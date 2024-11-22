@@ -1,0 +1,50 @@
+<?php
+
+namespace SUHK\DataFinder\App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class MainServiceProvider extends ServiceProvider
+{
+
+    protected $commands = [
+        'SUHK\DataFinder\Console\SetupPackage',
+    ];
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // $this->commands($this->commands);
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // Routes
+        $this->loadRoutesFrom(dirname(__FILE__) . '/../../routes/routes.php');
+
+        // Views
+        $this->loadViewsFrom(dirname(__FILE__) . '/../../views', 'datafinder');
+
+        // Configs
+        $this->publishes([
+            dirname(__FILE__) . '/../../config/filter_configurations.php' => config_path('datafinder/sample_filter_configurations.php'),
+        ], 'config');
+
+        // $this->commands($this->commands);
+
+        // Commands Registration
+        if ($this->app->runningInConsole()) {
+            $this->commands($this->commands);
+        }
+
+    }
+}
