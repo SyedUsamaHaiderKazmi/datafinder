@@ -18,6 +18,6 @@ Route::get('testPackage', function () {
     return view('datafinder::test');
 });
 
-Route::post('liveSearchTableRender', [DataSearchController::class, 'liveSearchTableRender']);
+Route::post('liveSearchTableRender', [DataSearchController::class, 'liveSearchTableRender'])->name('liveSearchTableRender');
 
 // Route::post('liveSearchDataExport', 'FilterController@liveSearchTableRender');
