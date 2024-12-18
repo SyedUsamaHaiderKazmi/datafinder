@@ -64,14 +64,27 @@ class DataSearchController extends Controller
             foreach ($records as $record) {
                 $arrayRecord = $record->toArray();
 
-                if (\config('filter_configurations.' . $table_name . '.row_has_buttons')) {
+                if (ConfigParser::tableHasRowButtons($request->config_file_name)) {
                     $record->options = "<div class='btn-group' role='group' aria-label='Basic example'>";
-                    foreach (\config('filter_configurations.' . $table_name . '.table_row_buttons') as $key => $button) {
+                    foreach (ConfigParser::tableRowButtons($request->config_file_name) as $key => $button) {
 
-                        $route = str_replace('{row_id}', $record->id, $request->routes[$button['route_key']]) ?? '#';
-                        $record->options .= "<a href='" . $route . (!is_null($button['tooltip']) ? "' title='" . $button['tooltip'] : '') . "' class='btn btn-sm shadow' style='background-color:" . $button['bgColor'] . "; color:" . $button['color'] . "';>" . (!is_null($button['icon']) ? "<i class='" . $button['icon'] . "'></i>" : "") . "</a>";
+                        // $route = str_replace('{row_id}', $record->id, $request->routes[$button['route_key']]) ?? '#';
+                        $routeParam = [];
+                        foreach ($button['route']['params'] as $key => $param) {
+                            $routeParam[] = $record->$param;
+                        }
+                        $route = route($button['route']['name'], $routeParam);
+                        // $route = '#';
+                        $record->options .= "<a href='" . $route 
+                            . (!is_null($button['tooltip']) ? "' title='" . $button['tooltip'] . "'" : '') 
+                            . (!is_null($button['class']) ? " class='" . $button['class'] . "'" : '')
+                            . (!is_null($button['style']) ? " style='" . $button['style'] . "'" : '') 
+                            . ">"
+                            . (!is_null($button['icon']) ? "<i class='" . $button['icon'] . "'></i>" : "")
+                            . (!is_null($button['label']) ? " " . $button['label'] : "") . "</a>";
 
                     }
+                    $record->options .= '</div>';
                 }
                 $data[] = $record->toArray();
                 array_push($added_ids, $record->id);

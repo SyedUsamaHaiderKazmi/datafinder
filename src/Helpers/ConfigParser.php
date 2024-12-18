@@ -264,4 +264,30 @@ class ConfigParser
             true
         );
     }
+    /**
+     * Get table tow button status.
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function tableHasRowButtons(string $configFileName): bool
+    {
+        return self::getConfigByCondition(
+            $configFileName,
+            'row_has_buttons'
+        );
+    }
+    /**
+     * Get table tow buttons aarray.
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function tableRowButtons(string $configFileName): array
+    {
+        return self::getConfigByCondition(
+            $configFileName,
+            'table_row_buttons'
+        );
+    }
 }
