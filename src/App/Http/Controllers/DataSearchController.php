@@ -23,7 +23,6 @@ class DataSearchController extends Controller
         $start = $request->input('start');
         $order = $table_header_columns[$request->input('order.0.column')]['data'];
         $dir = $request->input('order.0.dir');
-        $filters = $request->filters;
         // dd($filters);
         $query = $MODEL::query();
         $this->setupSelectQuery($query, ConfigParser::tableHasSelectiveColumns($request->config_file_name), $table_name, ConfigParser::tableSelectiveColumns($request->config_file_name));
@@ -38,7 +37,10 @@ class DataSearchController extends Controller
 
         $search = $request->input('search.value');
 
-        $this->applyFilters($query, $filters, $has_joins, $table_name);
+        if ($request->filters) {
+            $filters = $request->filters;
+            $this->applyFilters($query, $filters, $has_joins, $table_name);
+        }
 
         $totalDataQuery = clone $query;
         $totalData = $totalDataQuery->count();
