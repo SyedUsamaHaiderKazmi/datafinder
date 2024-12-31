@@ -21,6 +21,7 @@ class SetupPackage extends Command
         $this->call('vendor:publish', [
             '--provider' => "SUHK\DataFinder\App\Providers\MainServiceProvider",
             '--tag' => "config",
+            '--tag' => "assets",
         ]);
 
         $this->info('Package setuped successfully. Please follow the documentation for usage.');
