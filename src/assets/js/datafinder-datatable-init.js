@@ -3,13 +3,13 @@ var filters = {};
 
 $(document).ready(function () {
     // setupFilterObject();
-    datatable = $('#liveSearchTable').DataTable({
+    datatable = $('#df-'+ datafinder_table_id).DataTable({
         'info': true,
         'paging': true,
-        'pageLength': 100,
+        'pageLength': default_per_page,
         "processing": true,
         "serverSide": true,
-        "lengthChange": true,
+        "lengthChange": allow_per_page_options,
         "ajax":{
             "url": liveSearchFilterRoute,
             "dataType": "json",

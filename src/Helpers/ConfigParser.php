@@ -25,7 +25,7 @@ class ConfigParser
         ?bool $conditionValue = null,
         ?callable $transform = null
     ) {
-        $configEntries = ConfigGlobal::getValueFromFile("{$configFileName}.php", $configKey);
+        $configEntries = ConfigGlobal::getValueFromFile("{$configFileName}", $configKey);
         $result = [];
         if (!is_array($configEntries)) {
             return $configEntries;

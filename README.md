@@ -1,12 +1,12 @@
-# DataFinder - Laravel Datatables Integration Package Documentation
+# DataFinder - _Laravel Datatables Integration Package Documentation_
 
-## Introduction 
+## _Introduction_
 
 **DataFinder** is an innovative and highly efficient Laravel package designed to implement advanced search, filtering, and data retrieval functionalities in your applications. It bridges the gap between complex backend queries and dynamic front-end tables, providing developers with a streamlined solution for handling large datasets seamlessly.
 
 The package integrates effortlessly with **DataTables** on the frontend while leveraging Laravel's robust **Eloquent Query Builder** on the backend. Its scalable architecture ensures high performance, making it suitable for systems with millions of records.
 
-### **Key Features**
+### **_Key Features_**
 - **Multi-Table Search:** Perform advanced searches across multiple tables and rows in a single module or AJAX request, with or without JOINs.
 - **Flexible Table Configurations:** Fetch data from any table and define relationships through efficient JOIN operations.
 - **Easy Module Setup:** Configure columns, filters, table relationships, and custom row actions via a single configuration file for each module.
@@ -15,7 +15,7 @@ The package integrates effortlessly with **DataTables** on the frontend while le
 - **Custom Row Actions:** Add tailored buttons for specific actions, ensuring your tables are interactive and user-friendly.
 - **Scalability:** Designed for fast and efficient searches, even with millions of records, ensuring consistent performance.
 
-### **Why Use DataFinder?**
+### **_Why Use DataFinder?_**
 DataFinder simplifies the integration of **DataTables** with Laravel by reducing the complexity of repetitive configurations. Its modular approach empowers developers to:
 - Dynamically fetch, filter, and display data from the backend.
 - Maintain scalability and performance while handling large datasets.
@@ -23,11 +23,11 @@ DataFinder simplifies the integration of **DataTables** with Laravel by reducing
 - Minimize development overhead with reusable and centralized configuration files.
 
 
-## Installation Guide
+## _Installation Guide_
 
 Follow these steps to integrate the DataFinder package smoothly into your Laravel project.
 
-### Step 1: Install the Package
+### _Step 1: Install the Package_
 
 Run the following command to install the package via Composer:
 
@@ -35,7 +35,7 @@ Run the following command to install the package via Composer:
 composer require suhk/TO_BE_DECIDED
 ```
 
-### Step 2: Add Required CDNs
+### _Step 2: Add Required CDNs_
 
 Add the following CDNs for Bootstrap, jQuery, and DataTables to the `<head>` section of your application:
 
@@ -53,7 +53,7 @@ Add the following CDNs for Bootstrap, jQuery, and DataTables to the `<head>` sec
 datatable button script
 ```
 
-### Step 3: Add Service Provider
+### _Step 3: Add Service Provider_
 
 The package's service provider is auto-loaded upon installation. However, if it is not loaded, manually add the following entry to the `providers` array in your `config/app.php` file:
 
@@ -61,11 +61,12 @@ The package's service provider is auto-loaded upon installation. However, if it 
 SUHK\DataFinder\App\Providers\MainServiceProvider::class,
 ```
 
-### Step 3: Publish configuration:
+### _Step 4: Setup package:_
 ```bash
-   php artisan vendor:publish --tag="config"
-   php artisan vendor:publish --tag="assets"
+   php artisan suhk:setup-package
+
 ```
+
 ---
 
 
@@ -157,8 +158,9 @@ Columns define the data fetched from the database and how it is processed.
             'id' => 'DOM_ELEMENT_ID', // .
             'name' => 'DOM_ELEMENT_NAME', // 
             'label' => 'DOM_ELEMENT_LABEL', // 
-            'type' => 'text | select', // .
-            'value_type' => 'ROUTE_PARAM | PHP_VARIABLE | CUSTOM', // .
+            'placeholder' => 'DOM_ELEMENT_PLACEHOLDER', // Placeholder To Display on User Interface.
+            'type' => 'text | select | date | time | datetime-local', // .
+            'value_type' => 'ROUTE_PARAM | PHP_VARIABLE | CUSTOM', // ROUTE_PARAM only supported with Text
             'value' => 'DOM_ELEMENT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
             'selected' => 'DOM_ELEMENT_DEFAULT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
             'visibility' => true, // Boolean to Either show in Filters (User Interface) or not.
@@ -178,8 +180,9 @@ Columns define the data fetched from the database and how it is processed.
 | `id`                  | ID value for to access from Javascript.                                                           | `'user_status'`       |
 | `name`                | Name value for name attribute for forms or else.                                                        | `'user_status'`       |
 | `label`               | Label To Display on User Interface.                                                                  | `'User Status'`       |
-| `type`                | Input type value to render field as what. [Supports only: `text`, `select`, `date`].                                        | `'select'`            |
-| `value_type`          | Field Value. use tag `'CUSTOM/ ROUTE_PARAM/ PHP_VARIABLE'` to set value to the input element.                                       | `'CUSTOM/ ROUTE_PARAM/ PHP_VARIABLE'`            |
+| `placeholder`               | Placeholder To Display on User Interface.                                                                  | `'Select Status'`       |
+| `type`                | Input type value to render field as what. [Supports only: `text`, `select`, `date`, `time`, `datetime-local`].                                        | `'select'`            |
+| `value_type`          | Field Value. use tag `'CUSTOM/ ROUTE_PARAM/ PHP_VARIABLE'` to set value to the input element.                                       | `'CUSTOM/ ROUTE_PARAM/ PHP_VARIABLE'` Note:`'ROUTE_PARAM'` is only supported by input type `text`           |
 | `value`               | Incase of `CUSTOM` pass custom array of values. Incase of `ROUTE_PARAM` or `PHP_VARIABLE` view example for this section.                                                                | `[0 => 'Inactive']`   |
 | `selected`          | for type `select` pass the matching key to set the default value. For `text`, pass string, for `date` pass dateString                                                  | `key` or `text` or `2024-01-21`                |
 | `visibility`          | Whether the filter is displayed in the UI. Hiding a filter will not remove it from query.                                                 | `true`                |

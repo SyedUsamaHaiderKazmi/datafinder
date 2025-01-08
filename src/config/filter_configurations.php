@@ -20,6 +20,19 @@ return [
     |
      */
     
+    'dom_table_id' => 'YOUR_TABLE_ID',
+    'responsive' => false,
+    'default_per_page' => 'DEFAULT_NUMBER_OF_ROWS_PER_PAGE', // if remains empty, by default will be set to 10
+    'allow_per_page_options' => false,
+    'per_page_options' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | General information for the module that requires this file to be configurated.
+    |--------------------------------------------------------------------------
+    |
+     */
+    
     'model_path' => 'YOUR_MODEL_PATH',
     'table_name' => 'YOUR_TABLE_NAME',
     'selective_columns' => false, // Boolean False means system will fetch the data with all columns of this table.
@@ -38,6 +51,7 @@ return [
             'id' => 'DOM_ELEMENT_ID', // ID value for to access from Javascript.
             'name' => 'DOM_ELEMENT_NAME', // Name value for name attribute for forms or else.
             'label' => 'DOM_ELEMENT_LABEL', // Label To Display on User Interface.
+            'placeholder' => 'DOM_ELEMENT_PLACEHOLDER', // Label To Display on User Interface.
             'type' => 'text | select', // Input type value to render field as what.
             'value_type' => 'ROUTE_PARAM | PHP_VARIABLE | CUSTOM', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM | PHP_VARIABLE to get value from routes or variable passed to the blade.
             'value' => 'DOM_ELEMENT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM

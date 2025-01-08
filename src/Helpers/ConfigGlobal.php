@@ -23,7 +23,7 @@ class ConfigGlobal
         // This function is used to get the array value from the file contains configrations
         // only as array. Not a class but just a file.
 
-        $file = include(app_path(self::$basePath . $path));
+        $file = include(app_path(self::$basePath . $path . '.php'));
         $value = Arr::get($file, $value_to_get);
         return $value;
     }
