@@ -1,8 +1,12 @@
 var datatable;
 var filters = {};
+var errorList = []; // Array to hold error messages
 
 $(document).ready(function () {
     // setupFilterObject();
+    // to disable the popup of datatable and show errors in custom list
+    DataTable.ext.errMode = 'none';
+    // init datatable
     datatable = $('#df-'+ datafinder_table_id).DataTable({
         'info': true,
         'paging': true,
@@ -17,11 +21,12 @@ $(document).ready(function () {
             "data":function(data){
                 setupFilterObject();
                 data._token = $("input[name='_token']").val();
-                // data.model = model_path;
-                // data.table_name = table_name;
                 data.config_file_name = config_file_name;
                 data.filters = filters;
-                // data.routes = routes;
+            },
+            "error": function(xhr, status, error) {
+                errorList.push(`${xhr.responseJSON.errors}`);
+                updateErrorDisplay();
             },
         },
        "buttons": [
@@ -35,7 +40,8 @@ $(document).ready(function () {
         ],
        "columns": columns,
     });
-    addChangeEvent();
+    addEventToFilters();
+    addEventsToDatatable(datatable);
 
     $('#btn-data-finder-filter').on('click', function(e){
         dataTableReload(e);
@@ -77,7 +83,7 @@ function setupFilterObject() {
     });
 }
 
-function addChangeEvent() {
+function addEventToFilters() {
     const allowedFilters = document.getElementsByClassName('data-filters');
 
     Array.from(allowedFilters).forEach((filterElement) => {
@@ -90,4 +96,49 @@ function addChangeEvent() {
 
 function dataTableReload(event) {
     datatable.ajax.reload();
+}
+
+function addEventsToDatatable(datatable){
+    datatable.on('dt-error', function(e, settings, techNote, message) {
+        errorList.push(`${message}`);
+        updateErrorDisplay();
+    });
+    datatable.on('preXhr', function(e, settings, data) {
+        errorList = [];
+    });
+    datatable.on('xhr', function(e, settings, json, xhr) {
+        if (json.errors.length > 0) {
+            json.errors.forEach((error, index) => {
+                errorList.push(`${error}`);
+            });
+        }
+        updateErrorDisplay();
+    });
+}
+
+// Function to update the error list display in the UI
+function updateErrorDisplay() {
+    const errorContainer = $('#df-' + datafinder_table_id + '-errors');
+    const errorMessageDiv = errorContainer.children('div#error-message');
+
+    // Clear existing error messages
+    errorMessageDiv.empty();
+
+    // If there are any errors, show them
+    if (errorList.length > 0) {
+        // Create an ordered list to display errors
+        let errorListHTML = '<p style="margin: 0"><b>Following issue(s) found:</b></p><br><ol style="margin: 0">';
+        errorList.forEach(function (errorMsg) {
+            errorListHTML += `<li>${errorMsg}</li>`;
+        });
+        errorListHTML += '</ol>';
+
+        // Display the error list
+        errorMessageDiv.append(errorListHTML).show();
+        errorContainer.show();
+    } else {
+        // Hide the error container if no errors
+        errorMessageDiv.hide();
+        errorContainer.hide();
+    }
 }

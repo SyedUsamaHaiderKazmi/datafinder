@@ -22,7 +22,7 @@ return [
     
     'dom_table_id' => 'YOUR_TABLE_ID',
     'responsive' => false,
-    'default_per_page' => 'DEFAULT_NUMBER_OF_ROWS_PER_PAGE', // if remains empty, by default will be set to 10
+    'default_per_page' => null, // if remains empty, by default will be set to 10
     'allow_per_page_options' => false,
     'per_page_options' => [],
 
@@ -36,7 +36,18 @@ return [
     'model_path' => 'YOUR_MODEL_PATH',
     'table_name' => 'YOUR_TABLE_NAME',
     'selective_columns' => false, // Boolean False means system will fetch the data with all columns of this table.
-    'columns' => [], // If boolean is false then this array will be empty.
+    'columns' => [
+        [
+            'type' => 'DEFAULT', // RAW | DEFAULT 
+            'column' => '*',
+            'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
+        ],
+        [
+            'type' => 'RAW', // RAW | DEFAULT 
+            'column' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
+            'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
+        ],
+    ], // If boolean is false then this array will be empty.
 
 
     /*
@@ -85,17 +96,15 @@ return [
                 'selective_columns' => false, // if you want to retrieve data but with limited columns instead of everything, then set value to "true"
                 'columns' => [ // definition of columns you want to get from the table you are going to join with
                     [
-                        'column_name' => 'COLUMN_NAME', // joined tabled column name
-                        'aggregate' => false, // if you want a sum of a column or a count of column in different column name using "as"
-                        'sum' => [], // If there is no SUM required for the column, then this array will remains empty.
-                        'as' => null, // If "aggregate" is false, then this can be set as either "null" to get same column name or pass any custom string to get desired column name for specific column
+                        'type' => 'RAW', // RAW | DEFAULT 
+                        'column' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
+                        'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
                     ],
                     // NOTE: FOLLOWING EXAMPLE
                     [
+                        'type' => 'DEFAULT', // RAW | DEFAULT 
                         'column_name' => '*', // with selective column true you can still get all columns and your custom named columns as well
-                        'aggregate' => false, // if you want a sum of a column or a count of column in different column name using "as"
-                        'sum' => [], // If there is no SUM required for the column, then this array will remains empty.
-                        'as' => null, // If "aggregate" is false, then this can be set as either "null" to get same column name or pass any custom string to get desired column name for specific column
+                        'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
                     ],
                 ],
             ],

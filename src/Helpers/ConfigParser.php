@@ -243,7 +243,12 @@ class ConfigParser
             null,
             'searchable',
             true,
-            fn($header) => ['column_name' => $header['column_name'], 'table_name' => $header['table_name'], 'search_through_join' => $header['search_through_join']]
+            fn($header) => [
+                'title' => $header['title'],
+                'column_name' => $header['column_name'],
+                'table_name' => $header['table_name'],
+                'search_through_join' => $header['search_through_join']
+            ]
         );
     }
 

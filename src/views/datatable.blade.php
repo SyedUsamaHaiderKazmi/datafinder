@@ -5,6 +5,11 @@
         <a href="" id="file_path" hidden></a>
         <div class="col-md-12">
             <div class="card m-b-30">
+                <div class="card-header bg-white" id="df-{{ SUHK\DataFinder\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id')}}-errors">
+                    <div id="error-message" style="display:none; color: red; padding: 10px; background-color: #f8d7da; border: 1px solid #f5c6cb;">
+                        <!-- Error message will be displayed here -->
+                    </div>
+                </div>
                 <div class="card-body">
                    <table
                    id="df-{{ SUHK\DataFinder\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id') }}" 
