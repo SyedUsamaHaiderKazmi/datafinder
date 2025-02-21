@@ -7,11 +7,30 @@
                         <div class="form-group p-2 pl-3 pr-3">
                             <div class="row">
                                 @foreach(SUHK\DataFinder\Helpers\ConfigParser::getFiltersConfiguation($config_file_name) as $filter)  
-                                    @if ($filter['type'] == 'select')
-                                        @include('datafinder::filters.select')
-                                    @elseif ($filter['type'] == 'text')
-                                        @include('datafinder::filters.input')
+                                    @if($filter['value_type'] == 'ROUTE_PARAM' && !is_null(\Illuminate\Support\Facades\Route::current()->parameter($filter['value'])))
+                                        @php
+                                            $data = \Illuminate\Support\Facades\Route::current()->parameter($filter['value']);
+                                        @endphp
+                                    @elseif($filter['value_type'] == 'QUERY_PARAM' && !is_null(request()->query($filter['value'])))
+                                        @php
+                                            $data = request()->query($filter['value']);
+                                        @endphp
+                                    @elseif($filter['value_type'] == 'PHP_VARIABLE' && isset($phpVariables) && isset($phpVariables[$filter['value']]))
+                                        @php
+                                            $data = $phpVariables[$filter['value']];
+                                        @endphp
+                                    @elseif($filter['value_type'] == 'CUSTOM' && isset($filter['value'])))
+                                        @php
+                                            $data = $filter['value'];
+                                        @endphp
+                                    @else
+                                        {{-- wrong value set for filter --}}
+                                        @php
+                                            $data = false;
+                                        @endphp
                                     @endif
+
+                                    @include('datafinder::filters.elements', ['data' => $data])
                                 @endforeach
                             </div>
                         </div>
@@ -37,11 +56,7 @@
         </div>{{-- 
         <script src="{{asset('assets/js/jquery.min.js')}}"></script>
         <script src="{{ asset('js/filters/filters.js')  }}">></script> --}}
-        <script type="text/javascript">
-            $('.datafinder-select2').select2({
-                width: 'resolve' // need to override the changed default
-            });
-        </script>
+        
     @endif
 @else
     <p>{{ SUHK\DataFinder\Helpers\ConfigGlobal::$file_not_exisit_message }}</p>

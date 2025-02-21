@@ -38,7 +38,7 @@ class MainServiceProvider extends ServiceProvider
         // Configs
         $this->publishes([
             dirname(__FILE__) . '/../../config/filter_configurations.php' => app_path('Helpers/DataFinder/sample_filter_configurations.php'),
-        ], 'config');
+        ], 'sample_configuration');
         // assets
         $this->publishes([
             dirname(__FILE__) . '/../../assets' => public_path('vendor/datafinder/assets/'),

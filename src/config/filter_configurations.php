@@ -64,14 +64,14 @@ return [
             'label' => 'DOM_ELEMENT_LABEL', // Label To Display on User Interface.
             'placeholder' => 'DOM_ELEMENT_PLACEHOLDER', // Label To Display on User Interface.
             'type' => 'text | select', // Input type value to render field as what.
-            'value_type' => 'ROUTE_PARAM | PHP_VARIABLE | CUSTOM', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM | PHP_VARIABLE to get value from routes or variable passed to the blade.
+            'value_type' => 'ROUTE_PARAM | QUERY_PARAM | PHP_VARIABLE | CUSTOM', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM | PHP_VARIABLE to get value from routes or variable passed to the blade.
             'value' => 'DOM_ELEMENT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
             'selected' => 'DOM_ELEMENT_DEFAULT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
             'visibility' => true, // Boolean to Either show in Filters (User Interface) or not.
             'filterable' => true, // Boolean to Either show in Filters (User Interface) or not.
+            'column_name' => 'YOUR_DATABASE_TABLE_COLUMN', // Column name to look for in parent table.
             'filter_through_join' => false, // Boolean to Either set column for filtering through joined table or not.
             'join_table' => null, // Joined-Table name for Joined filters.
-            'column_name' => 'YOUR_DATABASE_TABLE_COLUMN', // Joined-Column name from Joined-Table for Joined filters.
             'conditional_operator' => '= | >= | <= | <>', // Conditional operator to use in where caluse for filters.
         ]
     ],
@@ -122,9 +122,9 @@ return [
         [
             'title' => "First Name", // Label To Display on Table (User Interface)
             'data' => "first_name", // key_name to be used from array passed [Not a db collection but a processed array] (It could be a column name or custom name)
-            'column_name' => 'COLUMN_NAME', // table column name same as in database table
             'visibility' => true, // Boolean to Either show on Table (User Interface) or not
             "searchable" => false, // Boolean to Either set column for searching or not
+            'column_name' => 'COLUMN_NAME', // table column name same as in database table required if searchable is true
             'search_through_join' => false, // boolean to either search the value in parent table or one of the joined tables
             "table_name" => null, // if "search_through_join" is set to true then add the table name, this column is from (join)
             'exportable' => false, // Boolean to Either get column in export or not
