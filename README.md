@@ -1,22 +1,48 @@
-# DataFinder - _Laravel Datatables Integration Package Documentation_
+
+<p align="center">
+<img src="https://suhk.me/assets/images/datafinder-full-logo-lg.png" width="400">
+</p>
+<p align="center">
+An easy, configurable & modular laravel package for <a href="https://datatables.net/">Datatables</a>
+</p>
 
 ## _Introduction_
 
 **DataFinder** is an innovative and highly efficient Laravel package designed to implement advanced search, filtering, and data retrieval functionalities in your applications. It bridges the gap between complex backend queries and dynamic front-end tables, providing developers with a streamlined solution for handling large datasets seamlessly.
 
-The package integrates effortlessly with **DataTables** on the frontend while leveraging Laravel's robust **Eloquent Query Builder** on the backend. Its scalable architecture ensures high performance, making it suitable for systems with millions of records.
+The package integrates effortlessly with **[DataTables](https://datatables.net/)** on the frontend while leveraging Laravel's robust **Eloquent Query Builder** on the backend. Its scalable architecture ensures high performance, making it suitable for systems with millions of records.
 
 ### **_Key Features_**
-- **Multi-Table Search:** Perform advanced searches across multiple tables and rows in a single module or AJAX request, with or without JOINs.
-- **Flexible Table Configurations:** Fetch data from any table and define relationships through efficient JOIN operations.
-- **Easy Module Setup:** Configure columns, filters, table relationships, and custom row actions via a single configuration file for each module.
-- **Customizable Filters and Columns:** Define searchable and filterable columns with ease, making the setup intuitive and reusable.
-- **Aggregate Operations:** Support for aggregate data calculations, like sums or averages, directly within the table configuration.
-- **Custom Row Actions:** Add tailored buttons for specific actions, ensuring your tables are interactive and user-friendly.
-- **Scalability:** Designed for fast and efficient searches, even with millions of records, ensuring consistent performance.
+
+🔍 **Dynamic Multi-Table Search**
+
+- Search seamlessly across multiple database tables using **dynamic JOINs**, retrieving relevant data efficiently.  
+
+🔎 **Advanced Multi-Filter Search**
+
+- Apply multiple filters at once, each supporting multiple values, enabling highly refined search results.  
+- Combine **filter-based search** with **text-based search**, working across single or multiple tables dynamically.  
+
+⚡ **Flexible Table Configurations**
+
+- Fetch data from any table and define relationships with **efficient JOIN operations**.  
+- Supports dynamic configurations for **searchable and filterable columns** in a single file per module.  
+
+🚀 **Easy Module Setup**
+
+- Configure columns, filters, table configuration, database table and their joins, data to display and custom row actions with a single configuration file per module, making setup intuitive and reusable.  
+
+🎯 **Custom Row Actions**
+
+- Add interactive buttons for specific actions within the table, ensuring seamless user interaction.  
+
+📈 **Optimized for Performance & Scalability**
+
+- Designed to handle **millions of records** while maintaining fast and efficient search performance.
+
 
 ### **_Why Use DataFinder?_**
-DataFinder simplifies the integration of **DataTables** with Laravel by reducing the complexity of repetitive configurations. Its modular approach empowers developers to:
+DataFinder simplifies the integration of **[DataTables](https://datatables.net/)** with Laravel by reducing the complexity of repetitive configurations. Its modular approach empowers developers to:
 - Dynamically fetch, filter, and display data from the backend.
 - Maintain scalability and performance while handling large datasets.
 - Enhance user experience with responsive and interactive tables.
@@ -26,6 +52,25 @@ DataFinder simplifies the integration of **DataTables** with Laravel by reducing
 ## _Installation Guide_
 
 Follow these steps to integrate the DataFinder package smoothly into your Laravel project.
+
+>#### **Prerequisites**
+For **DataFinder** to work properly, your project must include the following CDNs in your views:
+
+>- **[Bootstrap](https://getbootstrap.com/)**
+>- **[jQuery](https://jquery.com/)**
+>- **[DataTables](https://datatables.net/)**
+>- **[Select2](https://select2.org/)**
+>
+>These dependencies are **not included** in the package to:  
+>1. **Avoid copyright claims** – We ensure compliance by not bundling third-party assets. Instead, we reference their official websites.   
+2. **Maintain flexibility** – Including these libraries would require constant updates with each new release. By relying on your project’s existing dependencies, **DataFinder** remains compatible across multiple Laravel and PHP versions.  
+>
+>✅ **Tested Compatibility:**
+>
+> - **PHP:** 7.3 – 8.4
+> - **Laravel:** 5.8 – 11
+> 
+>Make sure to include the required CDNs in your project to ensure **DataFinder** works seamlessly. 
 
 ### _Step 1: Install the Package_
 
@@ -90,6 +135,7 @@ Columns define the data fetched from the database and how it is processed.
     'columns' => [], // If boolean is false then this array will be empty.
 
 ```
+
 | Key               | Description                                                                                                         | Example Value                           |
 |--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | `model_path`       | Namespace path to the Eloquent model used for the module.                                                          | `'App\Models\YOUR_MODEL_NAME'`  |
