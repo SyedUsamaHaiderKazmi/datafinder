@@ -1,8 +1,8 @@
 <?php
 
-namespace SUHK\DataFinder\Helpers;
+namespace SUHK\DataFinder\App\Helpers;
 
-use SUHK\DataFinder\Helpers\ConfigGlobal;
+use SUHK\DataFinder\App\Helpers\ConfigGlobal;
 
 class ConfigParser
 {

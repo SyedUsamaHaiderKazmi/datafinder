@@ -11,40 +11,40 @@ return [
     |--------------------------------------------------------------------------
     |
      */
--------------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------------------------
 
     /*
     |--------------------------------------------------------------------------
-    | General information for the module that requires this file to be configurated.
+    | Section A: General information for datable configuration and DOM element.
     |--------------------------------------------------------------------------
     |
      */
     
     'dom_table_id' => 'YOUR_TABLE_ID',
-    'responsive' => false,
+    'responsive' => false, // to make datatable responsive for better view for increased columns and small sized screens
     'default_per_page' => null, // if remains empty, by default will be set to 10
     'allow_per_page_options' => false,
     'per_page_options' => [],
 
     /*
     |--------------------------------------------------------------------------
-    | General information for the module that requires this file to be configurated.
+    | Section B: Section where parent table for module will be required to configure
     |--------------------------------------------------------------------------
     |
      */
     
-    'model_path' => 'YOUR_MODEL_PATH',
-    'table_name' => 'YOUR_TABLE_NAME',
+    'model_path' => 'YOUR_MODEL_PATH', // parent table's model path
+    'table_name' => 'YOUR_TABLE_NAME', // parent table's name from database
     'selective_columns' => false, // Boolean False means system will fetch the data with all columns of this table.
     'columns' => [
         [
             'type' => 'DEFAULT', // RAW | DEFAULT 
-            'column' => '*',
+            'column_name' => '*',
             'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
         ],
         [
             'type' => 'RAW', // RAW | DEFAULT 
-            'column' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
+            'column_name' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
             'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
         ],
     ], // If boolean is false then this array will be empty.
@@ -52,7 +52,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Filters Array to render filters on User Interface.
+    | Section C: Filters Array to render filters on User Interface.
     |--------------------------------------------------------------------------
     |
      */
@@ -78,7 +78,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    |if you want to use joins within the module to show data with complex data 
+    |Section D: if you want to use joins within the module to show data with complex data 
     |Joins Boolean and Configuration to search and filter the data from relationship tables using foreign keys.
     |--------------------------------------------------------------------------
     |
@@ -91,13 +91,12 @@ return [
             [
                 'join_with_table' => 'TABLE_NAME_TO_BE_JOIN_WITH',
                 'reference_in_current' => 'REFERENCE_HERE', // Syntax is parent_table_name.id, Parent Table Name (which is module's main table) then Its Column Name which is to be used for reference in child tables.
-                'conditional_sign' => '=', // conditional sign for where clause.
                 'reference_in_join' => 'REFERENCE_HERE', // Syntax is reference_table_name.id, Reference Table Name (from which u want the data as per the parent table row) then Its Column Name which is used for reference with parent tables.
                 'selective_columns' => false, // if you want to retrieve data but with limited columns instead of everything, then set value to "true"
                 'columns' => [ // definition of columns you want to get from the table you are going to join with
                     [
                         'type' => 'RAW', // RAW | DEFAULT 
-                        'column' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
+                        'column_name' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
                         'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
                     ],
                     // NOTE: FOLLOWING EXAMPLE
@@ -113,7 +112,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Header array for DATATABLE on User Interface.
+    | Section E: Header array for DATATABLE on User Interface.
     |--------------------------------------------------------------------------
     |
      */
@@ -133,7 +132,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | If a module is going to have any buttons, then its array is given below.
+    | Section F: If a module is going to have any buttons, then its array is given below.
     |--------------------------------------------------------------------------
     |
      */
@@ -143,30 +142,28 @@ return [
     
     'table_row_buttons' => [
         [
-            'label' => 'View',
-            'class' => 'btn btn-info btn-sm shadow rounded-0',
+            'label' => 'BTN_LABEL',
+            'class' => 'BTN_CLASS',
             'style' =>  null, // 'bgColor: #000; color: #fff;'
             'route' => [
                 'name' => 'route.name',
-                'params' => ['study_id', 'id', 'site_id'],
+                'params' => [ // only params from end results (data after query) are supported
+                    [
+                        'param_key' => 'YOUR_PARA<_KEY',
+                        'data_key' => 'YOU_DATA_KEY_FROM_DATA',
+                    ],
+                ], // params defined for url in url registry
+                'additional_params' => [
+                    [
+                        'param_key' => 'YOUR_PARA<_KEY',
+                        'data_key' => 'YOU_DATA_KEY_FROM_DATA',
+                    ],
+                ], // additional params to pass through with required params such as query params
             ],
             // '' => '#000',
             // 'color' => '#fff',
-            'icon' => 'fa fa-eye',
-            'tooltip' => 'View',
-        ],
-        [
-            'label' => 'View 1',
-            'class' => 'btn btn-warning btn-sm shadow rounded-0',
-            'style' =>  null, // 'bgColor: #000; color: #fff;'
-            'route' => [
-                'name' => 'route.name',
-                'params' => ['study_id', 'id', 'site_id'],
-            ],
-            // '' => '#000',
-            // 'color' => '#fff',
-            'icon' => 'fa fa-eye',
-            'tooltip' => 'View',
+            'icon' => 'YOUR_BTN_ICON_CLASS',
+            'tooltip' => 'YOUR_BTN_TOOLTIP',
         ],
     ],
 ];

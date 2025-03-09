@@ -1,6 +1,6 @@
 <?php
 
-namespace SUHK\DataFinder\Console;
+namespace SUHK\DataFinder\App\Console;
 
 use Illuminate\Console\Command;
 

@@ -4,8 +4,8 @@ namespace SUHK\DataFinder\App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
-use SUHK\DataFinder\Helpers\ConfigParser;
-use SUHK\DataFinder\Helpers\ConfigGlobal;
+use SUHK\DataFinder\App\Helpers\ConfigParser;
+use SUHK\DataFinder\App\Helpers\ConfigGlobal;
 use Illuminate\Support\Facades\Route;
 use Exception;
 
@@ -13,6 +13,7 @@ class DataSearchController extends Controller
 {
 
     private $errors = [];
+    private $table_buttons = [];
 
     // error messages
     // Searchable Specific Error Handlers
@@ -80,28 +81,13 @@ class DataSearchController extends Controller
             $data = array();
 
             if (!empty($records)) {
+                $table_has_buttons = ConfigParser::tableHasRowButtons($request->config_file_name);
+                if ($table_has_buttons) {
+                    $this->table_buttons = ConfigParser::tableRowButtons($request->config_file_name);
+                }
                 foreach ($records as $record) {
-                    if (ConfigParser::tableHasRowButtons($request->config_file_name)) {
-                        $record->options = "<div class='btn-group' role='group' aria-label='Basic example'>";
-                        foreach (ConfigParser::tableRowButtons($request->config_file_name) as $key => $button) {
-
-                            // $route = str_replace('{row_id}', $record->id, $request->routes[$button['route_key']]) ?? '#';
-                            $routeParam = [];
-                            foreach ($button['route']['params'] as $key => $param) {
-                                $routeParam[] = $record->$param;
-                            }
-                            $route = route($button['route']['name'], $routeParam);
-                            // $route = '#';
-                            $record->options .= "<a href='" . $route 
-                                . (!is_null($button['tooltip']) ? "' title='" . $button['tooltip'] . "'" : '') 
-                                . (!is_null($button['class']) ? " class='" . $button['class'] . "'" : '')
-                                . (!is_null($button['style']) ? " style='" . $button['style'] . "'" : '') 
-                                . ">"
-                                . (!is_null($button['icon']) ? "<i class='" . $button['icon'] . "'></i>" : "")
-                                . (!is_null($button['label']) ? " " . $button['label'] : "") . "</a>";
-
-                        }
-                        $record->options .= '</div>';
+                    if ($table_has_buttons) {
+                        $this->generateButtons($record);
                     }
                 }
             }
@@ -114,7 +100,8 @@ class DataSearchController extends Controller
                 "errors" => $this->errors,
 
             );
-            echo json_encode($json_data);   
+            echo json_encode($json_data);
+
         } catch (QueryException $e) {
             $this->errors[] = $e->getmessage();
             // Handle database-related errors (like SQL issues)
@@ -191,16 +178,16 @@ class DataSearchController extends Controller
         if ($selective_column) {
             foreach ($columns as $key => $column) {
                 if (strcasecmp($column['type'], 'default') == 0) {
-                    if ($column['column'] == '*') {
-                        $raw_query = $table_name . '.' . $column['column'];
+                    if ($column['column_name'] == '*') {
+                        $raw_query = $table_name . '.' . $column['column_name'];
                         $query->addSelect($raw_query);
                     }
-                    if ($column['column'] != '*' && $column['alias']) {
-                        $raw_query = $table_name . '.' . $column['column'] . ' as ' . $column['alias'];
+                    if ($column['column_name'] != '*' && $this->keyHasProperValue($column, 'alias')) {
+                        $raw_query = $table_name . '.' . $column['column_name'] . ' as ' . $column['alias'];
                         $query->addSelect($raw_query);
                     }
                 } elseif (strcasecmp($column['type'], 'raw') == 0) {
-                    $query->addSelect(\DB::raw($column['column']));
+                    $query->addSelect(\DB::raw($column['column_name']));
                 }
                 // array_push($select_raw, $raw_query);
             }
@@ -217,5 +204,42 @@ class DataSearchController extends Controller
     public function keyHasProperValue($object, $value)
     {
         return (isset($object[$value]) && $object[$value] != null && $object[$value] != '') ? true : false;
+    }
+
+    public function generateButtons($record)
+    {
+        $record->options = "<div class='btn-group' role='group' aria-label='Basic example'>";
+        foreach ($this->table_buttons as $key => $button) {
+
+            // $route = str_replace('{row_id}', $record->id, $request->routes[$button['route_key']]) ?? '#';
+            $routeParam = [];
+            foreach ($button['route']['params'] as $paramKey => $param) {
+                $routeParam[$param['param_key']] = $record->{$param['data_key']};
+            }
+            foreach ($button['route']['additional_params'] as $additioalParamKey => $param) {
+                $routeParam[$param['param_key']] = $record->{$param['data_key']};
+            }
+            $route = route($button['route']['name'], $routeParam);
+            // $route = '#';
+            $button_html = '<a';
+            // add route to button
+            $button_html .= ' href="' . $route . '"';
+            // add tooltip to button
+            $button_html .= $this->keyHasProperValue($button, 'tooltip') ? ' title="' . $button['tooltip'] . '"' : '';
+            // add class to button
+            $button_html .= $this->keyHasProperValue($button, 'class') ? ' class="' . $button['class'] . '"' : '';
+            // add style to button
+            $button_html .= $this->keyHasProperValue($button, 'style') ? ' style="' . $button['style'] . '"' : '';
+            // close button opening tag
+            $button_html .= '>';
+            // add icon to button
+            $button_html .= $this->keyHasProperValue($button, 'icon') ? ' <i class="' . $button['icon'] . '"></i> ' : '';
+            // add label to button
+            $button_html .= $this->keyHasProperValue($button, 'label') ? $button['label'] : '';
+            // end button
+            $button_html .= '</a>';
+            $record->options .= $button_html;
+        }
+        $record->options .= '</div>';
     }
 }

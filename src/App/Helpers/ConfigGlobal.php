@@ -1,5 +1,5 @@
 <?php
-namespace SUHK\DataFinder\Helpers;
+namespace SUHK\DataFinder\App\Helpers;
 
 use Illuminate\Support\Arr;
 

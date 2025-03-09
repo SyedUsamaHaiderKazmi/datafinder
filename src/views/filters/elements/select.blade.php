@@ -13,7 +13,7 @@
                 conditional_operator="{{ isset($filter['conditional_operator']) ? $filter['conditional_operator'] : '' }}"
                 >
                 @foreach($data as $key => $value)
-                    <option value="{{ $key }}" @if($key == $filter['selected']) selected @endif>
+                    <option value="{{ $key }}" @if(isset($filter['selected']) && $key == $filter['selected']) selected @endif>
                         {{ $value }}
                     </option>
                 @endforeach

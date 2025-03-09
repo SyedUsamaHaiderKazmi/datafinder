@@ -1,9 +1,9 @@
-@if(SUHK\DataFinder\Helpers\ConfigGlobal::validateConfigFile($config_file_name))
-    @if(count(SUHK\DataFinder\Helpers\ConfigParser::getFiltersConfiguation($config_file_name)) > 0)
+@if(SUHK\DataFinder\App\Helpers\ConfigGlobal::validateConfigFile($config_file_name))
+    @if(count(SUHK\DataFinder\App\Helpers\ConfigParser::getFiltersConfiguation($config_file_name)) > 0)
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    @foreach(SUHK\DataFinder\Helpers\ConfigParser::getFiltersConfiguation($config_file_name) as $filter)  
+                    @foreach(SUHK\DataFinder\App\Helpers\ConfigParser::getFiltersConfiguation($config_file_name) as $filter)  
                         @if($filter['value_type'] == 'ROUTE_PARAM' && !is_null(\Illuminate\Support\Facades\Route::current()->parameter($filter['value'])))
                             @php
                                 $data = \Illuminate\Support\Facades\Route::current()->parameter($filter['value']);
@@ -48,5 +48,5 @@
         </div>
     @endif
 @else
-    <p>{{ SUHK\DataFinder\Helpers\ConfigGlobal::$file_not_exisit_message }}</p>
+    <p>{{ SUHK\DataFinder\App\Helpers\ConfigGlobal::$file_not_exisit_message }}</p>
 @endif

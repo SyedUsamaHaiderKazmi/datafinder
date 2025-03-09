@@ -8,7 +8,7 @@ class MainServiceProvider extends ServiceProvider
 {
 
     protected $commands = [
-        'SUHK\DataFinder\Console\SetupPackage',
+        'SUHK\DataFinder\App\Console\SetupPackage',
     ];
 
     /**
