@@ -177,20 +177,20 @@ In your config file, reference the dynamic PHP variables passed from the view. F
 ```php
 [
     ...
-    {
+    [
         ...
         "name": "Languages",
         "value_type": "PHP_VARIABLE",
         "value": "languages",
         ...
-    },
-    {
+    ],
+    [
         ...
         "name": "Countries",
         "value_type": "PHP_VARIABLE",
         "value": "countries",
         ...
-    }
+    ]
     ...
 ]
 
