@@ -126,7 +126,7 @@ The following instructions will guide you through the necessary steps to impleme
 
 To get started, you need to include the necessary blade components in the relevant view where you wish to display the data table and filters (typically your index or a specific view for the module).
 
-###### **Include the Data Table and Filters:**
+###### **_Include the Data Table and Filters:_**
 
 In your blade view, add the following includes:
 
@@ -136,7 +136,7 @@ In your blade view, add the following includes:
 // for datatables
 @include('datafinder::datatable', ['config_file_name' => 'YOUR_CONFIG_FILE_NAME'])
 ```
-###### **Explanation:**
+###### **_Explanation:_**
 
 | Key          | Description                                                                                                                                                                          |
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -151,7 +151,7 @@ In your blade view, add the following includes:
 
 In some cases, you might need to pass dynamic data such as values from the database into the filters instead of using hardcoded values in the configuration file. Since you cannot directly utilize Eloquent models within the configuration file, the package provides a way to parse custom PHP variables.
 
-###### **Passing Custom PHP Variables:**
+###### **_Passing Custom PHP Variables:_**
 
 To handle complex filter cases, you can pass dynamic data (e.g., values from the database) to the filters using the phpVariables key. Here’s an example of how to pass custom variables to the view:
 
@@ -196,7 +196,7 @@ In your config file, reference the dynamic PHP variables passed from the view. F
 
 ```
 
-###### **Explanation:**
+###### **_Explanation:_**
 
 | Key        | Description                                                                                                        | Value |
 | :--------- | :----------------------------------------------------------------------------------------------------------------- | :---- |
@@ -207,21 +207,52 @@ In your config file, reference the dynamic PHP variables passed from the view. F
 
 ## _Configuration File Breakdown_
 
-* #### _General Configuration_
- 
+The configuration file is structured into 6 distinct sections, each serving a specific purpose to configure the table and its associated features. Below, you'll find a detailed explanation of each section, along with the purpose and how to use them effectively.
 
-Columns define the data fetched from the database and how it is processed.
+* ##### [_Section A: Frontend Configuration_](#section-a-frontend-configuration_1)
+* ##### [_Section B: Database Configuration_](#section-b-database-configuration_1)
+    * ##### [_Section B-1: Columns Configuration_](#section-b-1-columns-configuration_1)
+* ##### [_Section C: Filters Configuration_](#section-c-filters-configuration_1)
+* ##### [_Section D: Joins Configuration_](#section-d-joins-configuration_1)
+* ##### [_Section E: Table Headers_](#section-e-table-headers_1)
+* ##### [_Section F: Row Buttons_](#section-f-row-buttons_1)
 
-#### _Structure_
+---
+
+* #### _Section A: Frontend Configuration_
+
+
+In this section, users define settings that control how the table will be displayed on the frontend. This is crucial when a page contains multiple tables to avoid conflicts between them.
+
+##### _Structure_
 
 ```php
+    'dom_table_id' => 'YOUR_TABLE_ID',
+    'responsive' => false, // to make datatable responsive for better view for increased columns and small sized screens
+    'default_per_page' => null, // if remains empty, by default will be set to 10
+    'allow_per_page_options' => false,
+    'per_page_options' => [],
 
+```
+
+---
+
+
+* #### _Section B: Database Configuration_
+
+
+This section defines the base model and the base table used by the data table. It allows the user to configure which columns to retrieve from the database and whether to fetch all columns or only specific ones.
+
+##### _Structure_
+
+```php
     'model_path' => 'YOUR_MODEL_PATH',
     'table_name' => 'YOUR_TABLE_NAME',
     'selective_columns' => false, // Boolean False means system will fetch the data with all columns of this table.
     'columns' => [], // If boolean is false then this array will be empty.
 
 ```
+##### _Keys_
 
 | Key               | Description                                                                                                         | Example Value                           |
 |--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
@@ -232,58 +263,54 @@ Columns define the data fetched from the database and how it is processed.
 
 ---
 
-* #### _Columns Configuration_
+* #### _Section B-1: Columns Configuration_
 
 Columns define the data fetched from the database and how it is processed.
 
-#### _Structure_
+##### _Structure_
 ```php
 'columns' => [
     [
-        'column_name' => 'column_name_here',
-        'aggregate' => true/false,
-        'sum' => ['column1', 'column2'],
-        'as' => 'alias_name',
+        'type' => 'DEFAULT', // RAW | DEFAULT 
+        'column_name' => '*',
+        'alias' => null, 
     ],
 ],
 ```
 
-#### _Keys_
+##### _Keys_
 
 | Key           | Description                                                                                       | Example Value    |
 |---------------|---------------------------------------------------------------------------------------------------|------------------|
-| `column_name` | Name of the column in the database table.                                                               | `'created_at'`   |
-| `aggregate`   | Boolean. If `true`, aggregation is applied to the column (SUM, COUNT SUPPORTED ONLY).                        | `true/false`          |
-| `sum`         | An array of columns to sum if aggregation is enabled.                                             | `['amount']`     |
-| `as`          | Alias for the column in the results (used when `aggregate` or `sum` is applied).                  | `'total_amount'` |
+| `type` | Required field for users to set either `RAW` if custom values required or `DEFAULT` if just the exact column is required.                                                               | `'created_at'`   |
+| `column_name`   | If `DEFAULT`add column name. If `RAW` then add raw query                         | `DEFAULT`: `*/ column_name`<br> `RAW`: `DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date`          |
+| `alias`         | If `RAW` then alias should be null. For `DEFAULT` type, alias is mendatory if column name is not `*`.                                             | `['amount']`     |
 
-#### _Example_
+##### _Example_
 
 ```php
 'columns' => [
     [
-        'column_name' => 'id',
-        'aggregate' => false,
-        'sum' => [],
-        'as' => null,
+        'type' => 'DEFAULT', // RAW | DEFAULT 
+        'column' => '*',
+        'alias' => null,
     ],
     [
-        'column_name' => 'created_at',
-        'aggregate' => false,
-        'sum' => [],
-        'as' => 'creation_date',
+        'type' => 'RAW', // RAW | DEFAULT 
+        'column' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
+        'alias' => null,
     ],
 ],
 ```
 
 ---
 
-* #### _Filters Configuration_
+* #### _Section C: Filters Configuration_
  
 
-**Filters** allow you to easily manage query conditions through user input. By adding them to the configuration, you can automatically display them in the UI and integrate them into backend queries, without any code changes or manual updates
+**Filters** allow you to easily manage query conditions through user input. In this section, users can define multiple filters for their module, including how they interact with the AJAX data retrieval process.
 
-#### _Structure_
+##### _Structure_
 
 ```php
 'filters' => [
@@ -293,7 +320,7 @@ Columns define the data fetched from the database and how it is processed.
             'label' => 'DOM_ELEMENT_LABEL', // 
             'placeholder' => 'DOM_ELEMENT_PLACEHOLDER', // Placeholder To Display on User Interface.
             'type' => 'text | select | date | time | datetime-local', // .
-            'value_type' => 'ROUTE_PARAM | PHP_VARIABLE | CUSTOM', // ROUTE_PARAM only supported with Text
+            'value_type' => 'ROUTE_PARAM | QUERY_PARAM | PHP_VARIABLE | CUSTOM', // ROUTE_PARAM only supported with Text
             'value' => 'DOM_ELEMENT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
             'selected' => 'DOM_ELEMENT_DEFAULT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
             'visibility' => true, // Boolean to Either show in Filters (User Interface) or not.
@@ -306,7 +333,7 @@ Columns define the data fetched from the database and how it is processed.
 ],
 ```
 
-#### _Keys_
+##### _Keys_
 
 | Key                   | Description                                                                                  | Example Value         |
 |-----------------------|----------------------------------------------------------------------------------------------|-----------------------|
@@ -315,7 +342,7 @@ Columns define the data fetched from the database and how it is processed.
 | `label`               | Label To Display on User Interface.                                                                  | `'User Status'`       |
 | `placeholder`               | Placeholder To Display on User Interface.                                                                  | `'Select Status'`       |
 | `type`                | Input type value to render field as what. [Supports only: `text`, `select`, `date`, `time`, `datetime-local`].                                        | `'select'`            |
-| `value_type`          | Field Value. use tag `'CUSTOM/ ROUTE_PARAM/ PHP_VARIABLE'` to set value to the input element.                                       | `'CUSTOM/ ROUTE_PARAM/ PHP_VARIABLE'` Note:`'ROUTE_PARAM'` is only supported by input type `text`           |
+| `value_type`          | Field Value. use tag `'CUSTOM/ ROUTE_PARAM/ QUERY_PARAM/ PHP_VARIABLE'` to set value to the input element.                                       | `'CUSTOM/ ROUTE_PARAM/ QUERY_PARAM/ PHP_VARIABLE'` Note:`'ROUTE_PARAM'` is only supported by input type `text`           |
 | `value`               | Incase of `CUSTOM` pass custom array of values. Incase of `ROUTE_PARAM` or `PHP_VARIABLE` view example for this section.                                                                | `[0 => 'Inactive']`   |
 | `selected`          | for type `select` pass the matching key to set the default value. For `text`, pass string, for `date` pass dateString                                                  | `key` or `text` or `2024-01-21`                |
 | `visibility`          | Whether the filter is displayed in the UI. Hiding a filter will not remove it from query.                                                 | `true`                |
@@ -325,7 +352,7 @@ Columns define the data fetched from the database and how it is processed.
 | `column_name`         | Column name in the joined table.                                                            | `'is_active'`         |
 | `conditional_operator`| Conditional operator for filtering (`=`, `>=`, `<=`, `<>`).                                        | `'='`                 |
 
-#### _Example_
+##### _Example_
 
 ```php
 'filters' => [
@@ -333,9 +360,11 @@ Columns define the data fetched from the database and how it is processed.
         'id' => 'user_activation_status',
         'name' => 'user_activation_status',
         'label' => 'Account Status',
+        'placeholder' => 'Select Status',
         'type' => 'select',
         'value_type' => 'CUSTOM',
         'value' => [0 => 'Inactive', 1 => 'Active'],
+        'selected' => 1,
         'visibility' => true,
         'filterable' => true,
         'filter_through_join' => true,
@@ -348,14 +377,15 @@ Columns define the data fetched from the database and how it is processed.
 
 ---
 
-* #### _Joins Configuration_
+* #### _Section D: Joins Configuration_
 
 
 Joins define relationships between the primary table and other tables to fetch related data. To enable the join configuration for this package to retreive join table, make sure you add:
 
 `'table_has_joins' => true, // Boolean for Joins.`
 
-#### _Structure_
+##### _Structure_
+
 ```php
 'table_has_joins' => true/false, // Boolean for Joins.
 
@@ -364,15 +394,18 @@ Joins define relationships between the primary table and other tables to fetch r
         [
             'join_with_table' => 'related_table',
             'reference_in_current' => 'parent_table.column',
-            'conditional_sign' => '=',
             'reference_in_join' => 'related_table.column',
             'selective_columns' => true,
             'columns' => [
                 [
-                    'column_name' => 'column_name_here',
-                    'aggregate' => true/false,
-                    'sum' => [],
-                    'as' => 'alias_name',
+                    'type' => 'DEFAULT', // RAW | DEFAULT 
+                    'column' => '*',
+                    'alias' => null,
+                ],
+                [
+                    'type' => 'RAW', // RAW | DEFAULT 
+                    'column' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
+                    'alias' => null,
                 ],
             ],
         ],
@@ -380,20 +413,19 @@ Joins define relationships between the primary table and other tables to fetch r
 ],
 ```
 
-#### _Keys_
+##### _Keys_
 
 | Key                   | Description                                                                                  | Example Value            |
 |-----------------------|----------------------------------------------------------------------------------------------|--------------------------|
 | `table_has_joins`     | enable to retrieve data from joined tables .                                                        | `true`                |
 | `join_with_table`     | Table to join with the current table.                                                        | `'users'`                |
 | `reference_in_current`| Column in the current table used for the join condition.                                     | `'users.department_id'` |
-| `conditional_sign`    | Operator for the join condition (`=`).                                             | `'='`                    |
 | `reference_in_join`   | Column in the related table for the join condition.                                          | `'users.id'`             |
 | `selective_columns`   | Whether to fetch specific columns from the joined table.                                     | `true`                   |
 | `columns`   | Please review column configuration section.                                     | N/A                   |
 
 
-#### _Example_
+##### _Example_
 
 ```php
 'joins' => [
@@ -401,15 +433,18 @@ Joins define relationships between the primary table and other tables to fetch r
         [
             'join_with_table' => 'department',
             'reference_in_current' => 'users.department_id',
-            'conditional_sign' => '=',
             'reference_in_join' => 'users.id',
             'selective_columns' => true,
             'columns' => [
                 [
-                    'column_name' => 'name',
-                    'aggregate' => false,
-                    'sum' => [],
-                    'as' => 'user_name',
+                    'type' => 'DEFAULT', // RAW | DEFAULT 
+                    'column' => '*',
+                    'alias' => null,
+                ],
+                [
+                    'type' => 'RAW', // RAW | DEFAULT 
+                    'column' => 'DATE_FORMAT(department.created_at, "%W %d, %M %Y") AS formatted_date',
+                    'alias' => null,
                 ],
             ],
         ],
@@ -419,50 +454,50 @@ Joins define relationships between the primary table and other tables to fetch r
 
 ---
 
-* ### _Table Headers_
+* #### _Section E: Table Headers_
  
 
-Headers define how data is displayed in the frontend table.
+This section is where users define the columns they want to display in the data table. It’s especially useful when dealing with joins, as it allows the user to specify which table each column belongs to, ensuring the correct columns are shown and properly searchable.
 
-#### _Structure_
+##### _Structure_
 
 ```php
 'table_headers' => [
     [
         'title' => 'Column Title',
         'data' => 'key_name',
-        'column_name' => 'column_name',
         'visibility' => true,
         'searchable' => true/false,
+        'column_name' => 'column_name',
         'search_through_join' => true/false,
         'table_name' => 'related_table',
     ],
 ],
 ```
 
-#### _Keys_
+##### _Keys_
 
 | Key                   | Description                                                                                  | Example Value            |
 |-----------------------|----------------------------------------------------------------------------------------------|--------------------------|
 | `title`     | Label To Display on Table (User Interface).                                                        | `'First Name'`                |
 | `data`| `Key_name` to be used from array passed [Not a db collection but a processed array] (It could be a column name or an alias name).                                     | `'first_name'` |
-| `column_name`    | table column name same as in database table.                                             | `'users'`                    |
 | `visibility`   | Boolean to Either show on Table (User Interface) or not.                                          | `true`             |
 | `searchable`   | Boolean to Either set column for searching or not.                                     | `true`                   |
+| `column_name`    | table column name same as in database table.                                             | `'users'`                    |
 | `search_through_join`   | boolean to either search the value in parent table or one of the joined tables.                                     | `true`                   |
 | `table_name`   | if `search_through_join` is `true` then add the table name (join).                                     | `true`                   |
 
 
-#### _Example_
+##### _Example_
 
 ```php
 'table_headers' => [
     [
         'title' => 'User Name',
         'data' => 'user_name',
-        'column_name' => 'name',
         'visibility' => true,
         'searchable' => true,
+        'column_name' => 'name',
         'search_through_join' => true,
         'table_name' => 'users',u
     ],
@@ -471,27 +506,110 @@ Headers define how data is displayed in the frontend table.
 
 ---
 
-* ### _Row Buttons_
+* #### _Section F: Row Buttons_
 
-Define custom action buttons for table rows.
+This section allows users to define dynamic action buttons for each row in the data table. These buttons can be customized for any action the user needs, such as viewing details, editing, or deleting records.To enable the button configuration for this package to route buttons, make sure you add:
 
-#### _Example_
+`'row_has_buttons' => true,`
+
+##### _Structure_
+
+```php
+'table_row_buttons' => [
+    [
+        'label' => 'BTN_LABEL',
+        'class' => 'BTN_CLASS',
+        'style' =>  null, // 'bgColor: #000; color: #fff;'
+        'icon' => 'YOUR_BTN_ICON_CLASS',
+        'tooltip' => 'YOUR_BTN_TOOLTIP',
+        'route' => [
+            'name' => 'route.name',
+            'params' => [ // only params from end results (data after query) are supported
+                [
+                    'param_key' => 'YOUR_PARA<_KEY',
+                    'data_key' => 'YOU_DATA_KEY_FROM_DATA',
+                ],
+            ], // params defined for url in url registry
+            'additional_params' => [
+                [
+                    'param_key' => 'YOUR_PARA<_KEY',
+                    'data_key' => 'YOU_DATA_KEY_FROM_DATA',
+                ],
+            ], // additional params to pass through with required params such as query params
+        ],
+    ],
+],
+```
+
+##### _Keys_
+
+| Key                                   | Description                                                | Value                                |
+| :------------------------------------ | :--------------------------------------------------------- | :----------------------------------- |
+| label                                 | This key is used to pass label for the button              | View/ Edit                           |
+| class                                 | This key is used to pass the classes for the button        | btn btn-info btn-sm shadow rounded-0 |
+| style                                 | This key is used to pass the custom styling for the button | bgColor: #000; color: #fff;          |
+| icon                                  | This key is used to pass the classes for the button        | btn btn-info btn-sm shadow rounded-0 |
+| tooltip                               | This key is used to pass the custom styling for the button | Action Button: View                  |
+| route                                 |                                                            | N/A                                  |
+| route[].name                          |                                                            | route.show                           |
+| route[].params                        |                                                            | []                                   |
+| route[].params[].param_key            |                                                            | id                                   |
+| route[].params[].data_key             |                                                            | id                                   |
+| route[].additional_params             |                                                            | []                                   |
+| route[].additional_params[].param_key |                                                            | uuid                                 |
+| route[].additional_params[].data_key  |                                                            | user_id                              |
+
+
+##### _Example_
 
 ```php
 
-'row_has_buttons' => false,
+'row_has_buttons' => true,
 
 'table_row_buttons' => [
     [
-        'label' => 'View',
-        'class' => 'btn btn-info btn-sm shadow rounded-0',
-        'style' =>  null, // 'bgColor: #000; color: #fff;'
-        'route' => [
-            'name' => 'route.name',
-            'params' => ['user_type', 'id', 'user_department'],
+            'label' => 'View',
+            'class' => 'btn btn-info btn-sm shadow rounded-0',
+            'style' =>  null, // 'bgColor: #000; color: #fff;'
+            'icon' => 'fa fa-eye',
+            'tooltip' => 'View',
+            'route' => [
+                'name' => 'route.show', // route_name in url registry
+                'params' => [
+                    [
+                        'param_key' => 'id',
+                        'data_key' => 'id',
+                    ],
+                ], // params defined for url in url registry
+                'additional_params' => [
+                    [
+                        'param_key' => 'uuid',
+                        'data_key' => 'user_id',
+                    ],
+                ], // additional params to pass through with required params such as query params
+            ],
         ],
-        'icon' => 'fa fa-eye',
-        'tooltip' => 'View',
-    ],
+        [
+            'label' => 'Edit',
+            'class' => 'btn btn-warning btn-sm shadow rounded-0',
+            'style' =>  null, // 'bgColor: #000; color: #fff;'
+            'icon' => 'fa fa-pencil',
+            'tooltip' => 'View',
+            'route' => [
+                'name' => 'route.edit', // route_name in url registry
+                'params' => [
+                    [
+                        'param_key' => 'id',
+                        'data_key' => 'id',
+                    ],
+                ], // params defined for url in url registry
+                'additional_params' => [
+                    [
+                        'param_key' => 'uuid',
+                        'data_key' => 'user_id',
+                    ],
+                ], // additional params to pass through with required params such as query params
+            ],
+        ],
 ],
 ```

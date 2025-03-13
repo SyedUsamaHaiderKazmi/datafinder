@@ -145,6 +145,8 @@ return [
             'label' => 'BTN_LABEL',
             'class' => 'BTN_CLASS',
             'style' =>  null, // 'bgColor: #000; color: #fff;'
+            'icon' => 'YOUR_BTN_ICON_CLASS',
+            'tooltip' => 'YOUR_BTN_TOOLTIP',
             'route' => [
                 'name' => 'route.name',
                 'params' => [ // only params from end results (data after query) are supported
@@ -160,10 +162,6 @@ return [
                     ],
                 ], // additional params to pass through with required params such as query params
             ],
-            // '' => '#000',
-            // 'color' => '#fff',
-            'icon' => 'YOUR_BTN_ICON_CLASS',
-            'tooltip' => 'YOUR_BTN_TOOLTIP',
         ],
     ],
 ];
