@@ -209,13 +209,13 @@ In your config file, reference the dynamic PHP variables passed from the view. F
 
 The configuration file is structured into 6 distinct sections, each serving a specific purpose to configure the table and its associated features. Below, you'll find a detailed explanation of each section, along with the purpose and how to use them effectively.
 
-* ##### [_Section A: Frontend Configuration_](#section-a-frontend-configuration_1)
-* ##### [_Section B: Database Configuration_](#section-b-database-configuration_1)
-    * ##### [_Section B-1: Columns Configuration_](#section-b-1-columns-configuration_1)
-* ##### [_Section C: Filters Configuration_](#section-c-filters-configuration_1)
-* ##### [_Section D: Joins Configuration_](#section-d-joins-configuration_1)
-* ##### [_Section E: Table Headers_](#section-e-table-headers_1)
-* ##### [_Section F: Row Buttons_](#section-f-row-buttons_1)
+* ##### [_Section A: Frontend Configuration_](#section-a-frontend-configuration-1)
+* ##### [_Section B: Database Configuration_](#section-b-database-configuration-1)
+    * ##### [_Section B-1: Columns Configuration_](#section-b-1-columns-configuration-1)
+* ##### [_Section C: Filters Configuration_](#section-c-filters-configuration-1)
+* ##### [_Section D: Joins Configuration_](#section-d-joins-configuration-1)
+* ##### [_Section E: Table Headers_](#section-e-table-headers-1)
+* ##### [_Section F: Row Buttons_](#section-f-row-buttons-1)
 
 ---
 
