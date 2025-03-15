@@ -26,10 +26,5 @@
                 "SUHK\\DataFinder\\App\\Providers\\MainServiceProvider"
             ]
         }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "@php artisan package:discover --ansi"
-        ]
     }
 }
