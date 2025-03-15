@@ -34,9 +34,10 @@ checks:
 
 # Optional: Specify coding style rules if you want to enforce specific coding standards
 coding_style:
-    rules:
-        - PSR-12
-        - PSR-2
+    php:
+        spaces:
+            around_operators:
+                concatenation: true
 
 # Optional: Define conditions under which a build failure occurs (e.g., low score)
 build_failure_conditions:
