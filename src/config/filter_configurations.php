@@ -126,7 +126,6 @@ return [
             'column_name' => 'COLUMN_NAME', // table column name same as in database table required if searchable is true
             'search_through_join' => false, // boolean to either search the value in parent table or one of the joined tables
             "table_name" => null, // if "search_through_join" is set to true then add the table name, this column is from (join)
-            'exportable' => false, // Boolean to Either get column in export or not
         ],
     ],
 
