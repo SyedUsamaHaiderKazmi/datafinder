@@ -1,8 +1,8 @@
 /* skipcq: JS-0128 */
 
-var datatable;
-var filters = {};
-var errorList = []; // Array to hold error messages
+let datatable = null;
+let filters = {};
+let errorList = []; // Array to hold error messages
 
 $(document).ready(function () {
     // setupFilterObject();
