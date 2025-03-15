@@ -1,35 +1,41 @@
 # .scrutinizer.yml
 version: 1
 
-# Exclude non-relevant files and directories from the analysis
-exclude:
-    - "/tests/*"
-    - "/public/*"
-    - "/resources/*"
-    - "/vendor/*"
-    - "/node_modules/*"
-    - "/database/*"
-    - "/storage/*"
-    - "/app/Http/Controllers/*"
-    - "/app/Http/Requests/*"
-    - "/config/*"
-    - "/routes/*"
-    - "/bootstrap/*"
+# Define the extensions needed, in this case PHP
+extensions:
+    - php
 
-# Define the language of the package
-language: php
+# Define the files and directories to be excluded from analysis
+filter:
+    # Exclude non-package files and directories
+    exclude:
+        - "tests/*"
+        - "public/*"
+        - "resources/*"
+        - "vendor/*"
+        - "node_modules/*"
+        - "database/*"
+        - "storage/*"
+        - "config/*"
+        - "routes/*"
+        - "app/Http/Controllers/*"
+        - "app/Http/Requests/*"
+        - "bootstrap/*"
 
-# Define analysis settings for your Laravel package
-analyzers:
+# Optional: Set up the tools for analyzing your package's code
+tools:
     php:
+        # Define the paths to the PHP codebase
         paths:
             - "src"
-        
-        # Optional: if you are using PHPUnit, include your test directory here
+        # Optional: Enable PHPUnit analysis if you have tests
         # tests:
         #     paths:
         #         - "tests"
-    
-# Optional: Set a minimum quality score if you want Scrutinizer to help you track improvements
-quality:
-    score: 75
+
+# Optional: Configure checks for quality score
+checks:
+    style: true
+    complexity: true
+    consistency: true
+    security: true
