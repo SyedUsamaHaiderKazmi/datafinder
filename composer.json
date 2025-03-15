@@ -1,15 +1,20 @@
 {
     "name": "suhk/datafinder-laravel",
-    "description": "This is package to implement a search and filters on backend level using datatable and Models of laravel. Best part of this package is search in multiple tables and its any row in a single module or request (ajax), using or without using joins.",
+    "description": "This is a package to implement search and filters on the backend level using DataTables and Laravel Models. The best part of this package is the ability to search across multiple tables and rows in a single request (ajax), with or without using joins.",
     "type": "library",
     "license": "MIT",
-    "authors": [{
-        "name": "SyedUsamaHaiderKazmi",
-        "email": "usamakazmi.uk@gmail.com",
-        "role": "Owner/ Developer"
-    }],
-    "minimum-stability": "dev",
-    "require": {},
+    "authors": [
+        {
+            "name": "Syed Usama Haider Kazmi",
+            "email": "usamakazmi.uk@gmail.com",
+            "role": "Owner/Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.3 <8.5",
+        "illuminate/support": "5.8.*|6.*|7.*|8.*|9.*|10.*|11.*"
+    },
     "autoload": {
         "psr-4": {
             "SUHK\\DataFinder\\": "src/"
@@ -21,5 +26,10 @@
                 "SUHK\\DataFinder\\App\\Providers\\MainServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan package:discover --ansi"
+        ]
     }
 }

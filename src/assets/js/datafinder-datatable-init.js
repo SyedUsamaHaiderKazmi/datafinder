@@ -1,5 +1,3 @@
-/* skipcq: JS-0128 */
-
 let datatable = null;
 let filters = {};
 let errorList = []; // Array to hold error messages

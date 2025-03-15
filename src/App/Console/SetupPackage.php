@@ -11,7 +11,7 @@
 */
 
 namespace SUHK\DataFinder\App\Console;
-
+/** @scrutinizer ignore-unused */
 use Illuminate\Console\Command;
 
 class SetupPackage extends Command
