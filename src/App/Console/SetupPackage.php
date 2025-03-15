@@ -1,5 +1,15 @@
 <?php
 
+/**
+    * Setup Package command class for the DataFinder package.
+    *
+    * This command file is responsible for setting up the datafinder package for users
+    * such as publishing configuration file, assets and more
+    *
+    * @package SUHK\DataFinder
+    *
+*/
+
 namespace SUHK\DataFinder\App\Console;
 
 use Illuminate\Console\Command;

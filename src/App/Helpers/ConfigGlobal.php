@@ -1,4 +1,14 @@
 <?php
+
+/**
+    * Config Global class for the DataFinder package.
+    *
+    * This helper file is responsible for providing re-useable functions and variables
+    *
+    * @package SUHK\DataFinder
+    *
+*/
+
 namespace SUHK\DataFinder\App\Helpers;
 
 use Illuminate\Support\Arr;

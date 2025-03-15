@@ -1,5 +1,15 @@
 <?php
 
+/**
+    * Main Service Provider for the DataFinder package.
+    *
+    * This service provider is responsible for registering any application
+    * services, such as binding classes into the service container.
+    *
+    * @package SUHK\DataFinder
+    *
+*/
+
 namespace SUHK\DataFinder\App\Providers;
 
 use Illuminate\Support\ServiceProvider;

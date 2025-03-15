@@ -1,5 +1,17 @@
 <?php
 
+/**
+    * Config Parse class for the DataFinder package.
+    *
+    * This helper file is responsible for parsing and providing data
+    * required for package from configuration file. This is a wrapper class
+    * to prevent repeatable function within controller file
+    *
+    * @package SUHK\DataFinder
+    *
+*/
+
+
 namespace SUHK\DataFinder\App\Helpers;
 
 use SUHK\DataFinder\App\Helpers\ConfigGlobal;

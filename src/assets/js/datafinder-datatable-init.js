@@ -1,3 +1,4 @@
+// skipcq
 var datatable;
 var filters = {};
 var errorList = []; // Array to hold error messages
