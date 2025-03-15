@@ -70,7 +70,7 @@ Follow these steps to integrate the DataFinder package smoothly into your Larave
 Run the following command to install the package via Composer:
 
 ```bash
-composer require suhk/TO_BE_DECIDED
+composer require suhk/datafinder-laravel
 ```
 
 #### _Step 2: Add Required CDNs_
