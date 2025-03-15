@@ -4,7 +4,17 @@
 </p>
 <p align="center">
 An easy, configurable & modular laravel package for <a href="https://datatables.net/">Datatables</a>
+<br><br>
+
+<img src="https://img.shields.io/scrutinizer/quality/g/SyedUsamaHaiderKazmi/datafinder">
+
+<img src="https://img.shields.io/scrutinizer/build/g/SyedUsamaHaiderKazmi/datafinder">
+
+<img src="https://img.shields.io/github/license/SyedUsamaHaiderKazmi/datafinder.svg">
 </p>
+
+
+
 
 ## _Introduction_
 
