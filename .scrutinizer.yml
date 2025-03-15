@@ -1,41 +1,36 @@
 # .scrutinizer.yml
-version: 1
+version: '1'
 
-# Define the extensions needed, in this case PHP
+# Define the build environment and PHP version
+build:
+    image: php:8.1
+
+# Set up the extensions you want to use (In this case, PHP analysis)
 extensions:
     - php
 
-# Define the files and directories to be excluded from analysis
+# Filter to exclude unnecessary directories/files (like tests, public, etc.)
 filter:
-    # Exclude non-package files and directories
     exclude:
-        - "tests/*"
-        - "public/*"
-        - "resources/*"
-        - "vendor/*"
-        - "node_modules/*"
-        - "database/*"
-        - "storage/*"
-        - "config/*"
-        - "routes/*"
-        - "app/Http/Controllers/*"
-        - "app/Http/Requests/*"
-        - "bootstrap/*"
+        - "/tests/*"
+        - "/public/*"
+        - "/resources/*"
+        - "/vendor/*"
+        - "/node_modules/*"
+        - "/database/*"
+        - "/storage/*"
+        - "/config/*"
+        - "/routes/*"
+        - "/app/Http/Controllers/*"
+        - "/app/Http/Requests/*"
+        - "/bootstrap/*"
 
-# Optional: Set up the tools for analyzing your package's code
+# Optional: Configure the tools for analyzing the PHP package
 tools:
     php:
-        # Define the paths to the PHP codebase
         paths:
             - "src"
-        # Optional: Enable PHPUnit analysis if you have tests
-        # tests:
-        #     paths:
-        #         - "tests"
 
-# Optional: Configure checks for quality score
-checks:
-    style: true
-    complexity: true
-    consistency: true
-    security: true
+# Optional: You can set a quality score threshold if you want to enforce a minimum quality score
+quality:
+    score: 75
