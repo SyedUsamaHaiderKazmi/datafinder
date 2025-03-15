@@ -16,14 +16,12 @@ exclude:
     - "/routes/*"
     - "/bootstrap/*"
 
-# Set the appropriate language and environment for Scrutinizer
-extensions:
-    - php
+# Define the language of the package
+language: php
 
 # Define analysis settings for your Laravel package
 analyzers:
     php:
-        # Include directories where your source code resides
         paths:
             - "src"
         
