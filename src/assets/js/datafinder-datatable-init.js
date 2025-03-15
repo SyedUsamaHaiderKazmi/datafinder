@@ -100,14 +100,14 @@ function dataTableReload(event) {
 }
 
 function addEventsToDatatable(dt){
-    dt.on('dt-error', function(e, settings, techNote, message) {
+    dt.on('dt-error', (e, settings, techNote, message) => {
         errorList.push(`${message}`);
         updateErrorDisplay();
     });
-    dt.on('preXhr', function(e, settings, data) {
+    dt.on('preXhr', (e, settings, data) => {
         errorList = [];
     });
-    dt.on('xhr', function(e, settings, json, xhr) {
+    dt.on('xhr', (e, settings, json, xhr) => {
         if (json.errors.length > 0) {
             json.errors.forEach((error, index) => {
                 errorList.push(`${error}`);
