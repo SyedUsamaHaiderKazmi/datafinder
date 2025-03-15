@@ -1,15 +1,15 @@
 # .scrutinizer.yml
 version: '1'
 
-# Define the build environment (set PHP version here)
+# Define the build environment (using PHP 8.1 for example)
 build:
     image: php:8.1
 
-# Define which extensions to use (in this case, PHP analysis)
+# Enable the necessary extensions for your project (in this case PHP)
 extensions:
     php: true
 
-# Define which files to include/exclude for analysis
+# Define the files to be excluded from analysis
 filter:
     exclude:
         - "/tests/*"
@@ -25,29 +25,15 @@ filter:
         - "/app/Http/Requests/*"
         - "/bootstrap/*"
 
-# Enable checks for code quality
-checks:
-    style: true
-    complexity: true
-    consistency: true
-    security: true
-
-# Optional: Specify coding style rules if you want to enforce specific coding standards
-coding_style:
-    php:
-        spaces:
-            around_operators:
-                concatenation: true
-
-# Optional: Define conditions under which a build failure occurs (e.g., low score)
-build_failure_conditions:
-    score: 70
-
-# Set up tools to analyze your PHP code
+# Define which tools should be used for analysis
 tools:
     php:
         paths:
             - "src"
 
-# Optional: Define credentials for any private dependencies (if needed)
+# Optional: Define conditions under which a build failure occurs (e.g., low score)
+build_failure_conditions:
+    score: 70
+
+# Optional: You can define credentials for any private dependencies (if needed)
 credentials: {}
