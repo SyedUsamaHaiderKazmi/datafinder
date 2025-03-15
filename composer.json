@@ -17,7 +17,6 @@
         "illuminate/database": "5.8.*|6.*|7.*|8.*|9.*|10.*|11.*",
         "illuminate/console": "5.8.*|6.*|7.*|8.*|9.*|10.*|11.*",
         "illuminate/support": "5.8.*|6.*|7.*|8.*|9.*|10.*|11.*",
-        "illuminate/route": "5.8.*|6.*|7.*|8.*|9.*|10.*|11.*"
     },
     "autoload": {
         "psr-4": {
