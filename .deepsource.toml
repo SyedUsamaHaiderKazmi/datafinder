@@ -3,6 +3,9 @@ version = 1
 [[analyzers]]
 name = "php"
 
+  [analyzers.meta]
+  bootstrap_files = ["laravel"]
+
 [[analyzers]]
 name = "javascript"
 
