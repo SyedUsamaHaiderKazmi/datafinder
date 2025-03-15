@@ -14,7 +14,6 @@ class DataSearchController extends Controller
 {
     use DataFinderTrait;
 
-    private $errors = [];
     private $table_buttons = [];
 
     public function liveSearchTableRender(Request $request)
@@ -91,23 +90,23 @@ class DataSearchController extends Controller
                 "recordsTotal" => intval($totalData),
                 "recordsFiltered" => intval($totalFiltered),
                 "data" => $records->toArray(),
-                "errors" => $this->errors,
+                "errors" => $this->getErrors(),
 
             );
             echo json_encode($json_data);
 
         } catch (QueryException $e) {
-            $this->errors[] = $e->getmessage();
+            $this->setExceptionError($e->getmessage());
             // Handle database-related errors (like SQL issues)
             return response()->json([
                 'message' => 'Database query failed: ' . $e->getMessage(),
-                'errors' => $this->errors
+                'errors' => $this->getErrors()
             ], 500);
         }  catch (Exception $e) {
-            $this->errors[] = $e->getmessage();
+            $this->setExceptionError($e->getmessage());
             return response()->json([
                 'message' => $e->getmessage(),
-                'errors' => $this->errors
+                'errors' => $this->getErrors()
             ], 500);
         }
     }

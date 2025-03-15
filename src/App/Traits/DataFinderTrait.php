@@ -1,10 +1,10 @@
 <?php
 
 /**
-    * Setup Package command class for the DataFinder package.
+    * DataFinder Trait for the DataFinder package.
     *
-    * This command file is responsible for setting up the datafinder package for users
-    * such as publishing configuration file, assets and more
+    * This trait file is responsible for providing default complex function to the controller
+    * to provide better readability to what are the corefeatures for the Datafinder
     *
     * @package SUHK\DataFinder
     *
@@ -55,13 +55,13 @@ trait DataFinderTrait
             $query->where(function ($query) use ($columns, $search, $table_name) {
                 foreach ($columns as $key => $column) {
                     if (!$this->keyHasProperValue($column, 'column_name')) {
-                        $this->returnExceptionMessage('{title}', $column['title'], $this->EXCP_MSG_SEARCH_COLUMN);
+                        $this->setValidationError('{title}', $column['title'], $this->VALIDATION_MSG_SEARCH_COLUMN);
                     } else {
                         if ($this->keyHasProperValue($column, 'search_through_join') && $column['search_through_join']) {
                             if ($this->keyHasProperValue($column, 'table_name')) {
                                 $query->orWhere($column['table_name'] . '.' . $column['column_name'], 'LIKE', "%{$search}%");
                             } else {
-                                $this->returnExceptionMessage('{title}', $column['title'], $this->EXCP_MSG_SEARCH_WITH_JOIN_COLUMN);
+                                $this->setValidationError('{title}', $column['title'], $this->VALIDATION_MSG_SEARCH_WITH_JOIN_COLUMN);
                             }
                         } else{
                             $query->orWhere($table_name . '.' . $column['column_name'], 'LIKE', "%{$search}%");
@@ -70,7 +70,7 @@ trait DataFinderTrait
                 }
             });
         } else {
-            $this->returnExceptionMessage('', '', $this->EXCP_MSG_NO_SEARCH_COLUMN);
+            $this->setValidationError('', '', $this->VALIDATION_MSG_NO_SEARCH_COLUMN);
         }
     }
 
