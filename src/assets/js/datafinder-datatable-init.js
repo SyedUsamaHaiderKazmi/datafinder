@@ -99,15 +99,15 @@ function dataTableReload(event) {
     datatable.ajax.reload();
 }
 
-function addEventsToDatatable(datatable){
-    datatable.on('dt-error', function(e, settings, techNote, message) {
+function addEventsToDatatable(dt){
+    dt.on('dt-error', function(e, settings, techNote, message) {
         errorList.push(`${message}`);
         updateErrorDisplay();
     });
-    datatable.on('preXhr', function(e, settings, data) {
+    dt.on('preXhr', function(e, settings, data) {
         errorList = [];
     });
-    datatable.on('xhr', function(e, settings, json, xhr) {
+    dt.on('xhr', function(e, settings, json, xhr) {
         if (json.errors.length > 0) {
             json.errors.forEach((error, index) => {
                 errorList.push(`${error}`);
