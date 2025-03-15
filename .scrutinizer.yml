@@ -15,7 +15,7 @@ exclude:
     - "/config/*"
     - "/routes/*"
     - "/bootstrap/*"
-    
+
 # Set the appropriate language and environment for Scrutinizer
 extensions:
     - php
@@ -32,13 +32,6 @@ analyzers:
         #     paths:
         #         - "tests"
     
-# Enable or configure specific checks
-checks:
-    security: true
-    style: true
-    complexity: true
-    consistency: true
-
 # Optional: Set a minimum quality score if you want Scrutinizer to help you track improvements
 quality:
     score: 75
