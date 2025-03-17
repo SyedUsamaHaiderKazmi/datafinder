@@ -16,7 +16,7 @@ use Illuminate\Console\Command;
 
 class SetupPackage extends Command
 {
-    protected $signature = 'suhk:package-setup';
+    protected $signature = 'datafinder:setup';
 
     protected $description = 'Auto setup process for package.';
 

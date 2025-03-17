@@ -116,7 +116,7 @@ SUHK\DataFinder\App\Providers\MainServiceProvider::class,
 #### _Step 4: Setup package:_
 
 ```bash
-   php artisan suhk:setup-package
+php artisan datafinder:setup
 ```
 
 - Load route & views to autoload
