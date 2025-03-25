@@ -47,6 +47,24 @@ trait DataFinderTrait
                 });
             }
         });
+        /*foreach ($filters as $key => $filter) {
+            $query->where(function ($multiQuery) use ($filter, $key, $has_joins, $table_name) {
+                foreach ($filter as $subFilterKey => $value) {
+                    if ($value['filter_through_join'] == 'true' && $value['join_table'] != null) {
+                        $multiQuery->orWhere($has_joins ? ($value['join_table'] . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
+                    } else {
+                        if ($value['type'] == 'date') {
+                            if (!is_null($value['value'])) {
+                                $multiQuery->whereDate($has_joins ? ($table_name . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
+                            }
+                        } else {
+
+                            $multiQuery->orWhere($has_joins ? ($table_name . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
+                        }
+                    }
+                }
+            });
+        }*/
     }
 
     public function applySearch($query, $columns, $search, $table_name)

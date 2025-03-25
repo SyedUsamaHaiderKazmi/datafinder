@@ -16,7 +16,7 @@ use Illuminate\Support\Arr;
 class ConfigGlobal
 {
     static $basePath = 'Helpers\DataFinder\\';
-    static $file_not_exisit_message = 'Configuration file for the package not found. Please make sure you have correct configuration file setup.';
+    static $file_not_exist_message = 'Configuration file for the package not found. Please make sure you have correct configuration file setup.';
 
 
     public static function validateConfigFile($path)

@@ -19,7 +19,7 @@ class DataSearchController extends Controller
     public function liveSearchTableRender(Request $request)
     {
         try {
-
+            // dd($request->all());
             $table_name = ConfigParser::getTableName($request->config_file_name);
             $MODEL = ConfigParser::getModelPath($request->config_file_name);
             $table_header_columns = ConfigParser::getTableColumnsConfiguation($request->config_file_name);
@@ -46,7 +46,7 @@ class DataSearchController extends Controller
                 $filters = $request->filters;
                 $this->applyFilters($query, $filters, $has_joins, $table_name);
             }
-            
+            // dd($query->toSql());
             $totalDataQuery = clone $query;
             $totalData = $totalDataQuery->count();
 
