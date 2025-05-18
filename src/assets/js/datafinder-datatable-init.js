@@ -21,47 +21,50 @@ $(document).ready(function () {
 
 function getDatatableConfig(){
     return {
-        'info': true,
-        'paging': true,
-        'pageLength': default_per_page,
-        "processing": true,
-        "serverSide": true,
-        "lengthChange": allow_per_page_options,
-        "ajax":{
-            "url": live_search_filter_route,
-            "dataType": "json",
-            "type": "POST",
-            "data":function(data){
+        info: true,
+        paging: true,
+        search: {
+            return: true,
+        },
+        pageLength: default_per_page,
+        processing: true,
+        serverSide: true,
+        lengthChange: allow_per_page_options,
+        ajax:{
+            url: live_search_filter_route,
+            dataType: "json",
+            type: "POST",
+            data: function(data){
                 setupFilterObject();
                 data._token = $("input[name='_token']").val();
                 data.config_file_name = config_file_name;
                 data.filters = filters;
             },
-            "error": function(xhr, status, error) {
+            error: function(xhr, status, error) {
+                fnResetReloadButtonView()
                 errorList.push(`${xhr.responseJSON.errors}`);
                 updateErrorDisplay();
             },
         },
-       "buttons": [
-            {
-                "text": '<i class="fa fa-recycle"></i> | Reload',
-                "className": 'btn btn-primary btn-sm margin-right-5',
-                action: function ( e, dt, node, config ) {
-                    dt.ajax.reload();
-                }
-            },
-        ],
-       "columns": columns,
+        buttons: setupToolbar(),
+        columns: columns,
+        initComplete: function(setting, json){
+            // datatable.buttons().add(buttons);
+            setting.api.buttons().containers().prependTo('.dt-search');
+            setting.api.buttons().containers().css({'margin-right': '0.5rem'});
+        },
     };
 }
 
-function addEventsToDatatable(dt){
+addEventsToDatatable = (dt) => {
     dt.on('dt-error', (e, settings, techNote, message) => {
+        fnResetReloadButtonView()
         errorList.push(`${message}`);
         updateErrorDisplay();
     });
     dt.on('preXhr', (e, settings, data) => {
         errorList = [];
+        updateErrorDisplay();
     });
     dt.on('xhr', (e, settings, json, xhr) => {
         if (json != null && json.errors != undefined) {

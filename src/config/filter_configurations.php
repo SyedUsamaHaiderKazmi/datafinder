@@ -25,6 +25,9 @@ return [
     'default_per_page' => null, // if remains empty, by default will be set to 10
     'allow_per_page_options' => false,
     'per_page_options' => [],
+    'exportable' => false, // if true, then the export functionality will be activated.
+    'exportable_by_chunk' => false, // if exportable is true, then this value can be set true, Purpose is to optimized the exportable for larage datasets.
+    'exportable_chunk_size' => null, // if 'exportable_by_chunk' is false, then this value will be null
 
     /*
     |--------------------------------------------------------------------------
@@ -123,6 +126,7 @@ return [
             'data' => "first_name", // key_name to be used from array passed [Not a db collection but a processed array] (It could be a column name or custom name)
             'visibility' => true, // Boolean to Either show on Table (User Interface) or not
             "searchable" => false, // Boolean to Either set column for searching or not
+            "exportable" => false, // Boolean to Either set column for exporting or not. Set false and the column will not be exported.
             'column_name' => 'COLUMN_NAME', // table column name same as in database table required if searchable is true
             'search_through_join' => false, // boolean to either search the value in parent table or one of the joined tables
             "table_name" => null, // if "search_through_join" is set to true then add the table name, this column is from (join)

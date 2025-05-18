@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use SUHK\DataFinder\App\Http\Controllers\DataSearchController;
+use SUHK\DataFinder\App\Http\Controllers\DataExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,5 @@ use SUHK\DataFinder\App\Http\Controllers\DataSearchController;
  */
 
 Route::post('liveSearchTableRender', [DataSearchController::class, 'liveSearchTableRender'])->name('liveSearchTableRender');
+// export routes
+Route::post('export/init', [DataExportController::class, 'init'])->name('export.init');

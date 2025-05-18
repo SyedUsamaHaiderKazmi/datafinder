@@ -169,6 +169,47 @@ class ConfigParser
     }
 
     /**
+     * Get model path.
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function isExportable(string $configFileName): string
+    {
+        return self::getConfigByCondition(
+            $configFileName,
+            'exportable'
+        );
+    }
+
+    /**
+     * Get model path.
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function isExportableByChunk(string $configFileName): string
+    {
+        return self::getConfigByCondition(
+            $configFileName,
+            'exportable_by_chunk'
+        );
+    }
+    /**
+     * Get model path.
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function getExportableChunkSize(string $configFileName): string
+    {
+        return self::getConfigByCondition(
+            $configFileName,
+            'exportable_chunk_size'
+        );
+    }
+
+    /**
      * Get exportable table columns with table names.
      *
      * @param string $configFileName
@@ -182,7 +223,7 @@ class ConfigParser
             'data',
             'exportable',
             true,
-            fn($header) => "{$header['table_name']}.{$header['data']}"
+            fn($header) => ['title' => $header['title'], 'data' => $header['data']]
         );
     }
 
