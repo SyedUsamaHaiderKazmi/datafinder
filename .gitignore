@@ -22,3 +22,5 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 readme.html
+documentation/ConfigurationFileBreakdown.html
+documentation/Usage.html
