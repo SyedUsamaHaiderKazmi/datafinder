@@ -1,7 +1,4 @@
 /**
- * Exporter class for chunked export with support for XLSX, CSV, and XLS.
- */
-/**
  * Exporter Class for frontend file generation using SheetJS CE.
  * Supports XLSX, CSV, XLS. Uses chunking for memory-efficient export.
  */
@@ -66,12 +63,8 @@ export default class Exporter {
      * Finalize and download the file.
      */
     downloadFile() {
-        if (this.metadata) {
-            this.workbook.Props = {
-                ...this.metadata,
-                CreatedDate: new Date()
-            };
-        }
+
+        this.metadata.CreatedDate = new Date();
 
         let exportFileName = this.filename;
         if (!exportFileName.endsWith(`.${this.extension}`)) {
@@ -79,7 +72,8 @@ export default class Exporter {
         }
         const writeOptions = {
             bookType: this.extension,
-            type: "binary"
+            type: "binary",
+            Props: this.metadata,
         }
 
         if (this.extension === 'csv' ) {

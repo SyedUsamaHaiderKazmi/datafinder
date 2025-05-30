@@ -26,6 +26,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.1.1] - 2025-05-30
+
+#### Added
+
+- None
+
+#### Changed
+
+* **JOINS** following configuration changes have been made:
+  * it has been made more clear to what will be on left side of = and what will be on right side of = in Join query.
+  * Added `alias` compatibility to the config to allow users to define alias for their joined tables.
+
+#### Fixed
+
+* Implementation of responsive class to datatable DOM element through configuration file.
+
+#### Documentation
+
+* Updated documentation for:
+
+  * **Joins** changes made in this patch release
+  * Added credits to README.md file for all 3rd party integrations.
+
+#### Contributors
+
+
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ## [v1.1.0] - 2025-05-25
 
 #### Added

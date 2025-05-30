@@ -2,13 +2,13 @@
 
 The configuration file is structured into 6 distinct sections, each serving a specific purpose to configure the table and its associated features. Below, you'll find a detailed explanation of each section, along with the purpose and how to use them effectively.
 
-* ##### [_Section A: Frontend Configuration_](#section-a-frontend-configuration_1)
-* ##### [_Section B: Database Configuration_](#section-b-database-configuration_1)
-    * ##### [_Section B-1: Columns Configuration_](#section-b-1-columns-configuration_1)
-* ##### [_Section C: Filters Configuration_](#section-c-filters-configuration_1)
-* ##### [_Section D: Joins Configuration_](#section-d-joins-configuration_1)
-* ##### [_Section E: Table Headers_](#section-e-table-headers_1)
-* ##### [_Section F: Row Buttons_](#section-f-row-buttons_1)
+* ##### [_Section A: Frontend Configuration_](#section-a-frontend-configuration-1)
+* ##### [_Section B: Database Configuration_](#section-b-database-configuration-1)
+    * ##### [_Section B-1: Columns Configuration_](#section-b-1-columns-configuration-1)
+* ##### [_Section C: Filters Configuration_](#section-c-filters-configuration-1)
+* ##### [_Section D: Joins Configuration_](#section-d-joins-configuration-1)
+* ##### [_Section E: Table Headers_](#section-e-table-headers-1)
+* ##### [_Section F: Row Buttons_](#section-f-row-buttons-1)
 
 ---
 
@@ -188,8 +188,9 @@ Joins define relationships between the primary table and other tables to fetch r
     'tables' => [
         [
             'join_with_table' => 'related_table',
-            'reference_in_current' => 'parent_table.column',
-            'reference_in_join' => 'related_table.column',
+            'left_side' => 'parent_table.column',
+            'right_side' => 'related_table.column',
+            'alias' => null,
             'selective_columns' => true,
             'columns' => [
                 [
@@ -214,8 +215,9 @@ Joins define relationships between the primary table and other tables to fetch r
 |-----------------------|----------------------------------------------------------------------------------------------|--------------------------|
 | `table_has_joins`     | enable to retrieve data from joined tables .                                                        | `true`                |
 | `join_with_table`     | Table to join with the current table.                                                        | `'users'`                |
-| `reference_in_current`| Column in the current table used for the join condition.                                     | `'users.department_id'` |
-| `reference_in_join`   | Column in the related table for the join condition.                                          | `'users.id'`             |
+| `left_side`| Syntax is this value will be put to left side of = in join query.                                    | `'table.column'` |
+| `right_side`   | Syntax is this value will be put to right side of = in join query                                          | `'table.column'`             |
+| `alias`   | Column in the related table for the join condition.                                          | `'users.id'`             |
 | `selective_columns`   | Whether to fetch specific columns from the joined table.                                     | `true`                   |
 | `columns`   | Please review column configuration section.                                     | N/A                   |
 
@@ -227,8 +229,9 @@ Joins define relationships between the primary table and other tables to fetch r
     'tables' => [
         [
             'join_with_table' => 'department',
-            'reference_in_current' => 'users.department_id',
-            'reference_in_join' => 'users.id',
+            'left_sode' => 'users.department_id',
+            'right_side' => 'departments.id',
+            'alias' => null,
             'selective_columns' => true,
             'columns' => [
                 [

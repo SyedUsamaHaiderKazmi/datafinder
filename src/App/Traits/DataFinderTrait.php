@@ -20,8 +20,14 @@ trait DataFinderTrait
 
     public function setJoins($query, $joins){
         foreach ($joins as $key => $join) {
-            $query->leftjoin($join['join_with_table'], $join['reference_in_current'], '=', $join['reference_in_join']);
-            $this->setupSelectQuery($query, $join['selective_columns'], $join['join_with_table'], $join['columns']);
+            $join_name = $join['join_with_table'];
+            $table_name = $join_name;
+            if ($this->keyHasProperValue($join, 'alias')) {
+                $join_name .= ' as ' . $join['alias'];
+                $table_name = $join['alias']; // if alias is true then select query has to be generated with table's alias name
+            }
+            $query->leftjoin($join_name, $join['left_side'], '=', $join['right_side']);
+            $this->setupSelectQuery($query, $join['selective_columns'], $table_name, $join['columns']);
         }
     }
 

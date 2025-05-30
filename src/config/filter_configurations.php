@@ -93,8 +93,9 @@ return [
         'tables' => [
             [
                 'join_with_table' => 'TABLE_NAME_TO_BE_JOIN_WITH',
-                'reference_in_current' => 'REFERENCE_HERE', // Syntax is parent_table_name.id, Parent Table Name (which is module's main table) then Its Column Name which is to be used for reference in child tables.
-                'reference_in_join' => 'REFERENCE_HERE', // Syntax is reference_table_name.id, Reference Table Name (from which u want the data as per the parent table row) then Its Column Name which is used for reference with parent tables.
+                'left_side' => 'REFERENCE_HERE', // Syntax is this value will be put to left side of = in join query. Format = table.column
+                'right_side' => 'REFERENCE_HERE', // Syntax is this value will be put to right side of = in join query Format = table.column
+                'alias' => null, // an alias to the joined table if required, else set it to be null.
                 'selective_columns' => false, // if you want to retrieve data but with limited columns instead of everything, then set value to "true"
                 'columns' => [ // definition of columns you want to get from the table you are going to join with
                     [

@@ -1,7 +1,7 @@
 @if((!isset($custom_datatable) || !$custom_datatable) && isset($config_file_name) && SUHK\DataFinder\App\Helpers\ConfigGlobal::validateConfigFile($config_file_name))
     @include('datafinder::datatable.table', [
             'dom_table_id' => SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id'),
-            'responsive' => (isset($responsive) && $responsive == true) ? 'table-responsive' : ''
+            'responsive' => (SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id') == true) ? 'table-responsive' : ''
         ])
     @push('df-datatable')
         <script type="text/javascript">

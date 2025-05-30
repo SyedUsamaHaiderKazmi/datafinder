@@ -11,10 +11,10 @@ An easy, configurable & modular laravel package for <a href="https://datatables.
 <img src="https://img.shields.io/scrutinizer/build/g/SyedUsamaHaiderKazmi/datafinder">
 
 <img src="https://img.shields.io/github/license/SyedUsamaHaiderKazmi/datafinder.svg">
+<a href="https://sheetjs.com/">
+    <img src="https://img.shields.io/badge/Powered_by-SheetJS-blue?logo=javascript" alt="Powered by SheetJS">
+</a>
 </p>
-
-
-
 
 ## _Introduction_
 
@@ -95,8 +95,8 @@ For **DataFinder** to work properly, your project must include the following CDN
 
 These dependencies are **not included** in the package to:  
 
->1. **Avoid copyright claims** – We ensure compliance by not bundling third-party assets. Instead, we reference their official websites.   
-2. **Maintain flexibility** – Including these libraries would require constant updates with each new release. By relying on your project’s existing dependencies, **DataFinder** remains compatible across multiple Laravel and PHP versions.  
+>1. **Avoid copyright claims** – We ensure compliance by not bundling third-party assets. Instead, we reference their official websites.
+>2. **Maintain flexibility** – Including these libraries would require constant updates with each new release. By relying on your project’s existing dependencies, **DataFinder** remains compatible across multiple Laravel and PHP versions.  
 
 ###### ✅ **Tested Compatibility:**
 
@@ -129,3 +129,18 @@ php artisan datafinder:setup
 ---
 
 >For comprehensive guidance on how to use this package, please refer to the [_Usage_ ](documentation/Usage.md) Instructions. If you need a breakdown of the configuration file and its options, see the [_Configuration File Breakdown_ ](documentation/ConfigurationFileBreakdown.md).
+
+---
+
+## _Credits:_
+
+This project depends on the following open-source libraries, which are **not bundled** in the package (except **SheetJS CE**, which is included via CDN). All other libraries are expected to be added via CDN by the end user:
+
+- **[Bootstrap](https://getbootstrap.com/)**
+- **[jQuery](https://jquery.com/)**
+- **[DataTables](https://datatables.net/)**
+- **[Select2](https://select2.org/)**
+- **[SheetJS CE](https://docs.sheetjs.com/)**
+    - CDN used: `https://cdn.sheetjs.com/xlsx-latest/package/xlsx.mjs`
+    - Licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+    - © 2012–present SheetJS LLC

@@ -103,8 +103,9 @@ fnExport = (event, datatable, ext) => {
         extension: ext,
         multiSheet: false, // Set to true if each chunk should be a new sheet
         metadata: {
-            Owner: 'Data Finder',
-            Creator: 'SUHK'
+            Author: 'Data Finder',
+            Manager: 'SUHK',
+            Company: 'SUHK'
         }
     });
 
