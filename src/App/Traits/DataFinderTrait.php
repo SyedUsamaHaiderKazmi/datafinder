@@ -13,21 +13,18 @@
 namespace SUHK\DataFinder\App\Traits;
 
 use SUHK\DataFinder\App\Traits\ValidatorTrait;
+use SUHK\DataFinder\App\Traits\Supports\JoinTrait;
 
 trait DataFinderTrait
 {
-    use ValidatorTrait;
+    use ValidatorTrait, JoinTrait;
 
     public function setJoins($query, $joins){
+        // dd($joins);
         foreach ($joins as $key => $join) {
-            $join_name = $join['join_with_table'];
-            $table_name = $join_name;
-            if ($this->keyHasProperValue($join, 'alias')) {
-                $join_name .= ' as ' . $join['alias'];
-                $table_name = $join['alias']; // if alias is true then select query has to be generated with table's alias name
-            }
-            $query->leftjoin($join_name, $join['left_side'], '=', $join['right_side']);
-            $this->setupSelectQuery($query, $join['selective_columns'], $table_name, $join['columns']);
+            $this->joinsInit($join);
+            $this->attachJoin($query, $join);
+            $this->setupSelectQuery($query, $join['using']['options']['selective_columns'], $this->joined_table_name, $join['using']['options']['columns']);
         }
     }
 
@@ -102,16 +99,15 @@ trait DataFinderTrait
         if ($selective_column) {
             foreach ($columns as $key => $column) {
                 if (strcasecmp($column['type'], 'default') == 0) {
-                    if ($column['column_name'] == '*') {
-                        $raw_query = $table_name . '.' . $column['column_name'];
-                        $query->addSelect($raw_query);
+                    $raw_query = $table_name . '.' . $column['column_name'];
+                    if ($this->keyHasProperValue($column, 'alias')) {
+                        $raw_query .= ' as ' . $column['alias'];
                     }
-                    if ($column['column_name'] != '*' && $this->keyHasProperValue($column, 'alias')) {
-                        $raw_query = $table_name . '.' . $column['column_name'] . ' as ' . $column['alias'];
-                        $query->addSelect($raw_query);
-                    }
+                    $query->addSelect($raw_query);
                 } elseif (strcasecmp($column['type'], 'raw') == 0) {
                     $query->addSelect(\DB::raw($column['column_name']));
+                } elseif (strcasecmp($column['type'], 'sub_query') == 0) {
+                    $query->addSelectSub(\DB::raw($column['column_name']));
                 }
                 // array_push($select_raw, $raw_query);
             }

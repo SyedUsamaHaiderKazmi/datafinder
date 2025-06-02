@@ -132,7 +132,7 @@ class ConfigParser
     {
         return self::getConfigByCondition(
             $configFileName,
-            'joins.tables'
+            'joins'
         );
     }
 
@@ -201,7 +201,7 @@ class ConfigParser
      * @param string $configFileName
      * @return array
      */
-    public static function getExportableChunkSize(string $configFileName): string
+    public static function getExportableChunkSize(string $configFileName)
     {
         return self::getConfigByCondition(
             $configFileName,

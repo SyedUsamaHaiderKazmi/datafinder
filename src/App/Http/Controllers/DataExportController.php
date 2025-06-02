@@ -15,6 +15,7 @@ class DataExportController extends Controller
     {
         $data_layer = new DataLayerService($request);
         $query = $data_layer->getQuery();
+        $hasMore = false;
 
         $header_columns = $data_layer->table_header_columns;
         
@@ -33,6 +34,7 @@ class DataExportController extends Controller
             $completed_percentage = ((count($results)+$offset)/$data_layer->total_filtered) * 100;
         } else {
             $results = $query->get()->toArray();
+            $completed_percentage = ((count($results))/$data_layer->total_filtered) * 100;
         }
         
         $ordered_data = $this->generateKeyPairOrderedRecords($results, $header_columns);

@@ -10,8 +10,8 @@
             <div class="card-body">
                <table
                id="df-{{ $dom_table_id }}" 
-               class="table table-striped table-bordered {{ $responsive }}" >
-                    <thead>
+               class="table table-striped table-hover table-bordered {{ $responsive }}" style="text-align: center; vertical-align: middle;">
+                    <thead style="text-align: center; vertical-align: middle;">
                     </thead>
                     <tbody>
                     </tbody>

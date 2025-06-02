@@ -10,19 +10,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
-- None
+- SubQuery Joins to handle joins through a sub query including aggregate support for sub query joins.
+  - A new way to define the conditional clauses of where, groupBy or having ensuring of every single condition to be supported by the package which laravel offers in eloquent builder.
+- A new way to add joins within the datafinder supporting not just one type of join (previously leftJoin) but all types of joins provided by laravel builder.
+- A new way to define multiple On conditions for joins. Not just one but now a user can define "On" or "orOn" conditional references for joins.
+- Added a Join trait handeling the new additions of joins feature more robust and effectively.
+- Added a SubQuery trait to handle the subquery instance for not just subQueryJoins but also the subQuerySelects
 
 ### Changed
-- None
+- Moved joins processing from DataFinder's parent trait to sub trait as a support trait to enhance the implementation of whole process while ensuring the process more readable.
 
 ### Fixed
-- None
+- DataFinder's export functionality to be supported by the new implementation of joins ensuring while export, the joins are implemented as intended by the user through the package.
 
 ### Documentation
 - None
 
 ### Contributor(s)
-- None
+- @SyedUsamaHaiderKazmi (Owner)
 
 ---
 
