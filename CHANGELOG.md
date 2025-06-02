@@ -10,6 +10,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- None
+
+### Changed
+- None
+
+### Fixed
+- None
+
+### Documentation
+- None
+
+### Contributor(s)
+- None
+
+---
+
+## [v1.2.0] - 2025-06-03
+
+### Added
 - SubQuery Joins to handle joins through a sub query including aggregate support for sub query joins.
   - A new way to define the conditional clauses of where, groupBy or having ensuring of every single condition to be supported by the package which laravel offers in eloquent builder.
 - A new way to add joins within the datafinder supporting not just one type of join (previously leftJoin) but all types of joins provided by laravel builder.
@@ -24,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - DataFinder's export functionality to be supported by the new implementation of joins ensuring while export, the joins are implemented as intended by the user through the package.
 
 ### Documentation
-- None
+- Updated joins documentation with new joins structure.
 
 ### Contributor(s)
 - @SyedUsamaHaiderKazmi (Owner)

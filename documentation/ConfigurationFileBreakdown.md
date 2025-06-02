@@ -47,7 +47,7 @@ This section defines the base model and the base table used by the data table. I
     'columns' => [], // If boolean is false then this array will be empty.
 
 ```
-##### _Keys_
+##### _Keys & Developer Notes_
 
 | Key               | Description                                                                                                         | Example Value                           |
 |--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
@@ -73,7 +73,7 @@ Columns define the data fetched from the database and how it is processed.
 ],
 ```
 
-##### _Keys_
+##### _Keys & Developer Notes_
 
 | Key           | Description                                                                                       | Example Value    |
 |---------------|---------------------------------------------------------------------------------------------------|------------------|
@@ -128,7 +128,7 @@ Columns define the data fetched from the database and how it is processed.
 ],
 ```
 
-##### _Keys_
+##### _Keys & Developer Notes_
 
 | Key                   | Description                                                                                  | Example Value         |
 |-----------------------|----------------------------------------------------------------------------------------------|-----------------------|
@@ -174,83 +174,186 @@ Columns define the data fetched from the database and how it is processed.
 
 * #### _Section D: Joins Configuration_
 
+Joins define relationships between the primary table and other tables or subqueries to fetch related data.
 
-Joins define relationships between the primary table and other tables to fetch related data. To enable the join configuration for this package to retreive join table, make sure you add:
+> Supports all join types provided by Laravel (leftJoin, rightJoin, innerJoin, crossJoin, etc.)
+>**Note:** Package does not support dynamic values for subquery. Use hard values for your conditions
 
-`'table_has_joins' => true, // Boolean for Joins.`
-
-##### _Structure_
-
+To enable the join configuration, set:
 ```php
-'table_has_joins' => true/false, // Boolean for Joins.
-
-'joins' => [
-    'tables' => [
-        [
-            'join_with_table' => 'related_table',
-            'left_side' => 'parent_table.column',
-            'right_side' => 'related_table.column',
-            'alias' => null,
-            'selective_columns' => true,
-            'columns' => [
-                [
-                    'type' => 'DEFAULT', // RAW | DEFAULT 
-                    'column' => '*',
-                    'alias' => null,
-                ],
-                [
-                    'type' => 'RAW', // RAW | DEFAULT 
-                    'column' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
-                    'alias' => null,
-                ],
-            ],
-        ],
-    ],
-],
+'table_has_joins' => true,
 ```
 
-##### _Keys_
-
-| Key                   | Description                                                                                  | Example Value            |
-|-----------------------|----------------------------------------------------------------------------------------------|--------------------------|
-| `table_has_joins`     | enable to retrieve data from joined tables .                                                        | `true`                |
-| `join_with_table`     | Table to join with the current table.                                                        | `'users'`                |
-| `left_side`| Syntax is this value will be put to left side of = in join query.                                    | `'table.column'` |
-| `right_side`   | Syntax is this value will be put to right side of = in join query                                          | `'table.column'`             |
-| `alias`   | Column in the related table for the join condition.                                          | `'users.id'`             |
-| `selective_columns`   | Whether to fetch specific columns from the joined table.                                     | `true`                   |
-| `columns`   | Please review column configuration section.                                     | N/A                   |
-
-
-##### _Example_
+#### _Structure_
 
 ```php
 'joins' => [
-    'tables' => [
-        [
-            'join_with_table' => 'department',
-            'left_sode' => 'users.department_id',
-            'right_side' => 'departments.id',
-            'alias' => null,
-            'selective_columns' => true,
-            'columns' => [
-                [
-                    'type' => 'DEFAULT', // RAW | DEFAULT 
-                    'column' => '*',
-                    'alias' => null,
+    // Table Array which are going to be use for joins.
+    [
+        'type' => 'join', // Required: declares this is a join definition
+        'by' => 'TABLE', // Options: 'TABLE' or 'SUB_QUERY'
+        'using' => [
+            'name' => 'table_name',  // Table name or alias for subquery joins
+
+            'options' => [
+                'alias' => null, // Optional: name to use for subquery alias
+                'on' => [
+                    [                   // Define multiple ON conditions (AND or OR logic = on/orOn)
+                        'type' => 'on', // Required
+                        'left_side' => 'table.column',    
+                        'right_side' => 'table.column'     
+                    ],
+                    // More on conditions can be added
                 ],
-                [
-                    'type' => 'RAW', // RAW | DEFAULT 
-                    'column' => 'DATE_FORMAT(department.created_at, "%W %d, %M %Y") AS formatted_date',
-                    'alias' => null,
+
+                // Optional WHERE conditions (only fixed values supported)
+                'where' => [
+                    [
+                        'type' => 'where',                       // Eloquent clause: where, orWhere, etc.
+                        'column_name' => 'some_column',
+                        'conditional_operator' => '=',
+                        'value' => 'some_value' // Note: Package does not support dynamic values for subquery. Use hard values for your conditions
+                    ],
+                    // You can add more where or orWhere blocks
                 ],
-            ],
-        ],
-    ],
+
+                // SUBQUERY-SPECIFIC ONLY
+                'sub_query' => [
+                    'where' => [...], // Same as above
+                    'groupBy' => [...], // Group by one or multiple columns
+                    'having' => [...], // Optional: having or orHaving
+                    'select' => [
+                        [
+                            'type' => 'DEFAULT', // 'DEFAULT' or 'RAW'
+                            'column_name' => 'patient_id', // Field to retrieve
+                            'alias' => null // Required for DEFAULT
+                        ],
+                        [
+                            'type' => 'RAW', // Use raw expressions for conditional selects
+                            'column_name' => 'MAX(...) AS x',
+                            'alias' => null
+                        ]
+                    ]
+                ],
+
+                'selective_columns' => true, // Fetch selected columns only
+                'columns' => [ // Applies when 'selective_columns' is true
+                    [
+                        'type' => 'DEFAULT', // 'DEFAULT' or 'RAW'
+                        'column_name' => 'column_name',
+                        'alias' => 'column_alias' // Required if type is DEFAULT
+                    ]
+                ]
+            ]
+        ]
+    ]
+
 ],
 ```
 
+
+#### _Keys & Developer Notes_
+
+| Key               | Description |
+|------------------|-------------|
+| `type` | Always set to `'join'` |
+| `by` | Join method. Options: `'TABLE'` or `'SUB_QUERY'` |
+| `name` | If `by` is `TABLE`, use actual table name. If `SUB_QUERY`, this is the source table inside subquery. |
+| `alias` | Used when `SUB_QUERY`. Required to reference joined data. |
+| `on` | One or more ON conditions. All are ANDed by default. |
+| `join_type` | (New) Supports all Laravel join types: `left`, `right`, `inner`, `cross`. |
+| `where` | Array of conditions. Laravel-style `where`, `orWhere`, etc. Dynamic values not supported. |
+| `selective_columns` | If true, limits which columns are selected from joined table/subquery. |
+| `columns` | List of columns to select, with alias and type. |
+| `sub_query` | When using a subquery join, this defines the entire subquery logic (select, where, groupBy, having, etc.) |
+
+
+###### _Example:_
+
+###### _(Join by Table)_
+
+```php
+[
+    'type' => 'join',
+    'by' => 'TABLE',
+    'using' => [
+        'name' => 'tip_site',
+        'options' => [
+            'join_type' => 'left',
+            'alias' => null,
+            'on' => [
+                [
+                    'type' => 'on',
+                    'left_side' => 'tip_study_site.site_id',
+                    'right_side' => 'tip_site.site_id',
+                ]
+            ],
+            'selective_columns' => true,
+            'columns' => [
+                [
+                    'type' => 'DEFAULT',
+                    'column_name' => 'site_name',
+                    'alias' => 'site_name',
+                ],
+                [
+                    'type' => 'DEFAULT',
+                    'column_name' => 'site_id',
+                    'alias' => 'site_id',
+                ],
+            ]
+        ]
+    ]
+]
+```
+
+###### _(Join by Subquery)_
+
+```php
+[
+    'type' => 'join',
+    'by' => 'SUB_QUERY',
+    'using' => [
+        'name' => 'form_answers',
+        'options' => [
+            'alias' => 'subject_crfs',
+            'on' => [
+                [
+                    'type' => 'on',
+                    'left_side' => 'tip_study_patient.id',
+                    'right_side' => 'subject_crfs.patient_id',
+                ]
+            ],
+            'sub_query' => [
+                'where' => [
+                    [
+                        'type' => 'where',
+                        'column_name' => 'study_id',
+                        'conditional_operator' => '=',
+                        'value' => '46',
+                    ]
+                ],
+                'groupBy' => ['patient_id'],
+                'select' => [
+                    [
+                        'type' => 'DEFAULT',
+                        'column_name' => 'patient_id',
+                        'alias' => null
+                    ],
+                    [
+                        'type' => 'RAW',
+                        'column_name' => 'MAX(CASE WHEN form_id=284 AND question_id=2340 THEN answers END) AS barecitinib_start_date',
+                        'alias' => null
+                    ]
+                ]
+            ],
+            'selective_columns' => false,
+            'columns' => []
+        ]
+    ]
+]
+```
 ---
+
 
 * #### _Section E: Table Headers_
  
@@ -274,7 +377,7 @@ This section is where users define the columns they want to display in the data 
 ],
 ```
 
-##### _Keys_
+##### _Keys & Developer Notes_
 
 | Key                   | Description                                                                                  | Example Value            |
 |-----------------------|----------------------------------------------------------------------------------------------|--------------------------|
@@ -342,7 +445,7 @@ This section allows users to define dynamic action buttons for each row in the d
 ],
 ```
 
-##### _Keys_
+##### _Keys & Developer Notes_
 
 | Key                                   | Description                                                | Value                                |
 | :------------------------------------ | :--------------------------------------------------------- | :----------------------------------- |

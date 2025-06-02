@@ -98,16 +98,14 @@ trait DataFinderTrait
     public function setupSelectQuery($query, $selective_column, $table_name, $columns){
         if ($selective_column) {
             foreach ($columns as $key => $column) {
-                if (strcasecmp($column['type'], 'default') == 0) {
+                if ($this->matchTagValues($column['type'], 'default')) {
                     $raw_query = $table_name . '.' . $column['column_name'];
                     if ($this->keyHasProperValue($column, 'alias')) {
                         $raw_query .= ' as ' . $column['alias'];
                     }
                     $query->addSelect($raw_query);
-                } elseif (strcasecmp($column['type'], 'raw') == 0) {
+                } elseif ($this->matchTagValues($column['type'], 'raw')) {
                     $query->addSelect(\DB::raw($column['column_name']));
-                } elseif (strcasecmp($column['type'], 'sub_query') == 0) {
-                    $query->addSelectSub(\DB::raw($column['column_name']));
                 }
                 // array_push($select_raw, $raw_query);
             }

@@ -90,28 +90,65 @@ return [
     'table_has_joins' => false, // Boolean for Joins.
     'joins' => [
         // Table Array which are going to be use for joins.
-        'tables' => [
-            [
-                'join_with_table' => 'TABLE_NAME_TO_BE_JOIN_WITH',
-                'left_side' => 'REFERENCE_HERE', // Syntax is this value will be put to left side of = in join query. Format = table.column
-                'right_side' => 'REFERENCE_HERE', // Syntax is this value will be put to right side of = in join query Format = table.column
-                'alias' => null, // an alias to the joined table if required, else set it to be null.
-                'selective_columns' => false, // if you want to retrieve data but with limited columns instead of everything, then set value to "true"
-                'columns' => [ // definition of columns you want to get from the table you are going to join with
-                    [
-                        'type' => 'RAW', // RAW | DEFAULT 
-                        'column_name' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
-                        'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
+        [
+            'type' => 'join', // Required: declares this is a join definition
+            'by' => 'TABLE', // Options: 'TABLE' or 'SUB_QUERY'
+            'using' => [
+                'name' => 'table_name',  // Table name or alias for subquery joins
+
+                'options' => [
+                    'alias' => null, // Optional: name to use for subquery alias
+                    'on' => [
+                        [                   // Define multiple ON conditions (AND or OR logic = on/orOn)
+                            'type' => 'on', // Required
+                            'left_side' => 'table.column',    
+                            'right_side' => 'table.column'     
+                        ],
+                        // More on conditions can be added
                     ],
-                    // NOTE: FOLLOWING EXAMPLE
-                    [
-                        'type' => 'DEFAULT', // RAW | DEFAULT 
-                        'column_name' => '*', // with selective column true you can still get all columns and your custom named columns as well
-                        'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
+
+                    // Optional WHERE conditions (only fixed values supported)
+                    'where' => [
+                        [
+                            'type' => 'where',                       // Eloquent clause: where, orWhere, etc.
+                            'column_name' => 'some_column',
+                            'conditional_operator' => '=',
+                            'value' => 'some_value' // Note: Package does not support dynamic values for subquery. Use hard values for your conditions
+                        ],
+                        // You can add more where or orWhere blocks
                     ],
-                ],
-            ],
-        ],
+
+                    // SUBQUERY-SPECIFIC ONLY
+                    'sub_query' => [
+                        'where' => [...], // Same as above
+                        'groupBy' => [...], // Group by one or multiple columns
+                        'having' => [...], // Optional: having or orHaving
+                        'select' => [
+                            [
+                                'type' => 'DEFAULT', // 'DEFAULT' or 'RAW'
+                                'column_name' => 'patient_id', // Field to retrieve
+                                'alias' => null // Required for DEFAULT
+                            ],
+                            [
+                                'type' => 'RAW', // Use raw expressions for conditional selects
+                                'column_name' => 'MAX(...) AS x',
+                                'alias' => null
+                            ]
+                        ]
+                    ],
+
+                    'selective_columns' => true, // Fetch selected columns only
+                    'columns' => [ // Applies when 'selective_columns' is true
+                        [
+                            'type' => 'DEFAULT', // 'DEFAULT' or 'RAW'
+                            'column_name' => 'column_name',
+                            'alias' => 'column_alias' // Required if type is DEFAULT
+                        ]
+                    ]
+                ]
+            ]
+        ]
+
     ],
 
     /*

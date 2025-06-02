@@ -31,9 +31,9 @@ trait JoinTrait
     }
 
     public function attachJoin($query){
-        if (strcasecmp($this->join_by, 'table') == 0) {
+        if ($this->matchTagValues($this->join_by, 'table')) {
             $this->getJoinByTable($query);
-        } elseif (strcasecmp($this->join_by, 'sub_query') == 0){
+        } elseif ($this->matchTagValues($this->join_by, 'sub_query')){
             $this->getJoinBySubQuery($query);
         }     
     }
@@ -56,7 +56,7 @@ trait JoinTrait
     private function getJoinName(){
         $join_name = $this->joined_table_name;
         if ($this->keyHasProperValue($this->options, 'alias')) {
-            if (strcasecmp($this->join_by, 'sub_query') == 0) {
+            if ($this->matchTagValues($this->join_by, 'sub_query')) {
                 $join_name = $this->options['alias'];
             } else {
                 $join_name .= ' as ' . $this->options['alias'];

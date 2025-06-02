@@ -46,4 +46,8 @@ trait ValidatorTrait
         return (isset($object[$value]) && $object[$value] != null && $object[$value] != '') ? true : false;
     }
 
+    public function matchTagValues($compare, $to)
+    {
+        return strcasecmp($compare, $to) == 0 ? true: false;
+    }
 }
