@@ -1,0 +1,19 @@
+<?php
+return [
+    
+    'model_path' => '{{MODEL_PATH}}', // parent table's model path
+    'table_name' => '{{DATABASE_TABLE_NAME}}', // parent table's name from database
+    'selective_columns' => false, // Boolean False means system will fetch the data with all columns of this table.
+    'columns' => [
+        [
+            'type' => 'DEFAULT', // RAW | DEFAULT 
+            'column_name' => '*',
+            'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
+        ],
+        [
+            'type' => 'RAW', // RAW | DEFAULT 
+            'column_name' => 'DATE_FORMAT(tablename.column_name, "%W %d, %M %Y") AS formatted_date',
+            'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
+        ],
+    ], // If boolean is false then this array will be empty.
+];

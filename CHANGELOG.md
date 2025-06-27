@@ -26,6 +26,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased]
+
+### Added
+- Commands based configuration generation using stubs strategy to have a better file heirarcy for users to avoid the long file content build up in single configuration file. Using commands, called AddNewModule under Commands folder, package will generate relevant configurations through stubs in designated folders by having inputs from the developers. Command will be responsible for generating the configuration per module.
+- A general stub handler helper to have reuseable methods to generate and publish files through stubs.
+- Added functions in ConfigGlobal.php
+  - getPath
+  - createDirectoryIfNotExist
+
+### Changed
+- File name changed:
+  - DataLayerService.php to DataFinderService.php
+  - Function in ConfigGlobal.php:
+    - validateConfigFile: change the way, path was genertaed and used a new reuseable function called getPath.
+
+### Fixed
+- None
+
+### Documentation
+- None
+
+### Contributor(s)
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ## [v1.2.0] - 2025-06-03
 
 ### Added

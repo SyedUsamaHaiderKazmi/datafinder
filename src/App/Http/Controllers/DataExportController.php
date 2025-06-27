@@ -5,7 +5,7 @@ namespace SUHK\DataFinder\App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Route;
-use SUHK\DataFinder\App\Services\DataLayerService;
+use SUHK\DataFinder\App\Services\DataFinderService;
 use Exception;
 
 class DataExportController extends Controller
@@ -13,7 +13,7 @@ class DataExportController extends Controller
 
     public function init(Request $request)
     {
-        $data_layer = new DataLayerService($request);
+        $data_layer = new DataFinderService($request);
         $query = $data_layer->getQuery();
         $hasMore = false;
 

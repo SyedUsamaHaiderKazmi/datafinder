@@ -13,12 +13,14 @@
 namespace SUHK\DataFinder\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use SUHK\DataFinder\App\Helpers\ConfigGlobal;
 
 class MainServiceProvider extends ServiceProvider
 {
 
     protected $commands = [
         'SUHK\DataFinder\App\Console\SetupPackage',
+        'SUHK\DataFinder\App\Console\Commands\AddNewModule',
     ];
 
     /**
@@ -47,9 +49,9 @@ class MainServiceProvider extends ServiceProvider
         $this->loadViewsFrom(dirname(__FILE__) . '/../../views/datatable', 'datafinder');
 
         // Configs
-        $this->publishes([
-            dirname(__FILE__) . '/../../config/filter_configurations.php' => app_path('Helpers/DataFinder/sample_filter_configurations.php'),
-        ], 'sample_configuration');
+        /*$this->publishes([
+            dirname(__FILE__) . '/../../config/filter_configurations.php' => ConfigGlobal::getPath('sample_filter_configurations'),
+        ], 'sample_configuration');*/
         // assets
         $this->publishes([
             dirname(__FILE__) . '/../../assets' => public_path('vendor/datafinder/assets/'),

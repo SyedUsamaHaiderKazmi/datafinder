@@ -1,0 +1,19 @@
+<?php
+return [
+    [
+        'id' => 'DOM_ELEMENT_ID', // ID value for to access from Javascript.
+        'name' => 'DOM_ELEMENT_NAME', // Name value for name attribute for forms or else.
+        'label' => 'DOM_ELEMENT_LABEL', // Label To Display on User Interface.
+        'placeholder' => 'DOM_ELEMENT_PLACEHOLDER', // Label To Display on User Interface.
+        'type' => 'text | select', // Input type value to render field as what.
+        'value_type' => 'ROUTE_PARAM | QUERY_PARAM | PHP_VARIABLE | CUSTOM', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM | PHP_VARIABLE to get value from routes or variable passed to the blade.
+        'value' => 'DOM_ELEMENT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
+        'selected' => 'DOM_ELEMENT_DEFAULT_VALUE', // Field Default Value. Either provide custom value or use tag "ROUTE_PARAM
+        'visibility' => true, // Boolean to Either show in Filters (User Interface) or not.
+        'filterable' => true, // Boolean to Either show in Filters (User Interface) or not.
+        'column_name' => 'YOUR_DATABASE_TABLE_COLUMN', // Column name to look for in parent table.
+        'filter_through_join' => false, // Boolean to Either set column for filtering through joined table or not.
+        'join_table' => null, // Joined-Table name for Joined filters.
+        'conditional_operator' => '= | >= | <= | <>', // Conditional operator to use in where caluse for filters.
+    ]
+];

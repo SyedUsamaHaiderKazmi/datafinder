@@ -7,7 +7,7 @@ use SUHK\DataFinder\App\Helpers\ConfigGlobal;
 use SUHK\DataFinder\App\Traits\DataFinderTrait;
 
 /**
-    * DataFinder Data Layer Service for the DataFinder package.
+    * DataFinder Service for the DataFinder package.
     *
     * This service file is responsible for providing default complex function to the controller or other files
     * to provide better readability to what are the corefeatures for the Datafinder in regards to its business layer
@@ -15,7 +15,7 @@ use SUHK\DataFinder\App\Traits\DataFinderTrait;
     * @package SUHK\DataFinder
     *
 */
-class DataLayerService
+class DataFinderService
 {
     use DataFinderTrait;
 

@@ -1,0 +1,72 @@
+<?php
+return [
+
+    /*
+    ---------------------------------------------------------------------------
+    |                                    SAMPLE FILE
+    |--------------------------------------------------------------------------
+    | DUMMY FORMAT FOR ALL OPTIONS. THIS IS A DUMMY FILE FOR A SINGLE MODULE.
+    | PLEASE CREATE A NEW FILE FOR EVERY MODULE KEEPING THIS SAMPLE FILE AS IT
+    | IS FOR FUTURE REFERENCE.
+    |--------------------------------------------------------------------------
+    |
+     */
+    // -------------------------------------------------------------------------------------------------------------------
+
+    /*
+    |--------------------------------------------------------------------------
+    | Section A: General information for datable configuration and DOM element.
+    |--------------------------------------------------------------------------
+    |
+     */
+    
+    include('frontend/base.php'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Section B: Section where parent table for module will be required to configure
+    |--------------------------------------------------------------------------
+    |
+     */
+    
+    include('database/primary.php'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Section C: Filters Array to render filters on User Interface.
+    |--------------------------------------------------------------------------
+    |
+     */
+    'filters' => include('frontend/filters.php'),
+
+    /*
+    |--------------------------------------------------------------------------
+    |Section D: if you want to use joins within the module to show data with complex data 
+    |Joins Boolean and Configuration to search and filter the data from relationship tables using foreign keys.
+    |--------------------------------------------------------------------------
+    |
+     */
+
+    'table_has_joins' => '{{HAS_JOIN}}', // Boolean for Joins.
+    'joins' => '{{JOIN_VALUE}}',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Section E: Header array for DATATABLE on User Interface.
+    |--------------------------------------------------------------------------
+    |
+     */
+
+    'table_headers' => include('frontend/table_headers.php'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Section F: If a module is going to have any buttons, then its array is given below.
+    |--------------------------------------------------------------------------
+    |
+     */
+
+    'row_has_buttons' => '{{HAS_BUTTONS}}',
+    'table_row_buttons' => '{{BUTTON_VALUE}}'
+];
+

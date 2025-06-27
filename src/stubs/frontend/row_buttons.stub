@@ -1,0 +1,25 @@
+<?php
+return [
+    [
+        'label' => 'BTN_LABEL',
+        'class' => 'BTN_CLASS',
+        'style' =>  null, // 'bgColor: #000; color: #fff;'
+        'icon' => 'YOUR_BTN_ICON_CLASS',
+        'tooltip' => 'YOUR_BTN_TOOLTIP',
+        'route' => [
+            'name' => 'route.name',
+            'params' => [ // only params from end results (data after query) are supported
+                [
+                    'param_key' => 'YOUR_PARA<_KEY',
+                    'data_key' => 'YOU_DATA_KEY_FROM_DATA',
+                ],
+            ], // params defined for url in url registry
+            'additional_params' => [
+                [
+                    'param_key' => 'YOUR_PARA<_KEY',
+                    'data_key' => 'YOU_DATA_KEY_FROM_DATA',
+                ],
+            ], // additional params to pass through with required params such as query params
+        ],
+    ],
+];

@@ -49,14 +49,4 @@ class SetupPackage extends Command
         $this->info('Package setuped successfully. Please follow the documentation for usage.');
     }
 
-    public function createDirectoryIfNotExist($path, $replace = false)
-    {
-        if (file_exists($path) && $replace) {
-            rmdir($path);
-        }
-
-        if (!file_exists($path)) {
-            mkdir($path, 0755, true);
-        }
-    }
 }

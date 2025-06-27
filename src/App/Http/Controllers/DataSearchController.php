@@ -5,7 +5,7 @@ namespace SUHK\DataFinder\App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Route;
-use SUHK\DataFinder\App\Services\DataLayerService;
+use SUHK\DataFinder\App\Services\DataFinderService;
 use SUHK\DataFinder\App\Traits\ValidatorTrait;
 use Exception;
 
@@ -17,7 +17,7 @@ class DataSearchController extends Controller
     public function liveSearchTableRender(Request $request)
     {
         try {
-            $data_layer = new DataLayerService($request);
+            $data_layer = new DataFinderService($request);
             $data = $data_layer->getData();
             $json_data = array(
                 "draw" => intval($request->input('draw')),
