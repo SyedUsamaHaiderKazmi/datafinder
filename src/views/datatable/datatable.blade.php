@@ -16,7 +16,8 @@
                 });
             @endif
 
-            live_search_filter_route = '{{ route("liveSearchTableRender") }}';
+            live_search_filter_route = '{{ route("df.data") }}';
+            export_route = '{{ route("df.export.init") }}';
             datafinder_table_id = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id'));
 
             let default_per_page = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'default_per_page'));
@@ -63,6 +64,7 @@
 
         let columns = null;
         let live_search_filter_route = null;
+        let export_route = null;
         let datafinder_table_id = null;
         let custom_datatable = false;
 

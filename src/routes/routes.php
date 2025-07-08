@@ -17,4 +17,4 @@ use SUHK\DataFinder\App\Http\Controllers\DataExportController;
 
 Route::post('df/data', [DataSearchController::class, 'data'])->name('df.data');
 // export routes
-Route::post('export/init', [DataExportController::class, 'init'])->name('export.init');
+Route::post('df/export/init', [DataExportController::class, 'init'])->name('df.export.init');

@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - `createDirectoryIfNotExist`
 - Added the buttons column in table on frontend as a default column but based on the option in `configuration file`.
 - Improved validation for filters during data retrieval to exclude empty values and unselected fields from the filter object. This prevents ambiguity when searching or filtering against empty or null values.
+- RefreshPackage command is added in the package to allow users to update package assets (publishable) upon new release using command.
+  - Command: `php artisan datafinder:assets-refresh`
 
 #### Changed
 - File name:
@@ -51,6 +53,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - `options` to `actions`
 - Renamed route name to get data in the datatable:
   - `liveSearchTableRender` to `df/data`
+- Renamed route name to export data:
+  - `export/init` to `df/export/init`
+- Updated new routes in package's datatable support files in js for data fetch and export.
 
 #### Fixed
 - If no default value is given for filter type input text, then ask the value from end user to input

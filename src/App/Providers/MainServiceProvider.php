@@ -21,6 +21,7 @@ class MainServiceProvider extends ServiceProvider
     protected $commands = [
         'SUHK\DataFinder\App\Console\SetupPackage',
         'SUHK\DataFinder\App\Console\Commands\AddNewModule',
+        'SUHK\DataFinder\App\Console\Commands\RefreshPackage',
     ];
 
     /**

@@ -24,7 +24,7 @@ class SetupPackage extends Command
     {
         $this->info('Setting up the package...');
 
-        $this->info('Publishing sample configuration file...');
+        // $this->info('Publishing sample configuration file...');
 
         // $this->createDirectoryIfNotExist(config('datafinder'));
         //this works for latest laravel
@@ -36,11 +36,11 @@ class SetupPackage extends Command
         ]);*/
 
         // for old laravel, we will have to call each saperately
-        $this->call('vendor:publish', [
+        /*$this->call('vendor:publish', [
             '--provider' => "SUHK\DataFinder\App\Providers\MainServiceProvider",
             '--tag' => "sample_configuration",
         ]);
-
+*/
         $this->call('vendor:publish', [
             '--provider' => "SUHK\DataFinder\App\Providers\MainServiceProvider",
             '--tag' => "assets",

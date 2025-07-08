@@ -116,7 +116,7 @@ fnExport = (event, datatable, ext) => {
     const fetchChunk = (offset) => {
         params.offset = offset;
         $.ajax({
-            url: "export/init",
+            url: export_route,
             type: "POST",
             data: params,
             success: function (response) {
