@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Renamed route name to export data:
   - `export/init` to `df/export/init`
 - Updated new routes in package's datatable support files in js for data fetch and export.
+- Renamed Code of Conduct.md file.
 
 #### Fixed
 - If no default value is given for filter type input text, then ask the value from end user to input
