@@ -117,7 +117,7 @@ trait DataFinderTrait
     
     public function generateButtons($record, $table_buttons)
     {
-        $record->options = "<div class='btn-group' role='group' aria-label='Basic example'>";
+        $record->actions = "<div class='btn-group' role='group' aria-label='Basic example'>";
         foreach ($table_buttons as $key => $button) {
 
             // $route = str_replace('{row_id}', $record->id, $request->routes[$button['route_key']]) ?? '#';
@@ -147,8 +147,8 @@ trait DataFinderTrait
             $button_html .= $this->keyHasProperValue($button, 'label') ? $button['label'] : '';
             // end button
             $button_html .= '</a>';
-            $record->options .= $button_html;
+            $record->actions .= $button_html;
         }
-        $record->options .= '</div>';
+        $record->actions .= '</div>';
     }
 }

@@ -48,5 +48,5 @@
         </div>
     @endif
 @else
-    <p>{{ SUHK\DataFinder\App\Helpers\ConfigGlobal::$file_not_exisit_message }}</p>
+    <p>{{ SUHK\DataFinder\App\Helpers\ConfigGlobal::$file_not_exist_message }}</p>
 @endif

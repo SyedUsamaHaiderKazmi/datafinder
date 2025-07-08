@@ -8,6 +8,14 @@
             let config_file_name = @json($config_file_name);
 
             columns = @json(SUHK\DataFinder\App\Helpers\ConfigParser::getTableColumnsConfiguation($config_file_name));
+            @if(SUHK\DataFinder\App\Helpers\ConfigParser::tableHasRowButtons($config_file_name))
+                columns.push({
+                    title: 'Actions',
+                    data: 'actions',
+                    orderable: false
+                });
+            @endif
+
             live_search_filter_route = '{{ route("liveSearchTableRender") }}';
             datafinder_table_id = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id'));
 

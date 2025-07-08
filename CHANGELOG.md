@@ -1,53 +1,68 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+>All notable changes to this project will be documented in this file.
+>
+>The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+### _[Unreleased]_
 
-### Added
+#### Added
 - None
 
-### Changed
+#### Changed
 - None
 
-### Fixed
+#### Fixed
 - None
 
-### Documentation
+#### Documentation
 - None
 
-### Contributor(s)
+#### Contributor(s)
 - None
 
 ---
 
-## [Unreleased]
+### _[Unreleased]_
 
-### Added
-- Command-based configuration generation using a stub-driven strategy to maintain a cleaner file hierarchy and prevent bloated single configuration files. A new AddNewModule command (located in the Commands folder) allows developers to generate module-specific configuration files by providing interactive input. Each execution of the command will create a dedicated configuration file using predefined stubs in appropriate folders.
+#### Added
+- Command-based configuration generation using a stub-driven strategy to maintain a cleaner file hierarchy and prevent bloated single configuration files. A new `AddNewModule` command (located in the Commands folder) allows developers to generate module-specific configuration files by providing interactive input. Each execution of the command will create a dedicated configuration file using predefined stubs in appropriate folders.
+  - Command: `php artisan datafinder:add-new-module`
 - A general stub handler helper to have reuseable methods to generate and publish files through stubs.
-- Added functions in ConfigGlobal.php
-  - getPath
-  - createDirectoryIfNotExist
+- Added functions in `ConfigGlobal.php`
+  - `getPath`
+  - `createDirectoryIfNotExist`
+- Added the buttons column in table on frontend as a default column but based on the option in `configuration file`.
+- Improved validation for filters during data retrieval to exclude empty values and unselected fields from the filter object. This prevents ambiguity when searching or filtering against empty or null values.
 
-### Changed
+#### Changed
 - File name:
-  - DataLayerService.php to DataFinderService.php
+  - `DataLayerService.php` to `DataFinderService.php`.
 - Function in ConfigGlobal.php:
-    - validateConfigFile: change the way, path was genertaed and used a new reuseable function called getPath.
+    - `validateConfigFile`: change the way, path was genertaed and used a new reuseable function called getPath.
+- Function in `ConfigParser.php`:
+  - `getTableColumnsConfiguration`: added the orderable key in the mapping callback to return orderable status for columns.
+- Function name in `DataSearchController.php`:
+  - `liveSearchTableRender` to `data`.
+- Renamed key for buttons in records collection:
+  - `options` to `actions`
+- Renamed route name to get data in the datatable:
+  - `liveSearchTableRender` to `df/data`
 
-### Fixed
+#### Fixed
+- If no default value is given for filter type input text, then ask the value from end user to input
+- Validation message variable name fix from `file_not_exisit_message` to `file_not_exist_message`
+- fixed bugs in stubs structure and their file includes.
+
+#### Documentation
 - None
 
-### Documentation
-- None
+#### Contributor(s)
 
-### Contributor(s)
+Following are the contributor(s) to this release:
 - @SyedUsamaHaiderKazmi (Owner)
 
 ---

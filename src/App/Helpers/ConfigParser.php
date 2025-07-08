@@ -137,20 +137,6 @@ class ConfigParser
     }
 
     /**
-     * Get joins if a configuration has joins.
-     *
-     * @param string $configFileName
-     * @return array
-     */
-    public static function getValuesForSelectQuery(string $configFileName): array
-    {
-        return self::getConfigByCondition(
-            $configFileName,
-            'joins.select'
-        );
-    }
-
-    /**
      * Get visible table columns configuration for rendering.
      *
      * @param string $configFileName
@@ -164,7 +150,7 @@ class ConfigParser
             null,
             'visibility',
             true,
-            fn($header) => ['title' => $header['title'], 'data' => $header['data']]
+            fn($header) => ['title' => $header['title'], 'data' => $header['data'], 'orderable' => $header['orderable']]
         );
     }
 
@@ -225,61 +211,6 @@ class ConfigParser
             true,
             fn($header) => ['title' => $header['title'], 'data' => $header['data']]
         );
-    }
-
-    /**
-     * Get exportable table columns without table names.
-     *
-     * @param string $configFileName
-     * @return array
-     */
-    public static function getTableColumnsForExportWithoutTableName(string $configFileName): array
-    {
-        return self::getConfigByCondition(
-            $configFileName,
-            'table_headers',
-            'data',
-            'exportable',
-            true
-        );
-    }
-
-    /**
-     * Get formatted table column titles for export.
-     *
-     * @param string $configFileName
-     * @return array
-     */
-    public static function getFormattedTableColumnsForExport(string $configFileName): array
-    {
-        return self::getConfigByCondition(
-            $configFileName,
-            'table_headers',
-            'title',
-            'exportable',
-            true
-        );
-    }
-
-    /**
-     * Get formatted column titles for specific keys.
-     *
-     * @param string $configFileName
-     * @param array $keys
-     * @return array
-     */
-    public static function getFormattedTableColumnsNamesForExport(string $configFileName, array $keys): array
-    {
-        $tableHeaders = ConfigGlobal::getValueFromFile("{$configFileName}.php", 'table_headers');
-        $columns = [];
-
-        foreach ($keys as $key) {
-            if (isset($tableHeaders[$key]) && $tableHeaders[$key]['exportable']) {
-                $columns[] = $tableHeaders[$key]['title'];
-            }
-        }
-
-        return $columns;
     }
 
     /**

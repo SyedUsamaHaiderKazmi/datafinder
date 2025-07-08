@@ -14,7 +14,7 @@ class DataSearchController extends Controller
 
     private $table_buttons = [];
 
-    public function liveSearchTableRender(Request $request)
+    public function data(Request $request)
     {
         try {
             $data_layer = new DataFinderService($request);

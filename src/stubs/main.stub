@@ -20,7 +20,7 @@ return [
     |
      */
     
-    include('frontend/base.php'),
+    ...include('frontend/base.php'), // spread operator is required to flaten the file return for getting associative array
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     |
      */
     
-    include('database/primary.php'),
+    ...include('database/primary.php'), // spread operator is required to flaten the file return for getting associative array
 
     /*
     |--------------------------------------------------------------------------

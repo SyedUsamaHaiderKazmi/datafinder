@@ -6,6 +6,8 @@
         <input type="{{ $filter['type'] }}" 
         @if($data)
             value="{{ $data }}" 
+        @elseif(is_null($data) || empty($data))
+            placeholder="Enter value to filter" 
         @else
             placeholder="Wrong Data Passed!" 
         @endif
