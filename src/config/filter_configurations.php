@@ -120,9 +120,9 @@ return [
 
                     // SUBQUERY-SPECIFIC ONLY
                     'sub_query' => [
-                        'where' => [...], // Same as above
-                        'groupBy' => [...], // Group by one or multiple columns
-                        'having' => [...], // Optional: having or orHaving
+                        'where' => [], // Same as above
+                        'groupBy' => [], // Group by one or multiple columns
+                        'having' => [], // Optional: having or orHaving
                         'select' => [
                             [
                                 'type' => 'DEFAULT', // 'DEFAULT' or 'RAW'

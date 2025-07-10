@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## [v1.2.1] - 2025-07-10
 
 ### Added
 - None
@@ -16,13 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - None
 
 ### Fixed
-- None
+- A `...` saperator was added within the joins configuration, creating a crash in the package flow.
+- A wrong variable name [used to show message from constants] was used in else condition for frontend validation in filters blade file for validating if the file (config file) exists or not.
 
 ### Documentation
 - None
 
 ### Contributor(s)
-- None
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
 
 ---
 
