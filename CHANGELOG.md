@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.2.2] - 2025-07-10
+
+### Added
+- None
+
+### Changed
+- None
+
+### Fixed
+- called `url()` function instead of `asset()` to declase js files in frontend.
+
+### Documentation
+- None
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ## [v1.2.1] - 2025-07-10
 
 ### Added

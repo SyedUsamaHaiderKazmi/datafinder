@@ -61,7 +61,7 @@
     </script>
     @stack('df-datatable')
     @stack('df-datatable-custom')
-    <script type="text/javascript" src="{{ asset('vendor/datafinder/assets/js/datafinder-datatable-init.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datafinder/assets/js/datafinder-datatable-helper.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datafinder/assets/js/datafinder-datatable-constants.js') }}"></script>
+    <script type="text/javascript" src="{{ url('vendor/datafinder/assets/js/datafinder-datatable-init.js') }}"></script>
+    <script type="text/javascript" src="{{ url('vendor/datafinder/assets/js/datafinder-datatable-helper.js') }}"></script>
+    <script type="text/javascript" src="{{ url('vendor/datafinder/assets/js/datafinder-datatable-constants.js') }}"></script>
 @endsection
