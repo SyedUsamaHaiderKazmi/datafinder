@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.2.3] - 2025-07-15
+
+### Added
+- None
+
+### Changed
+- `@section(scripts)` to `@section(datafinder-scripts)`
+
+### Fixed
+- file include paths in js assets.
+- Spinner color was having problem, in some cases if the `bg-color` was light, and the spinner color is also light then it was giving a bad feeling, so i updated the css to inverse the colors if the bg is light, then color is dark and vise versa.
+
+### Documentation
+- README.md Changes:
+  - Added a line that datatable and its button extension CDNs are required for the package to operate properly.
+  - Added a step to guide users on how to add datafinder required scripts in their laravel views using `yield` directive.
+  - Refractored the steps in documentation (README.md) file and added extra steps.
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ## [v1.2.2] - 2025-07-10
 
 ### Added

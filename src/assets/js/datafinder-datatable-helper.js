@@ -152,7 +152,7 @@ fnProcessSpinElement = (btn) => {
     // Create a unique spinner and add it to the button
     const button = btn; // fallback to button if span/img clicked
     let spinner = document.createElement('img');
-    spinner.src = "vendor/datafinder/assets/svgs/spinner.svg";
+    spinner.src = "/vendor/datafinder/assets/svgs/spinner.svg";
     spinner.alt = "Exporting...";
     spinner.style.height = "16px";
     spinner.style.marginRight = "5px";
