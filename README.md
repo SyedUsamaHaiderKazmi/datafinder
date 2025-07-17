@@ -83,29 +83,13 @@ Run the following command to install the package via Composer:
 composer require suhk/datafinder-laravel
 ```
 
-#### _Step 2: Add Required CDNs_
-
-
-For **DataFinder** to work properly, your project must include the following CDNs in your views:
-
->- **[Bootstrap](https://getbootstrap.com/)**
->- **[jQuery](https://jquery.com/)**
->- **[DataTables](https://datatables.net/)**
->- **[Select2](https://select2.org/)**
-
-These dependencies are **not included** in the package to:  
-
->1. **Avoid copyright claims** – We ensure compliance by not bundling third-party assets. Instead, we reference their official websites.
->2. **Maintain flexibility** – Including these libraries would require constant updates with each new release. By relying on your project’s existing dependencies, **DataFinder** remains compatible across multiple Laravel and PHP versions.  
-
 ###### ✅ **Tested Compatibility:**
 
 > - **PHP:** 7.3 – 8.4
 > - **Laravel:** 5.8 – 11
  
-Make sure to include the required CDNs in your project to ensure **DataFinder** works seamlessly. 
 
-#### _Step 3: Add Service Provider_
+#### _Step 2: Add Service Provider_
 
 The package's service provider is auto-loaded upon installation. However, if it is not loaded, manually add the following entry to the `providers` array in your `config/app.php` file:
 
@@ -113,7 +97,7 @@ The package's service provider is auto-loaded upon installation. However, if it 
 SUHK\DataFinder\App\Providers\MainServiceProvider::class,
 ```
 
-#### _Step 4: Setup package:_
+#### _Step 3: Setup package:_
 
 ```bash
 php artisan datafinder:setup
@@ -126,9 +110,61 @@ php artisan datafinder:setup
         - This is the [_Sample Configuration_](src/config/filter_configurations.php) file used to configure the `datafinder` package per module. It contains default settings and structure that can be customized as needed for your application.
         - [_See file breakdown_ ](documentation/ConfigurationFileBreakdown.md)
 
----
 
->For comprehensive guidance on how to use this package, please refer to the [_Usage_ ](documentation/Usage.md) Instructions. If you need a breakdown of the configuration file and its options, see the [_Configuration File Breakdown_ ](documentation/ConfigurationFileBreakdown.md).
+#### _Step 4: Add Required CDNs_
+
+
+For **DataFinder** to work properly, your project must include the following CDNs in your views:
+
+>- **[Bootstrap](https://getbootstrap.com/)**
+>- **[jQuery](https://jquery.com/)**
+>- **[DataTables](https://cdn.datatables.net/)**
+>   - Datatable & Button Extension CDNs [Mendatory]
+>- **[Select2](https://select2.org/)**
+
+These dependencies are **not included** in the package to:  
+
+>1. **Avoid copyright claims** – We ensure compliance by not bundling third-party assets. Instead, we reference their official websites.
+>2. **Maintain flexibility** – Including these libraries would require constant updates with each new release. By relying on your project’s existing dependencies, **DataFinder** remains compatible across multiple Laravel and PHP versions.  
+
+Make sure to include the required CDNs in your project to ensure **DataFinder** works seamlessly. 
+
+#### _Step 5: Yield DataFinder Scripts_
+To ensure DataFinder functions correctly across different pages in your Laravel application, you need to reserve a section in your main layout for injecting page-specific DataFinder scripts using Laravel Blade's `@yield` directive with a section name `datafinder-scripts`.
+
+Place the following line just before the closing `</body>` tag in your main layout which will look like this:
+
+```blade
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Laravel App</title>
+    <!-- Global CSS and scripts -->
+</head>
+<body>
+
+    <!-- Page content will be injected here -->
+    @yield('content')
+
+    <!-- Page-specific DataFinder scripts will be injected here -->
+    @yield('datafinder-scripts')
+
+</body>
+</html>
+```
+###### Why This Matters:
+- Allows child views to inject their own DataFinder scripts only when needed.
+- Keeps your layout clean and avoids loading unnecessary scripts globally.
+- Supports better separation of concerns and modular code structure.
+
+
+#### _Step 6: Read Usage & Configuration File Breakdown_
+
+
+For comprehensive guidance on how to use this package, please refer to the [_Usage Instructions_](documentation/Usage.md). 
+
+If you need a breakdown of the configuration file to understnad what options and features this package offer and how, see the [_Configuration File Breakdown_ ](documentation/ConfigurationFileBreakdown.md).
 
 ---
 

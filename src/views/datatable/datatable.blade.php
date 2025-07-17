@@ -52,11 +52,11 @@
     <p style="border-left: 0.2rem solid red;background: #ffdfdf;margin: 1rem;padding: 0.1rem 1rem;color: #565656;">{{ SUHK\DataFinder\App\Helpers\ConfigGlobal::$file_not_exist_message }}</p>
 @endif
 
-@section('scripts')
+@section('df-scripts')
     @stack('df-filters-scripts')
     <script type="module">
         {{-- import {XLSXExport} from './vendor/datafinder/assets/js/export/abstract/export.js'; --}}
-        import Exporter from './vendor/datafinder/assets/js/export/services/Exporter.js';
+        import Exporter from '/vendor/datafinder/assets/js/export/services/Exporter.js';
         window.Exporter = Exporter;
 
     </script>
@@ -71,7 +71,7 @@
     </script>
     @stack('df-datatable')
     @stack('df-datatable-custom')
-    <script type="text/javascript" src="{{ asset('vendor/datafinder/assets/js/datafinder-datatable-init.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datafinder/assets/js/datafinder-datatable-helper.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datafinder/assets/js/datafinder-datatable-constants.js') }}"></script>
+    <script type="text/javascript" src="{{ url('vendor/datafinder/assets/js/datafinder-datatable-init.js') }}"></script>
+    <script type="text/javascript" src="{{ url('vendor/datafinder/assets/js/datafinder-datatable-helper.js') }}"></script>
+    <script type="text/javascript" src="{{ url('vendor/datafinder/assets/js/datafinder-datatable-constants.js') }}"></script>
 @endsection

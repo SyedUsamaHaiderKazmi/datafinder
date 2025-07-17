@@ -1,5 +1,5 @@
 let btn_reload = {
-    text: '<img id="reload-spin" hidden src="vendor/datafinder/assets/svgs/spinner-light.svg" alt="Icon"> Reload',
+    text: '<img id="reload-spin" style="mix-blend-mode: difference;" hidden src="/vendor/datafinder/assets/svgs/spinner-light.svg" alt="Icon"> Reload',
     className: 'btn btn-primary btn-sm float-right',
     action: function ( e, dt, node, config ) {
         document.getElementById('reload-spin').hidden = false;

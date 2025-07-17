@@ -10,25 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### _[Unreleased]_
 
 #### Added
-- None
-
-#### Changed
-- None
-
-#### Fixed
-- None
-
-#### Documentation
-- None
-
-#### Contributor(s)
-- None
-
----
-
-### _[Unreleased]_
-
-#### Added
 - Command-based configuration generation using a stub-driven strategy to maintain a cleaner file hierarchy and prevent bloated single configuration files. A new `AddNewModule` command (located in the Commands folder) allows developers to generate module-specific configuration files by providing interactive input. Each execution of the command will create a dedicated configuration file using predefined stubs in appropriate folders.
   - Command: `php artisan datafinder:add-new-module`
 - A general stub handler helper to have reuseable methods to generate and publish files through stubs.
@@ -70,6 +51,74 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 Following are the contributor(s) to this release:
 - @SyedUsamaHaiderKazmi (Owner)
+
+---
+
+## [v1.2.3] - 2025-07-15
+
+### Added
+- None
+
+### Changed
+- `@section(scripts)` to `@section(datafinder-scripts)`
+
+### Fixed
+- file include paths in js assets.
+- Spinner color was having problem, in some cases if the `bg-color` was light, and the spinner color is also light then it was giving a bad feeling, so i updated the css to inverse the colors if the bg is light, then color is dark and vise versa.
+
+### Documentation
+- README.md Changes:
+  - Added a line that datatable and its button extension CDNs are required for the package to operate properly.
+  - Added a step to guide users on how to add datafinder required scripts in their laravel views using `yield` directive.
+  - Refractored the steps in documentation (README.md) file and added extra steps.
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
+## [v1.2.2] - 2025-07-10
+
+#### Added
+- None
+
+#### Changed
+- None
+
+### Fixed
+- called `url()` function instead of `asset()` to declase js files in frontend.
+
+#### Documentation
+- None
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
+## [v1.2.1] - 2025-07-10
+
+### Added
+- None
+
+### Changed
+- None
+
+### Fixed
+- A `...` saperator was added within the joins configuration, creating a crash in the package flow.
+- A wrong variable name [used to show message from constants] was used in else condition for frontend validation in filters blade file for validating if the file (config file) exists or not.
+
+### Documentation
+- None
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
 
 ---
 
