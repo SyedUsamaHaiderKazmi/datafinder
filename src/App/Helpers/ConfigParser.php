@@ -67,6 +67,64 @@ class ConfigParser
 
 
     /**
+     * Get all primary query options .
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function getPrimaryQueryOptions(string $configFileName): array
+    {
+        $model_name = self::getConfigByCondition(
+            $configFileName,
+            'model_path'
+        );
+        $table_name = self::getConfigByCondition(
+            $configFileName,
+            'table_name'
+        );
+        $has_select = self::getConfigByCondition(
+            $configFileName,
+            'has_select'
+        );
+        $select = self::getConfigByCondition(
+            $configFileName,
+            'select'
+        );
+        $has_joins = self::getConfigByCondition(
+            $configFileName,
+            'table_has_joins'
+        );
+        $joins = self::getConfigByCondition(
+            $configFileName,
+            'joins'
+        );
+        $where = self::getConfigByCondition(
+            $configFileName,
+            'where'
+        );
+        $groupBy = self::getConfigByCondition(
+            $configFileName,
+            'groupBy'
+        );
+        $having = self::getConfigByCondition(
+            $configFileName,
+            'having'
+        );
+
+        return [
+            'model_path' => $model_name ?? '',
+            'table_name' => $table_name ?? '',
+            'has_select' => $has_select ?? false,
+            'select' => $select ?? [],
+            'has_joins' => $has_joins ?? false,
+            'joins' => $joins ?? [],
+            'where' => $where ?? [],
+            'groupBy' => $groupBy ?? [],
+            'having' => $having ?? [],
+        ];
+    }
+
+    /**
      * Get model path.
      *
      * @param string $configFileName
@@ -90,7 +148,7 @@ class ConfigParser
     {
         return self::getConfigByCondition(
             $configFileName,
-            'selective_columns'
+            'has_select'
         );
     }
 
@@ -104,7 +162,7 @@ class ConfigParser
     {
         return self::getConfigByCondition(
             $configFileName,
-            'columns'
+            'select'
         );
     }
 

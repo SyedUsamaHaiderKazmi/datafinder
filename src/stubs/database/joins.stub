@@ -34,6 +34,7 @@ return [
                     'where' => [], // Same as above. In array values are [type, column_name, conditional_operator, value]
                     'groupBy' => [], // Group by one or multiple columns
                     'having' => [], // Optional: having or orHaving. In array values are [type, column_name, conditional_operator, value]
+                    'has_select' => true, // Fetch selected columns only
                     'select' => [
                         [
                             'type' => 'DEFAULT', // 'DEFAULT' or 'RAW'
@@ -48,8 +49,8 @@ return [
                     ]
                 ],
 
-                'selective_columns' => true, // Fetch selected columns only
-                'columns' => [ // Applies when 'selective_columns' is true
+                'has_select' => true, // Fetch selected columns only
+                'select' => [ // Applies when 'selective_columns' is true
                     [
                         'type' => 'DEFAULT', // 'DEFAULT' or 'RAW'
                         'column_name' => 'column_name',

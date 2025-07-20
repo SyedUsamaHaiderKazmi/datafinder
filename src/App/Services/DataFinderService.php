@@ -4,6 +4,7 @@ namespace SUHK\DataFinder\App\Services;
 
 use SUHK\DataFinder\App\Helpers\ConfigParser;
 use SUHK\DataFinder\App\Helpers\ConfigGlobal;
+use SUHK\DataFinder\App\Helpers\DFQueryBuilder;
 use SUHK\DataFinder\App\Traits\DataFinderTrait;
 
 /**
@@ -72,32 +73,30 @@ class DataFinderService
 	public function getQuery()
 	{
 		// dd($this->request->all());
-        $table_name = ConfigParser::getTableName($this->request->config_file_name);
-        $MODEL = ConfigParser::getModelPath($this->request->config_file_name);
+        $query_options = ConfigParser::getPrimaryQueryOptions($this->request->config_file_name);
+        // dd($query_options);
+        $table_name = $query_options['table_name'];
+        $has_joins = $query_options['has_joins'];
+        $MODEL = $query_options['model_path'];
         $this->total_data = 0;
         $this->total_filtered = $this->total_data;
 
-        $query = $MODEL::query();
-        $table_has_selective_query = ConfigParser::tableHasSelectiveColumns($this->request->config_file_name);
-        if ($table_has_selective_query) {
-            $columns = ConfigParser::tableSelectiveColumns($this->request->config_file_name);
-            $this->setupSelectQuery($query, $table_has_selective_query, $table_name, $columns);
-        }
-        $has_joins = ConfigParser::hasJoins($this->request->config_file_name);
-        if ($has_joins) {
-            $this->setJoins($query, ConfigParser::getJoins($this->request->config_file_name));
-        }
+        // initialize query trait and get the query object
+        $df_query_builder = new DFQueryBuilder($query_options);
+        $query = $df_query_builder->createQuery(ConfigGlobal::QUERY_BY_MODEL);
 
-        $search = $this->request->input('search.value');
+        // dd($query->toSql());
 
         if ($this->request->filters) {
             $filters = $this->request->filters;
             $this->applyFilters($query, $filters, $has_joins, $table_name);
         }
-        // dd($query->toSql());
+
         $totalDataQuery = clone $query;
         $this->total_data = $totalDataQuery->count();
 
+        // searchable values to apply search on query
+        $search = $this->request->input('search.value');
         if (empty(!$search)) {
             $searchable_columns = ConfigParser::getTableSearchableColumns($this->request->config_file_name);
             $this->applySearch($query, $searchable_columns, $search, $table_name);

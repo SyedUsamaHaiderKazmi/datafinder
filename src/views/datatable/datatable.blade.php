@@ -20,6 +20,8 @@
             export_route = '{{ route("df.export.init") }}';
             datafinder_table_id = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id'));
 
+            let full_text_search = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'full_text_search'));
+            
             let default_per_page = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'default_per_page'));
             if(default_per_page == null || default_per_page == 0 || default_per_page == '') {
                 default_per_page = 10;

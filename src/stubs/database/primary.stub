@@ -3,8 +3,8 @@ return [
     
     'model_path' => '{{MODEL_PATH}}', // parent table's model path
     'table_name' => '{{DATABASE_TABLE_NAME}}', // parent table's name from database
-    'selective_columns' => false, // Boolean False means system will fetch the data with all columns of this table.
-    'columns' => [
+    'has_select' => false, // Boolean False means system will fetch the data with all columns of this table.
+    'select' => [
         [
             'type' => 'DEFAULT', // RAW | DEFAULT 
             'column_name' => '*',
@@ -16,4 +16,22 @@ return [
             'alias' => null, // If Raw then alias should be null. For DEFAULT type, alias is mendatory.
         ],
     ], // If boolean is false then this array will be empty.
+
+    'where' => [
+        [
+            'type' => 'where', // Eloquent clause: where, orWhere, etc.
+            'column_name' => 'some_column',
+            'conditional_operator' => '=',
+            'value' => 'some_value' // Note: Package does not support dynamic values for subquery. Use hard values for your conditions
+        ],
+    ], // Same as above. In array values are [type, column_name, conditional_operator, value]
+    'groupBy' => [], // Group by one or multiple columns
+    'having' => [
+        [
+            'type' => 'orHaving',                       // Eloquent clause: having, orHaving, etc.
+            'column_name' => 'some_column',
+            'conditional_operator' => '=',
+            'value' => 'some_value' // Note: Package does not support dynamic values for subquery. Use hard values for your conditions
+        ],
+    ], // Optional: having or orHaving. In array values are [type, column_name, conditional_operator, value]
 ];

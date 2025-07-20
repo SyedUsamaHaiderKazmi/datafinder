@@ -23,6 +23,7 @@ function getDatatableConfig(){
     return {
         info: true,
         paging: true,
+        searching: full_text_search,
         search: {
             return: true,
         },

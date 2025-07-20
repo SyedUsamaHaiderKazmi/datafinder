@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Improved validation for filters during data retrieval to exclude empty values and unselected fields from the filter object. This prevents ambiguity when searching or filtering against empty or null values.
 - RefreshPackage command is added in the package to allow users to update package assets (publishable) upon new release using command.
   - Command: `php artisan datafinder:assets-refresh`
+- Now supports conditional functions like where, groupBy, having including aggregate support for primary table.
+- Added an option to enable and disable the text-based search in datatable in frontend configuration file.
 
 #### Changed
 - File name:
@@ -38,6 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - `export/init` to `df/export/init`
 - Updated new routes in package's datatable support files in js for data fetch and export.
 - Renamed Code of Conduct.md file.
+- `SubQueryTrait` has now convert to `DFQueryBuilder` class to cover not just the creation of query for subqueries-joins but also for primary query now using one single file following the code reusability approach.
+  - Implemented new builder to `JoinTrait` and `DataFinderService` 
+- Enhanced `DataFinderTrait` to cover only the functions that are functionality for Datafinder but not the core features
+- Enhanced `ConfigParser` by adding a new function which will return all the nessecary items required by the package configuration in single call, saving memory utilizations and recalling of the config file repitition.
 
 #### Fixed
 - If no default value is given for filter type input text, then ask the value from end user to input

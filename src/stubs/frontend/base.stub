@@ -3,6 +3,7 @@ return [
     
     'dom_table_id' => '{{DOM_TABLE_ID}}',
     'responsive' => false, // to make datatable responsive for better view for increased columns and small sized screens
+    'full_text_search' => false, // to make datatable responsive for better view for increased columns and small sized screens
     'default_per_page' => null, // if remains empty, by default will be set to 10
     'allow_per_page_options' => false,
     'per_page_options' => [],

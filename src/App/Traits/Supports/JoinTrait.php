@@ -10,17 +10,15 @@
 */
 namespace SUHK\DataFinder\App\Traits\Supports;
 use Illuminate\Database\Query\JoinClause;
-use SUHK\DataFinder\App\Traits\Supports\SubQueryTrait;
+use SUHK\DataFinder\App\Helpers\DFQueryBuilder;
 
 trait JoinTrait
 {
 
-    use SubQueryTrait;
-
     protected $join_type = '';
     protected $join_by = '';
     protected $joined_table_name = '';
-    protected $options = [];
+    protected $join_options = [];
 
     public function joinsInit($join)
     {
@@ -43,7 +41,7 @@ trait JoinTrait
     }
 
     private function setOption($join){
-        $this->options = $join['using']['options'];
+        $this->join_options = $join['using']['options'];
     }
     private function setJoinType($join){
         $this->join_type = $join['type'];
@@ -55,19 +53,19 @@ trait JoinTrait
 
     private function getJoinName(){
         $join_name = $this->joined_table_name;
-        if ($this->keyHasProperValue($this->options, 'alias')) {
+        if ($this->keyHasProperValue($this->join_options, 'alias')) {
             if ($this->matchTagValues($this->join_by, 'sub_query')) {
-                $join_name = $this->options['alias'];
+                $join_name = $this->join_options['alias'];
             } else {
-                $join_name .= ' as ' . $this->options['alias'];
+                $join_name .= ' as ' . $this->join_options['alias'];
             }
-            $this->joined_table_name = $this->options['alias']; // if alias is true then select query has to be generated with table's alias name
+            $this->joined_table_name = $this->join_options['alias']; // if alias is true then select query has to be generated with table's alias name
         }
         return $join_name;
     }
 
     private function getJoinByTable($query){
-        $indepth_constraints = ['on' => $this->options['on']/*, 'where' => $this->options['onWhere']*/];
+        $indepth_constraints = ['on' => $this->join_options['on']/*, 'where' => $this->join_options['onWhere']*/];
         $query->{$this->join_type}($this->getJoinName(), function (JoinClause $joinQuery) use ($indepth_constraints) {
             foreach ($indepth_constraints['on'] as $key => $value) {
                 $joinQuery->{$value['type']}($value['left_side'], '=', $value['right_side']);
@@ -78,11 +76,13 @@ trait JoinTrait
         });
     }
     private function getJoinBySubQuery($query){
-        $sub_query_options = $this->options['sub_query'];
+        $sub_query_join_options = $this->join_options['sub_query'];
+        $sub_query_join_options['table_name'] = $this->joined_table_name;
 
-        $this->subQueryInit($sub_query_options);
-        $sub_query = $this->getNeatQuery($this->joined_table_name);
-        $indepth_constraints = ['on' => $this->options['on']/*, 'where' => $this->options['onWhere']*/];
+        $df_query_builder = new DFQueryBuilder($sub_query_join_options);
+        $sub_query = $df_query_builder->createQuery();
+
+        $indepth_constraints = ['on' => $this->join_options['on']/*, 'where' => $this->join_options['onWhere']*/];
 
         $query->joinSub($sub_query, $this->getJoinName(), function (JoinClause $joinQuery) use ($indepth_constraints) {
             foreach ($indepth_constraints['on'] as $key => $value) {

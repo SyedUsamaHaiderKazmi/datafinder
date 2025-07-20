@@ -27,6 +27,10 @@ class ConfigGlobal
     const SECTION_E = ['key' => 'frontend_table_headers', 'stub_path' => '/../stubs/frontend/table_headers.stub'];
     const SECTION_F = ['key' => 'frontend_row_buttons', 'stub_path' => '/../stubs/frontend/row_buttons.stub'];
 
+    // type of sources to generate query, by model or by table (raw)
+    const QUERY_BY_MODEL = 'MODEL';
+    const QUERY_BY_ELOQUENT_BUILDER = 'TABLE_RAW';
+
     public static function validateConfigFile($path)
     {
         if(file_exists(self::getPath($path))){

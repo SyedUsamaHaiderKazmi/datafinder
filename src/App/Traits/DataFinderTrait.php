@@ -17,16 +17,7 @@ use SUHK\DataFinder\App\Traits\Supports\JoinTrait;
 
 trait DataFinderTrait
 {
-    use ValidatorTrait, JoinTrait;
-
-    public function setJoins($query, $joins){
-        // dd($joins);
-        foreach ($joins as $key => $join) {
-            $this->joinsInit($join);
-            $this->attachJoin($query, $join);
-            $this->setupSelectQuery($query, $join['using']['options']['selective_columns'], $this->joined_table_name, $join['using']['options']['columns']);
-        }
-    }
+    use ValidatorTrait;
 
     public function applyFilters($query, $filters, $has_joins, $table_name)
     {
@@ -50,24 +41,6 @@ trait DataFinderTrait
                 });
             }
         });
-        /*foreach ($filters as $key => $filter) {
-            $query->where(function ($multiQuery) use ($filter, $key, $has_joins, $table_name) {
-                foreach ($filter as $subFilterKey => $value) {
-                    if ($value['filter_through_join'] == 'true' && $value['join_table'] != null) {
-                        $multiQuery->orWhere($has_joins ? ($value['join_table'] . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
-                    } else {
-                        if ($value['type'] == 'date') {
-                            if (!is_null($value['value'])) {
-                                $multiQuery->whereDate($has_joins ? ($table_name . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
-                            }
-                        } else {
-
-                            $multiQuery->orWhere($has_joins ? ($table_name . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
-                        }
-                    }
-                }
-            });
-        }*/
     }
 
     public function applySearch($query, $columns, $search, $table_name)
@@ -92,26 +65,6 @@ trait DataFinderTrait
             });
         } else {
             $this->setValidationError('', '', $this->VALIDATION_MSG_NO_SEARCH_COLUMN);
-        }
-    }
-
-    public function setupSelectQuery($query, $selective_column, $table_name, $columns){
-        if ($selective_column) {
-            foreach ($columns as $key => $column) {
-                if ($this->matchTagValues($column['type'], 'default')) {
-                    $raw_query = $table_name . '.' . $column['column_name'];
-                    if ($this->keyHasProperValue($column, 'alias')) {
-                        $raw_query .= ' as ' . $column['alias'];
-                    }
-                    $query->addSelect($raw_query);
-                } elseif ($this->matchTagValues($column['type'], 'raw')) {
-                    $query->addSelect(\DB::raw($column['column_name']));
-                }
-                // array_push($select_raw, $raw_query);
-            }
-        } else {
-            $query->addSelect($table_name . '.*'); /* WIll get all the data for all columns if the array is empty*/
-            // array_push($select_raw, $table_name . '.*');
         }
     }
     
