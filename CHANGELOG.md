@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.2.4] - 2025-07-25
+
+### Added
+- None
+
+### Changed
+- None
+
+### Fixed
+- Input type elements faced bugs of not rendering properly unless the `data` key is not set as `''` or to some value instead of `null`. Whereas input element is for to get the input from user. So it created the bug which is now resolved in this release.
+- fixed the `Page Length` menu in datatables as they were not working before and also fixed if the value for page length is empty, do not crash the integration but set the default value as `''`.
+
+### Documentation
+- README.md Changes:
+  - Update the wrong `yield` name in guide. It was mistakenly wrote as `yield('datafinder-scriots')`. Correct value was `yield('df-scripts')`.
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ## [v1.2.3] - 2025-07-15
 
 ### Added

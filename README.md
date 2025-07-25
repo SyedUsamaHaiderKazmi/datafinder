@@ -130,7 +130,7 @@ These dependencies are **not included** in the package to:
 Make sure to include the required CDNs in your project to ensure **DataFinder** works seamlessly. 
 
 #### _Step 5: Yield DataFinder Scripts_
-To ensure DataFinder functions correctly across different pages in your Laravel application, you need to reserve a section in your main layout for injecting page-specific DataFinder scripts using Laravel Blade's `@yield` directive with a section name `datafinder-scripts`.
+To ensure DataFinder functions correctly across different pages in your Laravel application, you need to reserve a section in your main layout for injecting page-specific DataFinder scripts using Laravel Blade's `@yield` directive with a section name `df-scripts`.
 
 Place the following line just before the closing `</body>` tag in your main layout which will look like this:
 
@@ -148,7 +148,7 @@ Place the following line just before the closing `</body>` tag in your main layo
     @yield('content')
 
     <!-- Page-specific DataFinder scripts will be injected here -->
-    @yield('datafinder-scripts')
+    @yield('df-scripts')
 
 </body>
 </html>

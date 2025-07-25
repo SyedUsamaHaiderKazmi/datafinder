@@ -30,6 +30,7 @@ function getDatatableConfig(){
         processing: true,
         serverSide: true,
         lengthChange: allow_per_page_options,
+        lengthMenu: per_page_options,
         ajax:{
             url: live_search_filter_route,
             dataType: "json",
