@@ -60,6 +60,50 @@ Following are the contributor(s) to this release:
 
 ---
 
+## [v1.2.5] - 2025-07-26
+
+### Added
+- None
+
+### Changed
+- None
+
+### Fixed
+- System were submitting the values from filters even if they are empty, making datafinder search for empty values, making it difficult for the data to fetched in case of input elements, fixed the bugs in JS where we initialize the object.
+
+### Documentation
+- None
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
+## [v1.2.4] - 2025-07-25
+
+### Added
+- None
+
+### Changed
+- None
+
+### Fixed
+- Input type elements faced bugs of not rendering properly unless the `data` key is not set as `''` or to some value instead of `null`. Whereas input element is for to get the input from user. So it created the bug which is now resolved in this release.
+- fixed the `Page Length` menu in datatables as they were not working before and also fixed if the value for page length is empty, do not crash the integration but set the default value as `''`.
+
+### Documentation
+- README.md Changes:
+  - Update the wrong `yield` name in guide. It was mistakenly wrote as `yield('datafinder-scriots')`. Correct value was `yield('df-scripts')`.
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ## [v1.2.3] - 2025-07-15
 
 ### Added

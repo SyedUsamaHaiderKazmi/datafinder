@@ -32,7 +32,7 @@
                 allow_per_page_options = false;
             }
             
-            let per_page_options = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'per_page_options'));
+            let per_page_options = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'per_page_options') ?? '');
             
             let exportable = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'exportable'));
         </script>

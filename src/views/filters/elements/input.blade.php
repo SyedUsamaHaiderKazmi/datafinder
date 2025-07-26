@@ -14,7 +14,7 @@
         name="{{ $filter['column_name'] }}" id="{{ $filter['id'] }}" 
         @if($filter['type'] == 'date') 
             data-date-format="YYYY-MM-DD" 
-        @endif 
+        @endif
         class="form-control data-filters" 
         filter_through_join="{{ $filter['filter_through_join'] }}"
         join_table="{{ $filter['join_table'] }}"
