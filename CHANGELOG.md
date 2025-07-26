@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.2.5] - 2025-07-26
+
+### Added
+- None
+
+### Changed
+- None
+
+### Fixed
+- System were submitting the values from filters even if they are empty, making datafinder search for empty values, making it difficult for the data to fetched in case of input elements, fixed the bugs in JS where we initialize the object.
+
+### Documentation
+- None
+
+### Contributor(s)
+Following are the contributor(s) to this release:
+
+* @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ## [v1.2.4] - 2025-07-25
 
 ### Added

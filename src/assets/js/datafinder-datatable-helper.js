@@ -4,31 +4,33 @@ setupFilterObject = () => {
 
     Array.from(allowedFilters).forEach((filterElement) => {
         // Initialize filter entry if it doesn't exist
-        if (!filters[filterElement.name]) {
-            filters[filterElement.name] = {};
-        }
+        if (filterElement.value) {
+            if (!filters[filterElement.name]) {
+                filters[filterElement.name] = {};
+            }
 
-        if (filterElement.selectedOptions) { // If the element is a select dropdown
-            Array.from(filterElement.selectedOptions).forEach((selectedOption, index) => {
-                // Store selected options in the filter object
-                filters[filterElement.name][index] = {
-                    value: selectedOption.value,
+            if (filterElement.selectedOptions) { // If the element is a select dropdown
+                Array.from(filterElement.selectedOptions).forEach((selectedOption, index) => {
+                    // Store selected options in the filter object
+                    filters[filterElement.name][index] = {
+                        value: selectedOption.value,
+                        type: filterElement.type,
+                        filter_through_join: filterElement.hasAttribute('filter_through_join'),
+                        join_table: filterElement.getAttribute('join_table'),
+                        conditional_operator: filterElement.getAttribute('conditional_operator')
+                    };
+                });
+            } else {
+                // For non-select elements, store the value directly
+                const length = Object.keys(filters[filterElement.name]).length;
+                filters[filterElement.name][length] = {
+                    value: filterElement.value,
                     type: filterElement.type,
                     filter_through_join: filterElement.hasAttribute('filter_through_join'),
                     join_table: filterElement.getAttribute('join_table'),
                     conditional_operator: filterElement.getAttribute('conditional_operator')
                 };
-            });
-        } else {
-            // For non-select elements, store the value directly
-            const length = Object.keys(filters[filterElement.name]).length;
-            filters[filterElement.name][length] = {
-                value: filterElement.value,
-                type: filterElement.type,
-                filter_through_join: filterElement.hasAttribute('filter_through_join'),
-                join_table: filterElement.getAttribute('join_table'),
-                conditional_operator: filterElement.getAttribute('conditional_operator')
-            };
+            }
         }
     });
 }
