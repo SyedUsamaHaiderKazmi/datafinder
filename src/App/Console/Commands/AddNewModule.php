@@ -69,10 +69,10 @@ class AddNewModule extends Command
 
         // generate main configuration stub
         $section_a = $this->setupStub(ConfigGlobal::MAIN_CONFIG_FILE['stub_path'], [
-            ['from' => "'{{HAS_JOIN}}'", 'to' => $has_joins ? 'true': 'false'],
-            ['from' => "'{{JOIN_VALUE}}'", 'to' => $has_joins? "include('database/joins.php')" : ''],
-            ['from' => "'{{HAS_BUTTONS}}'", 'to' => $has_buttons ? 'true': 'false'],
-            ['from' => "'{{BUTTON_VALUE}}'", 'to' => $has_buttons ? "include('frontend/row_buttons.php')": ''],
+            ['from' => "'{{HAS_JOIN}}'", 'to' => "'table_has_joins' => " . ($has_joins ? 'true': 'false') . ','],
+            ['from' => "'{{JOIN_VALUE}}'", 'to' => $has_joins? "'joins' => include('database/joins.php')," : ''],
+            ['from' => "'{{HAS_BUTTONS}}'", 'to' => "'row_has_buttons' => " . ($has_buttons ? 'true': 'false') . ','],
+            ['from' => "'{{BUTTON_VALUE}}'", 'to' => $has_buttons ? "'table_row_buttons' => include('frontend/row_buttons.php'),": ''],
         ]);
     }
 

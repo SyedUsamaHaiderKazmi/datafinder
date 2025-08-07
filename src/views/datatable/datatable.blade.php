@@ -1,7 +1,7 @@
 @if((!isset($custom_datatable) || !$custom_datatable) && isset($config_file_name) && SUHK\DataFinder\App\Helpers\ConfigGlobal::validateConfigFile($config_file_name))
     @include('datafinder::datatable.table', [
             'dom_table_id' => SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id'),
-            'responsive' => (SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id') == true) ? 'table-responsive' : ''
+            'responsive' => (SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'responsive') == true) ? 'table-responsive' : ''
         ])
     @push('df-datatable')
         <script type="text/javascript">
@@ -32,7 +32,7 @@
                 allow_per_page_options = false;
             }
             
-            let per_page_options = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'per_page_options') ?? '');
+            let per_page_options = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'per_page_options')) ?? [10, 25, 50, 100];
             
             let exportable = @json(SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'exportable'));
         </script>

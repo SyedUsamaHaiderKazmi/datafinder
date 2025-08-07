@@ -23,6 +23,10 @@ function getDatatableConfig(){
     return {
         info: true,
         paging: true,
+        layout: {
+            top2End: 'buttons',
+            topEnd: 'search',
+        },
         searching: full_text_search,
         search: {
             return: true,
@@ -52,8 +56,6 @@ function getDatatableConfig(){
         columns: columns,
         initComplete: function(setting, json){
             // datatable.buttons().add(buttons);
-            setting.api.buttons().containers().prependTo('.dt-search');
-            setting.api.buttons().containers().css({'margin-right': '0.5rem'});
         },
     };
 }

@@ -4,7 +4,7 @@
     </label>
     <div>
         <input type="{{ $filter['type'] }}" 
-        @if($data)
+        @if($data && !is_array($data))
             value="{{ $data }}" 
         @elseif(is_null($data) || empty($data))
             placeholder="Enter value to filter" 

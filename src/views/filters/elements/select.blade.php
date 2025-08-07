@@ -3,7 +3,7 @@
         {{ $filter['label'] }}:
     </label>
     <div>
-        @if($data)
+        @if($data && is_array($data))
             <select id="{{ isset($filter['id']) ? $filter['id'] : '' }}"
                 name="{{ isset($filter['column_name']) ? $filter['column_name'] : '' }}"
                 class="form-control {{ isset($filter['id']) ? $filter['id'] : '' }}-datafinder-select2 data-filters"

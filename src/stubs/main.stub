@@ -1,72 +1,48 @@
 <?php
-return [
 
-    /*
-    ---------------------------------------------------------------------------
-    |                                    SAMPLE FILE
-    |--------------------------------------------------------------------------
-    | DUMMY FORMAT FOR ALL OPTIONS. THIS IS A DUMMY FILE FOR A SINGLE MODULE.
-    | PLEASE CREATE A NEW FILE FOR EVERY MODULE KEEPING THIS SAMPLE FILE AS IT
-    | IS FOR FUTURE REFERENCE.
-    |--------------------------------------------------------------------------
-    |
-     */
-    // -------------------------------------------------------------------------------------------------------------------
+return array_merge(
+    include('frontend/base.php'), // spread operator is required to flaten the file return for getting associative array
+    include('database/primary.php'), // spread operator is required to flaten the file return for getting associative array
+    [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Section A: General information for datable configuration and DOM element.
-    |--------------------------------------------------------------------------
-    |
-     */
-    
-    ...include('frontend/base.php'), // spread operator is required to flaten the file return for getting associative array
+        /*
+        |--------------------------------------------------------------------------
+        | Section C: Filters Array to render filters on User Interface.
+        |--------------------------------------------------------------------------
+        |
+         */
+        'filters' => include('frontend/filters.php'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Section B: Section where parent table for module will be required to configure
-    |--------------------------------------------------------------------------
-    |
-     */
-    
-    ...include('database/primary.php'), // spread operator is required to flaten the file return for getting associative array
+        /*
+        |--------------------------------------------------------------------------
+        |Section D: if you want to use joins within the module to show data with complex data 
+        |Joins Boolean and Configuration to search and filter the data from relationship tables using foreign keys.
+        |--------------------------------------------------------------------------
+        |
+         */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Section C: Filters Array to render filters on User Interface.
-    |--------------------------------------------------------------------------
-    |
-     */
-    'filters' => include('frontend/filters.php'),
+        '{{HAS_JOIN}}' // Boolean for Joins.
+        '{{JOIN_VALUE}}'
 
-    /*
-    |--------------------------------------------------------------------------
-    |Section D: if you want to use joins within the module to show data with complex data 
-    |Joins Boolean and Configuration to search and filter the data from relationship tables using foreign keys.
-    |--------------------------------------------------------------------------
-    |
-     */
+        /*
+        |--------------------------------------------------------------------------
+        | Section E: Header array for DATATABLE on User Interface.
+        |--------------------------------------------------------------------------
+        |
+         */
 
-    'table_has_joins' => '{{HAS_JOIN}}', // Boolean for Joins.
-    'joins' => '{{JOIN_VALUE}}',
+        'table_headers' => include('frontend/table_headers.php'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Section E: Header array for DATATABLE on User Interface.
-    |--------------------------------------------------------------------------
-    |
-     */
+        /*
+        |--------------------------------------------------------------------------
+        | Section F: If a module is going to have any buttons, then its array is given below.
+        |--------------------------------------------------------------------------
+        |
+         */
 
-    'table_headers' => include('frontend/table_headers.php'),
+        '{{HAS_BUTTONS}}'
+        '{{BUTTON_VALUE}}'
 
-    /*
-    |--------------------------------------------------------------------------
-    | Section F: If a module is going to have any buttons, then its array is given below.
-    |--------------------------------------------------------------------------
-    |
-     */
-
-    'row_has_buttons' => '{{HAS_BUTTONS}}',
-    'table_row_buttons' => '{{BUTTON_VALUE}}'
-];
+    ]
+);
 

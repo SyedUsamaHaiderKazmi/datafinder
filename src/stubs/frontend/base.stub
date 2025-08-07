@@ -6,7 +6,7 @@ return [
     'full_text_search' => false, // to make datatable responsive for better view for increased columns and small sized screens
     'default_per_page' => null, // if remains empty, by default will be set to 10
     'allow_per_page_options' => false,
-    'per_page_options' => [],
+    'per_page_options' => null,
     'exportable' => false, // if true, then the export functionality will be activated.
     'exportable_by_chunk' => false, // if exportable is true, then this value can be set true, Purpose is to optimized the exportable for larage datasets.
     'exportable_chunk_size' => null, // if 'exportable_by_chunk' is false, then this value will be null
