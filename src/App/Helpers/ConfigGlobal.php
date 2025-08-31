@@ -23,8 +23,8 @@ class ConfigGlobal
     const SECTION_A = ['key' => 'frontend_base', 'stub_path' => '/../stubs/frontend/base.stub'];
     const SECTION_B = ['key' => 'backend_primary', 'stub_path' => '/../stubs/database/primary.stub'];
     const SECTION_C = ['key' => 'frontend_filters', 'stub_path' => '/../stubs/frontend/filters.stub'];
-    const SECTION_D = ['key' => 'backend_joins', 'stub_path' => '/../stubs/database/joins.stub'];
-    const SECTION_E = ['key' => 'frontend_table_headers', 'stub_path' => '/../stubs/frontend/table_headers.stub'];
+    const SECTION_D = ['key' => 'frontend_table_headers', 'stub_path' => '/../stubs/frontend/table_headers.stub'];
+    const SECTION_E = ['key' => 'backend_joins', 'stub_path' => '/../stubs/database/joins.stub'];
     const SECTION_F = ['key' => 'frontend_row_buttons', 'stub_path' => '/../stubs/frontend/row_buttons.stub'];
 
     // type of sources to generate query, by model or by table (raw)

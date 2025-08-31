@@ -77,7 +77,7 @@ class DataFinderService
         // dd($query_options);
         $table_name = $query_options['table_name'];
         $has_joins = $query_options['has_joins'];
-        $MODEL = $query_options['model_path'];
+
         $this->total_data = 0;
         $this->total_filtered = $this->total_data;
 

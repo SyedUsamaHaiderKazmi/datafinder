@@ -89,7 +89,7 @@ class DFQueryBuilder
         if ($has_joins) {
             foreach ($this->query_options['joins'] as $key => $join) {
                 $this->joinsInit($join);
-                $this->attachJoin($query, $join);
+                $this->attachJoin($query);
                 $this->setupSelectQuery($query, $join['using']['options']['has_select'], $this->joined_table_name, $join['using']['options']['select']);
             }
         }

@@ -6,9 +6,11 @@
 An easy, configurable & modular laravel package for <a href="https://datatables.net/">Datatables</a>
 <br><br>
 
-<img alt="Static Badge" src="https://img.shields.io/badge/Docs-DataFinder-red?style=for-the-badge&link=https%3A%2F%2Fdatafinder.suhk.me%2F&logo=readthedocs&logoColor=white">
+<a href="https://datafinder.suhk.me/">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Docs-DataFinder-red?style=for-the-badge&link=https%3A%2F%2Fdatafinder.suhk.me%2F&logo=readthedocs&logoColor=white">
+</a>
 
-<img alt="Static Badge" src="https://img.shields.io/github/v/release/SyedUsamaHaiderKazmi/datafinder?style=for-the-badge&link=https%3A%2F%2Fdatafinder.suhk.me%2F&logo=semanticrelease&logoColor=white">
+<img alt="Static Badge" src="https://img.shields.io/github/v/release/SyedUsamaHaiderKazmi/datafinder?style=for-the-badge&logo=semanticrelease&logoColor=white">
 
 <img src="https://img.shields.io/scrutinizer/quality/g/SyedUsamaHaiderKazmi/datafinder?style=for-the-badge&logo=scrutinizerci&logoColor=white">
 

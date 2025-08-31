@@ -55,11 +55,11 @@ class AddNewModule extends Command
         // generate section C stub
         $section_c = $this->setupStub(ConfigGlobal::SECTION_C['stub_path'], []);
         // generate section D stub
-        if ($has_joins) {
-            $section_d = $this->setupStub(ConfigGlobal::SECTION_D['stub_path'], []);
-        }
+        $section_d = $this->setupStub(ConfigGlobal::SECTION_E['stub_path'], []);
         // generate section E stub
-        $section_e = $this->setupStub(ConfigGlobal::SECTION_E['stub_path'], []);
+        if ($has_joins) {
+            $section_e = $this->setupStub(ConfigGlobal::SECTION_D['stub_path'], []);
+        }
         // generate section F stub
         if ($has_buttons) {
             $section_f = $this->setupStub(ConfigGlobal::SECTION_F['stub_path'], []);
@@ -68,12 +68,13 @@ class AddNewModule extends Command
         $this->comment('Generating the main configuration file. Please wait!');
 
         // generate main configuration stub
-        $section_a = $this->setupStub(ConfigGlobal::MAIN_CONFIG_FILE['stub_path'], [
+        $section_main = $this->setupStub(ConfigGlobal::MAIN_CONFIG_FILE['stub_path'], [
             ['from' => "'{{HAS_JOIN}}'", 'to' => "'table_has_joins' => " . ($has_joins ? 'true': 'false') . ','],
             ['from' => "'{{JOIN_VALUE}}'", 'to' => $has_joins? "'joins' => include('database/joins.php')," : ''],
             ['from' => "'{{HAS_BUTTONS}}'", 'to' => "'row_has_buttons' => " . ($has_buttons ? 'true': 'false') . ','],
             ['from' => "'{{BUTTON_VALUE}}'", 'to' => $has_buttons ? "'table_row_buttons' => include('frontend/row_buttons.php'),": ''],
         ]);
+        $this->comment('Configurations generated successfully!');
     }
 
     function setupStub($stub_path, $values)

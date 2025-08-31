@@ -38,10 +38,10 @@ class ConfigParser
         ?callable $transform = null
     ) {
         $configEntries = ConfigGlobal::getValueFromFile("{$configFileName}", $configKey);
-        $result = [];
         if (!is_array($configEntries)) {
             return $configEntries;
         }
+        $result = [];
         foreach ($configEntries as $key => $entry) {
             if (is_null($conditionKey) || !isset($entry['conditionKey']) || (isset($entry[$conditionKey]) && $entry[$conditionKey] === $conditionValue)) {
                 $result[] = $transform ? $transform($entry) : ($valueKey ? $entry[$valueKey] : $entry);
@@ -144,7 +144,7 @@ class ConfigParser
      * @param string $configFileName
      * @return array
      */
-    public static function tableHasSelectiveColumns(string $configFileName): string
+    public static function tableHasSelectiveColumns(string $configFileName): boolean
     {
         return self::getConfigByCondition(
             $configFileName,
