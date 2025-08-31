@@ -20,9 +20,11 @@ $(document).ready(function () {
 });
 
 function getDatatableConfig(){
+    const first_orderable_column = columns.findIndex(filterOrderAbleColumn(key, column) => column.orderable !== false);
     return {
         info: true,
         paging: true,
+        order: first_orderable_column >= 0 ? [[first_orderable_column, 'asc']] : [],
         layout: {
             top2End: 'buttons',
             topEnd: 'search',
@@ -48,7 +50,11 @@ function getDatatableConfig(){
             },
             error: function(xhr, status, error) {
                 fnResetReloadButtonView()
-                errorList.push(`${xhr.responseJSON.errors}`);
+                if (xhr.responseJSON.errors) {
+                    errorList.push(`${xhr.responseJSON.errors}`);
+                } else {
+                    errorList.push(`${xhr.responseJSON.message}`);
+                }
                 updateErrorDisplay();
             },
         },

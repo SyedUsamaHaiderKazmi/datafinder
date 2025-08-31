@@ -1,4 +1,4 @@
-<div class="col-md-2" @if(!$filter['visibility']) hidden @endif>
+<div class="col-md-2" @if(isset($filter['visibility']) && !$filter['visibility']) hidden @endif>
     <label>
         {{ $filter['label'] }}:
     </label>
@@ -7,17 +7,17 @@
         @if($data && !is_array($data))
             value="{{ $data }}" 
         @elseif(is_null($data) || empty($data))
-            placeholder="Enter value to filter" 
+            placeholder="{{ empty($filter['placeholder']) ? 'Enter value to filter' : $filter['placeholder']}}" 
         @else
             placeholder="Wrong Data Passed!" 
         @endif
-        name="{{ $filter['column_name'] }}" id="{{ $filter['id'] }}" 
+        name="{{ $filter['column_name'] ?? $filter['name'] }}" id="{{ $filter['id'] }}" 
         @if($filter['type'] == 'date') 
             data-date-format="YYYY-MM-DD" 
         @endif
         class="form-control data-filters" 
-        filter_through_join="{{ $filter['filter_through_join'] }}"
-        join_table="{{ $filter['join_table'] }}"
-        conditional_operator="{{ $filter['conditional_operator'] }}">
+        filter_through_join="{{ $filter['filter_through_join'] ?? false }}"
+        join_table="{{ $filter['join_table'] ?? null }}"
+        conditional_operator="{{ $filter['conditional_operator'] ?? '=' }}">
     </div>
 </div>

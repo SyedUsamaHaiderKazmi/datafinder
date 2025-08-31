@@ -1,5 +1,6 @@
 <?php
 return [
+    /*
     [
         'title' => "First Name", // Label To Display on Table (User Interface)
         'data' => "first_name", // key_name to be used from array passed [Not a db collection but a processed array] (It could be a column name or custom name)
@@ -11,4 +12,5 @@ return [
         'search_through_join' => false, // boolean to either search the value in parent table or one of the joined tables
         "table_name" => null, // if "search_through_join" is set to true then add the table name, this column is from (join)
     ],
+    */
 ];

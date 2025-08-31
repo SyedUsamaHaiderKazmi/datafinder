@@ -1,8 +1,8 @@
 <?php
 
 return array_merge(
-    include('frontend/base.php'), // spread operator is required to flaten the file return for getting associative array
-    include('database/primary.php'), // spread operator is required to flaten the file return for getting associative array
+    include('frontend/base.php'),
+    include('database/primary.php'),
     [
 
         /*
@@ -15,7 +15,16 @@ return array_merge(
 
         /*
         |--------------------------------------------------------------------------
-        |Section D: if you want to use joins within the module to show data with complex data 
+        | Section D: Header array for DATATABLE on User Interface.
+        |--------------------------------------------------------------------------
+        |
+         */
+
+        'table_headers' => include('frontend/table_headers.php'),
+
+        /*
+        |--------------------------------------------------------------------------
+        |Section E: if you want to use joins within the module to show data with complex data 
         |Joins Boolean and Configuration to search and filter the data from relationship tables using foreign keys.
         |--------------------------------------------------------------------------
         |
@@ -23,15 +32,6 @@ return array_merge(
 
         '{{HAS_JOIN}}' // Boolean for Joins.
         '{{JOIN_VALUE}}'
-
-        /*
-        |--------------------------------------------------------------------------
-        | Section E: Header array for DATATABLE on User Interface.
-        |--------------------------------------------------------------------------
-        |
-         */
-
-        'table_headers' => include('frontend/table_headers.php'),
 
         /*
         |--------------------------------------------------------------------------

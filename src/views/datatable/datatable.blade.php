@@ -1,10 +1,25 @@
 @if((!isset($custom_datatable) || !$custom_datatable) && isset($config_file_name) && SUHK\DataFinder\App\Helpers\ConfigGlobal::validateConfigFile($config_file_name))
     @include('datafinder::datatable.table', [
             'dom_table_id' => SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'dom_table_id'),
+            'table_classes' => SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'class'),
             'responsive' => (SUHK\DataFinder\App\Helpers\ConfigGlobal::getValueFromFile($config_file_name, 'responsive') == true) ? 'table-responsive' : ''
         ])
     @push('df-datatable')
+        <script type="module">
+            {{-- import {XLSXExport} from './vendor/datafinder/assets/js/export/abstract/export.js'; --}}
+            import Exporter from '/vendor/datafinder/assets/js/export/services/Exporter.js';
+            window.Exporter = Exporter;
+
+        </script>
         <script type="text/javascript">
+
+            let columns = null;
+            let live_search_filter_route = null;
+            let export_route = null;
+
+        </script>
+        <script type="text/javascript">
+
             let config_file_name = @json($config_file_name);
 
             columns = @json(SUHK\DataFinder\App\Helpers\ConfigParser::getTableColumnsConfiguation($config_file_name));
@@ -55,22 +70,11 @@
 @endif
 
 @section('df-scripts')
-    @stack('df-filters-scripts')
-    <script type="module">
-        {{-- import {XLSXExport} from './vendor/datafinder/assets/js/export/abstract/export.js'; --}}
-        import Exporter from '/vendor/datafinder/assets/js/export/services/Exporter.js';
-        window.Exporter = Exporter;
-
-    </script>
     <script type="text/javascript">
-
-        let columns = null;
-        let live_search_filter_route = null;
-        let export_route = null;
-        let datafinder_table_id = null;
         let custom_datatable = false;
-
+        let datafinder_table_id = null;
     </script>
+    @stack('df-filters-scripts')
     @stack('df-datatable')
     @stack('df-datatable-custom')
     <script type="text/javascript" src="{{ url('vendor/datafinder/assets/js/datafinder-datatable-init.js') }}"></script>

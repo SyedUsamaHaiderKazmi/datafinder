@@ -1,5 +1,6 @@
 <?php
 return [
+    /*
     [
         'label' => 'BTN_LABEL',
         'class' => 'BTN_CLASS',
@@ -22,4 +23,5 @@ return [
             ], // additional params to pass through with required params such as query params
         ],
     ],
+    */
 ];

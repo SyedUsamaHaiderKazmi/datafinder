@@ -43,7 +43,7 @@ class ConfigParser
             return $configEntries;
         }
         foreach ($configEntries as $key => $entry) {
-            if (is_null($conditionKey) || (isset($entry[$conditionKey]) && $entry[$conditionKey] === $conditionValue)) {
+            if (is_null($conditionKey) || !isset($entry['conditionKey']) || (isset($entry[$conditionKey]) && $entry[$conditionKey] === $conditionValue)) {
                 $result[] = $transform ? $transform($entry) : ($valueKey ? $entry[$valueKey] : $entry);
             }
         }
@@ -208,7 +208,7 @@ class ConfigParser
             null,
             'visibility',
             true,
-            fn($header) => ['title' => $header['title'], 'data' => $header['data'], 'orderable' => $header['orderable']]
+            fn($header) => ['title' => $header['title'], 'data' => $header['data'], 'orderable' => $header['orderable'] ?? true]
         );
     }
 
@@ -288,8 +288,8 @@ class ConfigParser
             fn($header) => [
                 'title' => $header['title'],
                 'column_name' => $header['column_name'],
-                'table_name' => $header['table_name'],
-                'search_through_join' => $header['search_through_join']
+                'table_name' => $header['table_name'] ?? '',
+                'search_through_join' => $header['search_through_join'] ?? false
             ]
         );
     }

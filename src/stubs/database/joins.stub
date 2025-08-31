@@ -1,6 +1,7 @@
 <?php
 return [
     // Table Array which are going to be use for joins.
+    /*
     [
         'type' => 'join', // Required: declares this is a join definition
         'by' => 'TABLE', // Options: 'TABLE' or 'SUB_QUERY'
@@ -60,5 +61,5 @@ return [
             ]
         ]
     ],
-
+    */
 ];

@@ -1,8 +1,10 @@
 <?php
 return [
     
-    'model_path' => '{{MODEL_PATH}}', // parent table's model path
+    'model_path' => '{{MODEL_PATH}}', // parent table's model path. Note: It must be full path, no just name
     'table_name' => '{{DATABASE_TABLE_NAME}}', // parent table's name from database
+    /*
+    
     'has_select' => false, // Boolean False means system will fetch the data with all columns of this table.
     'select' => [
         [
@@ -34,4 +36,6 @@ return [
             'value' => 'some_value' // Note: Package does not support dynamic values for subquery. Use hard values for your conditions
         ],
     ], // Optional: having or orHaving. In array values are [type, column_name, conditional_operator, value]
+
+    */
 ];
