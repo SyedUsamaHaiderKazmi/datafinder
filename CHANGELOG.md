@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
-### _[Unreleased]_
+### [v2.0.0] - 2025-09-01
 
 #### Added
 - Command-based configuration generation using a stub-driven strategy to maintain a cleaner file hierarchy and prevent bloated single configuration files. A new `AddNewModule` command (located in the Commands folder) allows developers to generate module-specific configuration files by providing interactive input. Each execution of the command will create a dedicated configuration file using predefined stubs in appropriate folders.
