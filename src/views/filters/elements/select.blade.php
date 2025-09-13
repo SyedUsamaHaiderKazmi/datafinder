@@ -1,4 +1,4 @@
-<div class="col-md-2" @if(!$filter['visibility']) hidden @endif>
+<div class="col-md-2" @if(isset($filter['visibility']) && !$filter['visibility']) hidden @endif>
     <label>
         {{ $filter['label'] }}:
     </label>

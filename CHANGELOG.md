@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.0.1] - 2025-09-14
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- check if visibility key exists or not before checking its value in `select.blade.php`
+
+#### Documentation
+- None
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.0.0] - 2025-09-01
 
 #### Added
