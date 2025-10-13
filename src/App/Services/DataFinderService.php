@@ -122,17 +122,21 @@ class DataFinderService
 
     protected function getQueryCount($query){
 
-        $has_group_by = !empty($query->groups);
-        $has_aggregates = collect($query->columns)->contains(function ($col) {
+        $base_query = $query instanceof \Illuminate\Database\Eloquent\Builder
+        ? $query->getQuery()
+        : $query;
+
+        $has_group_by = !empty($base_query->groups);
+        $has_aggregates = collect($base_query->columns)->contains(function ($col) {
             return is_string($col) && preg_match('/count|sum|avg|max|min|group_concat/i', $col);
         });
 
         if ($has_group_by || $has_aggregates) {
-            $sub_query_to_count = DB::query()->fromSub($query, 'sub');
+            $sub_query_to_count = DB::query()->fromSub($base_query, 'sub');
 
             return $sub_query_to_count->count();
         }
 
-        return $query->count();
+        return $base_query->count();
     }
 }

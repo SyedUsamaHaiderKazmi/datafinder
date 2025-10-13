@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.0.3] - 2025-10-14
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- Bugs and fixes in data count through queries and table styles.
+
+#### Documentation
+- None.
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.0.2] - 2025-10-13
 
 #### Added

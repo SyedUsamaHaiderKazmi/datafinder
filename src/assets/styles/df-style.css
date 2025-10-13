@@ -1,8 +1,16 @@
-.df-thead {
+.df-table {
+    width: 100% !important;
+    text-align: center !important;
+    text-align-last: center !important;
+}
+.df-table > thead {
     max-width: 200px;
     white-space: nowrap;
     /* overflow: hidden; */
     /* text-overflow: ellipsis; */
-    text-align: center;
-    vertical-align: middle;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+.df-table > tbody > tr {
+    white-space: nowrap !important;
 }
