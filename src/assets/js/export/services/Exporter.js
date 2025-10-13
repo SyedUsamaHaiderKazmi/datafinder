@@ -63,26 +63,33 @@ export default class Exporter {
      * Finalize and download the file.
      */
     downloadFile() {
-
+        if (!this.metadata) {
+            this.metadata = {};
+        }
         this.metadata.CreatedDate = new Date();
 
         let exportFileName = this.filename;
         if (!exportFileName.endsWith(`.${this.extension}`)) {
             exportFileName = `${this.filename.split('.')[0]}.${this.extension}`;
         }
+
         const writeOptions = {
-            bookType: this.extension,
-            type: "binary",
-            Props: this.metadata,
-        }
+            bookType: this.extension === "xls" ? "xlsx" : this.extension, // avoid fake xls
+            props: this.metadata
+        };
 
-        if (this.extension === 'csv' ) {
-            writeOptions.FS = ','; // field separator
-            writeOptions.RS = '\n'; // row separator
-            writeOptions.compression = false;
+        // Special handling for CSV with BOM
+        if (this.extension === "csv") {
+            const csv = XLSX.utils.sheet_to_csv(this.workbook.Sheets[this.sheetNameUsed], { FS: ",", RS: "\r\n", forceQuotes: true});
+            const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = exportFileName;
+            link.click();
+        } else {
+            XLSX.writeFile(this.workbook, exportFileName, writeOptions);
         }
-
-        XLSX.writeFile(this.workbook, exportFileName, writeOptions);
     }
+
 }
 

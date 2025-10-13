@@ -61,7 +61,12 @@ class DFQueryBuilder
             $where = $this->query_options['where'];
             $query->where(function ($query) use ($where) {
                 foreach ($where as $key => $value) {
-                    $query->{$value['type']}($value['column_name'], $value['conditional_operator'], $value['value']);
+                    if ($this->keyHasProperValue($value, 'value')) {
+                        $conditional_operator = $this->keyHasProperValue($value, 'conditional_operator') ? $value['conditional_operator'] : '=';
+                        $query->{$value['type']}($value['column_name'], $value['conditional_operator'], $value['value']);
+                    } else {
+                        $query->{$value['type']}($value['column_name']);
+                    }
                 }
             });
         }
@@ -78,7 +83,12 @@ class DFQueryBuilder
     {
         if ($this->keyHasProperValue($this->query_options, 'having') && count($this->query_options['having']) > 0) {
             foreach ($this->query_options['having'] as $key => $value) {
-                $query->{$value['type']}($value['column_name'], $value['conditional_operator'], $value['value']);
+                if ($this->keyHasProperValue($value, 'value')) {
+                    $conditional_operator = $this->keyHasProperValue($value, 'conditional_operator') ? $value['conditional_operator'] : '=';
+                    $query->{$value['type']}($value['column_name'], $value['conditional_operator'], $value['value']);
+                } else {
+                    $query->{$value['type']}($value['column_name']);
+                }
             }
         }
     }

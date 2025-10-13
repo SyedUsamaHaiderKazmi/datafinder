@@ -20,7 +20,7 @@ $(document).ready(function () {
 });
 
 function getDatatableConfig(){
-    const first_orderable_column = columns.findIndex(filterOrderAbleColumn(key, column) => column.orderable !== false);
+    const first_orderable_column = columns.findIndex((key, column) => column.orderable !== false);
     return {
         info: true,
         paging: true,

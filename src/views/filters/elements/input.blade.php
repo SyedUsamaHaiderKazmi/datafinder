@@ -11,11 +11,12 @@
         @else
             placeholder="Wrong Data Passed!" 
         @endif
-        name="{{ $filter['column_name'] ?? $filter['name'] }}" id="{{ $filter['id'] }}" 
+        name="{{ $filter['name'] ?? null }}" id="{{ $filter['id'] }}" 
         @if($filter['type'] == 'date') 
             data-date-format="YYYY-MM-DD" 
         @endif
-        class="form-control data-filters" 
+        class="form-control data-finder-filters" 
+        column_name="{{ $filter['column_name'] ?? null }}"
         filter_through_join="{{ $filter['filter_through_join'] ?? false }}"
         join_table="{{ $filter['join_table'] ?? null }}"
         conditional_operator="{{ $filter['conditional_operator'] ?? '=' }}">

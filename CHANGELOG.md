@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.0.2] - 2025-10-13
+
+#### Added
+- Introducing custom datatable styles using `yield('df-styles')`.
+  - Custom styles on table.
+- For defaults, `count()` works fine, but when there is raw query joins and raw subquery joins `count()` requires a `binding` strategy to the eloquent query builder to ensure you get the correct count.
+
+#### Changed
+- None.
+
+#### Fixed
+- Validation on table aggregate/ conditional values.
+- Bugs and fixes in integration flow.
+
+#### Documentation
+- Discontinued in this package repository. Visit [https://datafinder.suhk.me/](Documentation)
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.0.1] - 2025-09-14
 
 #### Added

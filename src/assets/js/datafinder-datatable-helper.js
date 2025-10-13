@@ -1,6 +1,6 @@
 setupFilterObject = () => {
     filters = {}; // Initialize filter object
-    const allowedFilters = document.getElementsByClassName('data-filters'); // Get all elements with the 'data-filters' class
+    const allowedFilters = document.getElementsByClassName('data-finder-filters'); // Get all elements with the 'data-finder-filters' class
 
     Array.from(allowedFilters).forEach((filterElement) => {
         if (filterElement.value != "") {
@@ -17,6 +17,7 @@ setupFilterObject = () => {
                         type: filterElement.type,
                         filter_through_join: filterElement.hasAttribute('filter_through_join'),
                         join_table: filterElement.getAttribute('join_table'),
+                        column_name: filterElement.getAttribute('column_name'),
                         conditional_operator: filterElement.getAttribute('conditional_operator')
                     };
                 });
@@ -28,6 +29,7 @@ setupFilterObject = () => {
                     type: filterElement.type,
                     filter_through_join: filterElement.hasAttribute('filter_through_join'),
                     join_table: filterElement.getAttribute('join_table'),
+                    column_name: filterElement.getAttribute('column_name'),
                     conditional_operator: filterElement.getAttribute('conditional_operator')
                 };
             }
@@ -36,7 +38,7 @@ setupFilterObject = () => {
 }
 
 addEventToFilters = () => {
-    const allowedFilters = document.getElementsByClassName('data-filters');
+    const allowedFilters = document.getElementsByClassName('data-finder-filters');
 
     Array.from(allowedFilters).forEach((filterElement) => {
         // Bind change event to each filter element

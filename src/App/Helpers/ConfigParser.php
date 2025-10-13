@@ -232,7 +232,7 @@ class ConfigParser
      * @param string $configFileName
      * @return array
      */
-    public static function isExportableByChunk(string $configFileName): string
+    public static function isExportableByChunk(string $configFileName): ?string
     {
         return self::getConfigByCondition(
             $configFileName,

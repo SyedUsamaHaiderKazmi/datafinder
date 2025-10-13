@@ -6,6 +6,7 @@ use SUHK\DataFinder\App\Helpers\ConfigParser;
 use SUHK\DataFinder\App\Helpers\ConfigGlobal;
 use SUHK\DataFinder\App\Helpers\DFQueryBuilder;
 use SUHK\DataFinder\App\Traits\DataFinderTrait;
+use Illuminate\Support\Facades\DB;
 
 /**
     * DataFinder Service for the DataFinder package.
@@ -93,7 +94,7 @@ class DataFinderService
         }
 
         $totalDataQuery = clone $query;
-        $this->total_data = $totalDataQuery->count();
+        $this->total_data = $this->getQueryCount($totalDataQuery);
 
         // searchable values to apply search on query
         $search = $this->request->input('search.value');
@@ -102,7 +103,7 @@ class DataFinderService
             $this->applySearch($query, $searchable_columns, $search, $table_name);
         }
         
-        $this->total_filtered = $query->count();
+        $this->total_filtered = $this->getQueryCount($query);
         
         if($this->request->has('order')){
             if (count($this->table_header_columns) > 0) {
@@ -118,4 +119,20 @@ class DataFinderService
 
         return $query;
 	}
+
+    protected function getQueryCount($query){
+
+        $has_group_by = !empty($query->groups);
+        $has_aggregates = collect($query->columns)->contains(function ($col) {
+            return is_string($col) && preg_match('/count|sum|avg|max|min|group_concat/i', $col);
+        });
+
+        if ($has_group_by || $has_aggregates) {
+            $sub_query_to_count = DB::query()->fromSub($query, 'sub');
+
+            return $sub_query_to_count->count();
+        }
+
+        return $query->count();
+    }
 }
