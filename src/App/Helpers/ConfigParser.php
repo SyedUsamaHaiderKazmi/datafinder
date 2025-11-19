@@ -65,7 +65,6 @@ class ConfigParser
         );
     }
 
-
     /**
      * Get all primary query options .
      *
@@ -121,6 +120,84 @@ class ConfigParser
             'where' => $where ?? [],
             'groupBy' => $groupBy ?? [],
             'having' => $having ?? [],
+        ];
+    }
+
+    /**
+     * Get all primary frontend table options .
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function getPrimaryFrontendOptions(string $configFileName): array
+    {
+        $table_id = self::getConfigByCondition(
+            $configFileName,
+            'dom_table_id'
+        );
+        $class = self::getConfigByCondition(
+            $configFileName,
+            'class'
+        );
+        $table_responsiveness = self::getConfigByCondition(
+            $configFileName,
+            'responsive'
+        );
+        $full_text_search = self::getConfigByCondition(
+            $configFileName,
+            'full_text_search'
+        );
+        $default_per_page = self::getConfigByCondition(
+            $configFileName,
+            'default_per_page'
+        );
+        $allow_per_page_options = self::getConfigByCondition(
+            $configFileName,
+            'allow_per_page_options'
+        );
+        $per_page_options = self::getConfigByCondition(
+            $configFileName,
+            'per_page_options'
+        );
+        $exportable = self::getConfigByCondition(
+            $configFileName,
+            'exportable'
+        );
+        $exportable_by_chunk = self::getConfigByCondition(
+            $configFileName,
+            'exportable_by_chunk'
+        );
+        $exportable_chunk_size = self::getConfigByCondition(
+            $configFileName,
+            'exportable_chunk_size'
+        );
+        $allow_custom_route = self::getConfigByCondition(
+            $configFileName,
+            'allow_custom_route'
+        );
+        $custom_data_route = self::getConfigByCondition(
+            $configFileName,
+            'custom_data_route'
+        );
+        $custom_export_route = self::getConfigByCondition(
+            $configFileName,
+            'custom_export_route'
+        );
+
+        return [
+            'dom_table_id' => $table_id ?? '',
+            'class' => $class ?? '',
+            'responsive' => $table_responsiveness ?? '',
+            'full_text_search' => $full_text_search ?? true,
+            'default_per_page' => !empty($default_per_page) ? $default_per_page : 50,
+            'allow_per_page_options' => $allow_per_page_options ?? true,
+            'per_page_options' => $per_page_options ?? [10, 25, 50, 100],
+            'exportable' => $exportable ?? false,
+            'exportable_by_chunk' => $allow_custom_route ? false : $exportable_by_chunk,
+            'exportable_chunk_size' => $allow_custom_route ? null : $exportable_chunk_size,
+            'allow_custom_route' => $allow_custom_route ?? false,
+            'custom_data_route' => $custom_data_route ?? null,
+            'custom_export_route' => $custom_export_route ?? null,
         ];
     }
 

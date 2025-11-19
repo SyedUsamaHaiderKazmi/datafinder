@@ -17,6 +17,7 @@ class ConfigGlobal
 {
     static $basePath = 'Helpers\DataFinder\\';
     static $file_not_exist_message = 'Configuration file for the package not found. Please make sure you have correct configuration file setup.';
+    static $config_file_path_missed_message = 'Configuration file path is not defined.';
 
     // Configuration File Section Constants
     const MAIN_CONFIG_FILE = ['key' => 'main_config_file', 'stub_path' => '/../stubs/main.stub'];

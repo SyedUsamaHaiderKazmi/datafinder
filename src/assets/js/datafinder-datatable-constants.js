@@ -12,7 +12,7 @@ let btn_reload = {
 let btn_export = {
     extend: 'collection',
     text: 'Export',
-    className: 'btn btn-dark btn-sm' + (!exportable?' d-none':''),
+    className: 'btn btn-dark btn-sm' + ((!exportable || frontend_config.allow_custom_route) ? ' d-none' : ''),
     style: "background-color: #007bff; color: white; border-radius: 5px;margin-right: 1rem",  // Inline styling
     buttons: [
         {

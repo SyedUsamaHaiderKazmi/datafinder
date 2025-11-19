@@ -43,7 +43,7 @@ trait ValidatorTrait
 
     public function keyHasProperValue($object, $value)
     {
-        return (isset($object[$value]) && $object[$value] != null && $object[$value] != '') ? true : false;
+        return (isset($object[$value]) && !is_null($object[$value]) && !empty($object[$value])) ? true : false;
     }
 
     public function matchTagValues($compare, $to)

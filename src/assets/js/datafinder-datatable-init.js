@@ -7,9 +7,9 @@ $(document).ready(function () {
     // to disable the popup of datatable and show errors in custom list
     DataTable.ext.errMode = 'none';
     // init datatable
-    let config = custom_datatable != true ? getDatatableConfig() : datafinder_custom_config;
+    // let config = custom_datatable != true ? getDatatableConfig() : datafinder_custom_config;
    
-    datatable = $('#df-'+ datafinder_table_id).DataTable(config);
+    datatable = $('#df-'+ datafinder_table_id).DataTable(getDatatableConfig());
     addEventToFilters();
     addEventsToDatatable(datatable);
 
@@ -42,9 +42,11 @@ function getDatatableConfig(){
             url: live_search_filter_route,
             dataType: "json",
             type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             data: function(data){
                 setupFilterObject();
-                data._token = $("input[name='_token']").val();
                 data.config_file_name = config_file_name;
                 data.filters = filters;
             },

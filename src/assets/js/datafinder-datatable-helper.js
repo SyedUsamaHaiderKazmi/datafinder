@@ -17,7 +17,7 @@ setupFilterObject = () => {
                         type: filterElement.type,
                         filter_through_join: filterElement.hasAttribute('filter_through_join'),
                         join_table: filterElement.getAttribute('join_table'),
-                        column_name: filterElement.getAttribute('column_name'),
+                        column_name: (filterElement.hasAttribute('column_name')?filterElement.getAttribute('column_name'): filterElement.name),
                         conditional_operator: filterElement.getAttribute('conditional_operator')
                     };
                 });
@@ -29,7 +29,7 @@ setupFilterObject = () => {
                     type: filterElement.type,
                     filter_through_join: filterElement.hasAttribute('filter_through_join'),
                     join_table: filterElement.getAttribute('join_table'),
-                    column_name: filterElement.getAttribute('column_name'),
+                    column_name: (filterElement.hasAttribute('column_name')?filterElement.getAttribute('column_name'): filterElement.name),
                     conditional_operator: filterElement.getAttribute('conditional_operator')
                 };
             }

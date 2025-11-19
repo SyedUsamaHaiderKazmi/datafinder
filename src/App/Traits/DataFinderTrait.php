@@ -25,17 +25,28 @@ trait DataFinderTrait
             foreach ($filters as $key => $filter) {
                 $query->where(function ($multiQuery) use ($filter, $key, $has_joins, $table_name) {
                     foreach ($filter as $subFilterKey => $value) {
-                        if ($value['filter_through_join'] == 'true' && $value['join_table'] != null) {
-                            $multiQuery->orWhere($has_joins ? ($value['join_table'] . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
-                        } else {
-                            if ($value['type'] == 'date') {
-                                if (!is_null($value['value'])) {
-                                    $multiQuery->whereDate($has_joins ? ($table_name . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
+                        if ($has_joins) {
+                            if ($this->keyHasProperValue($value, 'filter_through_join') && $value['filter_through_join'] == 'true') {
+                                if ($this->keyHasProperValue($value, 'join_table')){
+                                    $table_column = $value['join_table'] . '.' . $value['column_name'];
                                 }
                             } else {
-
-                                $multiQuery->orWhere($has_joins ? ($table_name . '.' . $key) : $key, $value['conditional_operator'] == null ? '=' : $value['conditional_operator'], $value['value']);
+                                $table_column = $table_name . '.' . $value['column_name'];
                             }
+                        } else {
+                            $table_column = $value['column_name'];
+                        }
+                        $conditional_operator = !$this->keyHasProperValue($value, 'conditional_operator') ? '=' : $value['conditional_operator'];
+                        if ($value['type'] == 'date') {
+                            $multiQuery->whereDate($table_column, $conditional_operator, $value['value']);
+                        } else if ($value['type'] == 'time'){
+                            $multiQuery->whereTime($table_column, $conditional_operator, $value['value']);
+                        } else if ($value['type'] == 'month'){
+                            $multiQuery->whereMonth($table_column, $conditional_operator, $value['value']);
+                        } else if ($value['type'] == 'year'){
+                            $multiQuery->whereYear($table_column, $conditional_operator, $value['value']);
+                        } else {
+                            $multiQuery->orWhere($table_column, $conditional_operator, $value['value']);
                         }
                     }
                 });

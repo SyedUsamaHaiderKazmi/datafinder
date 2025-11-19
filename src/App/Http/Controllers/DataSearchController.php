@@ -27,7 +27,7 @@ class DataSearchController extends Controller
                 "errors" => $data_layer->getErrors(),
 
             );
-            echo json_encode($json_data);
+            return response()->json($json_data, 200);
 
         } catch (QueryException $e) {
             $error_message = $e->getmessage();
@@ -44,7 +44,11 @@ class DataSearchController extends Controller
             $data_layer->setExceptionError($e->getmessage());
             return response()->json([
                 'message' => $e->getmessage(),
-                'errors' => $data_layer->getErrors()
+                'errors' => $data_layer->getErrors(),
+                'status_code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'stacktrace' => $e->getTrace(),
             ], 500);
         }
     }

@@ -59,16 +59,37 @@ class DFQueryBuilder
     {
         if ($this->keyHasProperValue($this->query_options, 'where') && count($this->query_options['where']) > 0) {
             $where = $this->query_options['where'];
-            $query->where(function ($query) use ($where) {
+            $query->where(function ($query) use ($where) {    
                 foreach ($where as $key => $value) {
-                    if ($this->keyHasProperValue($value, 'value')) {
-                        $conditional_operator = $this->keyHasProperValue($value, 'conditional_operator') ? $value['conditional_operator'] : '=';
-                        $query->{$value['type']}($value['column_name'], $value['conditional_operator'], $value['value']);
+                    if ($this->keyHasProperValue($value, 'grouped_condition')) {
+                        if ($value['type'] == 'where' || $value['type'] == 'orWhere') {
+                            $grouped_condition = $value['grouped_condition'];
+                            $query->{$value['type']}(function ($query) use ($grouped_condition)
+                            {
+                                foreach ($grouped_condition as $value) {
+                                    $this->applyWhereOnQuery($query, $value);
+                                }
+                            });
+                        }
                     } else {
-                        $query->{$value['type']}($value['column_name']);
+                        $this->applyWhereOnQuery($query, $value);
                     }
                 }
             });
+        }
+    }
+
+    private function applyWhereOnQuery($query, $value)
+    {
+        if ($this->keyHasProperValue($value, 'value')) {
+            $conditional_operator = $this->keyHasProperValue($value, 'conditional_operator') ? $value['conditional_operator'] : '=';
+            if ($value['type'] == 'whereIn' || $value['type'] == 'whereNotIn') {
+                $query->{$value['type']}($value['column_name'], $value['value']);
+            } else {
+                $query->{$value['type']}($value['column_name'], $conditional_operator, $value['value']);
+            }
+        } else {
+            $query->{$value['type']}($value['column_name']);
         }
     }
 

@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.1.0] - 2025-11-19
+
+#### Added
+- Introducing grouped paramters in where clause.
+- `column_name` value added back to support value generating through laravel eloquent model's append or mutators to support proper search and filters over them.
+  - For example: a column in database is `first_name` or `last_name` but on frontend using appends you create custom key-pair `full_name`. To support DB search over such values or filter over such value, column_name is added to define the actual column from DB to pass from frontend in filter search like `Filter by Last Name` or `Filter by First Name` etc.
+- Custom datatable logic is refractored as well where the custom config is not required not, simply define if the custom routes are allowed or not, if yes, then add custom routes to data handler (controller) and the export handler (controller). Export handler is still in progress. Rightnow if custom route is enabled, then export is disabled.
+  - `allow_custom_route`, `custom_data_route`, `custom_export_route`
+
+#### Changed
+- Refractored backend code to support package main functionality more effectively with less callable methods.
+- Refractored frontend code to help user integrating package more effectively by making the `include` from 2 to 1
+  - Previously:
+    - `@include('datafinder::filters', ['config_file_name' => 'PATH_TO_YOUR_CONFIG_FILE_NAME'])`
+    - `@include('datafinder::datatable', ['config_file_name' => 'PATH_TO_YOUR_CONFIG_FILE_NAME'])`
+  - New:
+    - `@include('datafinder::container', ['config_file_name' => 'PATH_TO_YOUR_CONFIG_FILE_NAME'])` and this will include both the datatable and the filters container.
+- Refractored javascript helper classes to support the frontend integration more effectively by reducing the repitive data declare and the callable funtions to get the data.
+
+#### Fixed
+- Bugs and fixes for handling values coming through laravel eloquent model's append or mutators.
+- Added more validation for required fields such as `name` in filters. If not provided, package will not render the field and will notify user to add the name attribute first.
+
+#### Documentation
+- None.
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.0.3] - 2025-10-14
 
 #### Added

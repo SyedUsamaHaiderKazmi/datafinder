@@ -26,6 +26,30 @@ return [
             'conditional_operator' => '=',
             'value' => 'some_value' // Note: Package does not support dynamic values for subquery. Use hard values for your conditions
         ],
+        [
+            'type' => 'whereIn', // Eloquent clause: where, orWhere, etc.
+            'column_name' => 'some_column',
+            'value' => ['value1', 'value2', 'value3'], // Note: Package does not support dynamic values for subquery. Use hard values for your conditions
+        ],
+        [
+            'type' => 'where',
+            'grouped_condition' => [
+
+                [
+                    'type' => 'where',
+                    'column_name' => 'some_column',
+                    'conditional_operator' => 'like',
+                    'value' => '%ar%',
+                ],
+                [
+                    'type' => 'orWhere',
+                    'column_name' => 'some_column',
+                    'conditional_operator' => 'like',
+                    'value' => '%hn%',
+                ],
+
+            ]
+        ]
     ], // Same as above. In array values are [type, column_name, conditional_operator, value]
     'groupBy' => [], // Group by one or multiple columns
     'having' => [

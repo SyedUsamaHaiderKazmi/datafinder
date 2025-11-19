@@ -46,8 +46,8 @@ class MainServiceProvider extends ServiceProvider
 
         // Views
         $this->loadViewsFrom(dirname(__FILE__) . '/../../views', 'datafinder');
-        $this->loadViewsFrom(dirname(__FILE__) . '/../../views/filters', 'datafinder');
-        $this->loadViewsFrom(dirname(__FILE__) . '/../../views/datatable', 'datafinder');
+        // $this->loadViewsFrom(dirname(__FILE__) . '/../../views/filters', 'datafinder');
+        // $this->loadViewsFrom(dirname(__FILE__) . '/../../views/datatable', 'datafinder');
 
         // Configs
         /*$this->publishes([
