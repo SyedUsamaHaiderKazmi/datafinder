@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="df-container">
     @if(isset($config_file_name))
     	@php
     		$config_file_name = $config_file_name . '/main';

@@ -28,15 +28,13 @@
                 @include('datafinder::filters.elements', ['data' => $data])
             @endforeach
         </div>
-        <div class="align-self-center mt-auto p-2">
-            <div class="">
-                <button type="button" id="btn-data-finder-filter" class="btn btn-success shadow "{{--  onclick="getFilterData('{{$filters_configuration['route']}}')" --}}>
-                    Filter Data
-                </button>
-                <a class="btn btn-danger shadow pl-2" href="">
-                    Clear Filter
-                </a>
-            </div>
+        <div class="align-self-center mt-auto mb-3">
+            <button type="button" id="btn-data-finder-filter" class="btn btn-success shadow m-auto">
+                Filter Data
+            </button>
+            <a class="btn btn-danger shadow m-auto" href="">
+                Clear Filter
+            </a>
         </div>
     </div>
 @endif

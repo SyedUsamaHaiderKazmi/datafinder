@@ -55,10 +55,10 @@ class AddNewModule extends Command
         // generate section C stub
         $section_c = $this->setupStub(ConfigGlobal::SECTION_C['stub_path'], []);
         // generate section D stub
-        $section_d = $this->setupStub(ConfigGlobal::SECTION_E['stub_path'], []);
+        $section_d = $this->setupStub(ConfigGlobal::SECTION_D['stub_path'], []);
         // generate section E stub
         if ($has_joins) {
-            $section_e = $this->setupStub(ConfigGlobal::SECTION_D['stub_path'], []);
+            $section_e = $this->setupStub(ConfigGlobal::SECTION_E['stub_path'], []);
         }
         // generate section F stub
         if ($has_buttons) {
