@@ -1,16 +1,253 @@
+/**
+ * DataFinder Styles
+ * 
+ * Core styles for DataFinder components.
+ * Designed to work with Bootstrap but not dependent on it.
+ * 
+ * @package SUHK\DataFinder
+ * @since 2.0.0
+ */
+
+/* ==========================================================================
+   TABLE STYLES
+   ========================================================================== */
+
 .df-table {
     width: 100% !important;
     text-align: center !important;
     text-align-last: center !important;
 }
+
 .df-table > thead {
     max-width: 200px;
     white-space: nowrap;
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
     text-align: center !important;
     vertical-align: middle !important;
 }
+
 .df-table > tbody > tr {
     white-space: nowrap !important;
+}
+
+.df-table > tbody > tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* ==========================================================================
+   CONTAINER STYLES
+   ========================================================================== */
+
+.df-container {
+    position: relative;
+    width: 100%;
+}
+
+/* ==========================================================================
+   FILTER STYLES
+   ========================================================================== */
+
+.df-filters-container {
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.df-filters-row {
+    gap: 0.5rem;
+}
+
+.df-filter-wrapper {
+    min-width: 150px;
+    max-width: 300px;
+}
+
+.df-filter-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    color: #495057;
+}
+
+.df-filter {
+    width: 100%;
+}
+
+.df-filters-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Filter buttons */
+.df-filter-btn,
+.df-clear-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.df-filter-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.df-clear-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   ERROR STYLES
+   ========================================================================== */
+
+.df-errors {
+    margin-bottom: 1rem;
+}
+
+.df-error-message {
+    animation: df-fadeIn 0.3s ease;
+}
+
+.df-error-message ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.df-error-message li {
+    margin-bottom: 0.25rem;
+}
+
+/* ==========================================================================
+   LOADING STATES
+   ========================================================================== */
+
+.df-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.df-spinner {
+    animation: df-spin 1s linear infinite;
+}
+
+.df-reload-spinner {
+    margin-right: 5px;
+}
+
+/* ==========================================================================
+   TOOLBAR / BUTTONS
+   ========================================================================== */
+
+.df-btn-reload,
+.df-btn-export {
+    transition: all 0.2s ease;
+}
+
+.df-btn-reload:hover,
+.df-btn-export:hover {
+    transform: translateY(-1px);
+}
+
+.df-export-progress {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   RESPONSIVE STYLES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .df-filters-row {
+        flex-direction: column;
+    }
+    
+    .df-filter-wrapper {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .df-filters-actions {
+        width: 100%;
+    }
+    
+    .df-filter-btn,
+    .df-clear-btn {
+        flex: 1;
+    }
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes df-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes df-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   DARK MODE SUPPORT (Optional)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .df-container {
+        /* Inherit from parent - doesn't force dark mode */
+    }
+}
+
+/* ==========================================================================
+   SELECT2 INTEGRATION
+   ========================================================================== */
+
+.df-filter-wrapper .select2-container {
+    width: 100% !important;
+}
+
+.df-filter-wrapper .select2-container--default .select2-selection--multiple {
+    min-height: 38px;
+    border-color: #ced4da;
+}
+
+.df-filter-wrapper .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+    .df-filters-container,
+    .df-filters-actions,
+    .df-btn-reload,
+    .df-btn-export,
+    .df-errors {
+        display: none !important;
+    }
+    
+    .df-table {
+        font-size: 10pt;
+    }
 }

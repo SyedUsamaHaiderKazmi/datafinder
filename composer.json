@@ -24,7 +24,10 @@
         "laravel": {
             "providers": [
                 "SUHK\\DataFinder\\App\\Providers\\MainServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "DataFinder": "SUHK\\DataFinder\\App\\Facades\\DataFinder"
+            }
         }
     }
 }

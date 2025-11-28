@@ -1,23 +1,31 @@
 <?php
 
 /**
-    * Main Service Provider for the DataFinder package.
-    *
-    * This service provider is responsible for registering any application
-    * services, such as binding classes into the service container.
-    *
-    * @package SUHK\DataFinder
-    *
-*/
+ * Main Service Provider for the DataFinder package.
+ *
+ * This service provider is responsible for:
+ * - Registering the DataFinder singleton
+ * - Loading routes, views, and assets
+ * - Publishing package assets
+ * - Registering console commands
+ *
+ * @package SUHK\DataFinder
+ * @since 1.0.0
+ */
 
 namespace SUHK\DataFinder\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use SUHK\DataFinder\App\Helpers\ConfigGlobal;
+use SUHK\DataFinder\App\Services\DataFinderManager;
 
 class MainServiceProvider extends ServiceProvider
 {
-
+    /**
+     * Console commands to register
+     * 
+     * @var array
+     */
     protected $commands = [
         'SUHK\DataFinder\App\Console\SetupPackage',
         'SUHK\DataFinder\App\Console\Commands\AddNewModule',
@@ -27,43 +35,88 @@ class MainServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      *
+     * This method is called before boot() and is used to bind
+     * services into the container.
+     *
      * @return void
      */
     public function register()
     {
-        // $this->commands($this->commands);
+        // Register DataFinder Manager as singleton
+        // This backs the DataFinder facade
+        $this->app->singleton('datafinder', function ($app) {
+            return new DataFinderManager();
+        });
+
+        // Register alias for the facade
+        $this->app->alias('datafinder', DataFinderManager::class);
     }
 
     /**
      * Bootstrap any application services.
      *
+     * This method is called after all service providers have been registered.
+     * Used to load routes, views, publish assets, etc.
+     *
      * @return void
      */
     public function boot()
     {
-        // Routes
-        $this->loadRoutesFrom(dirname(__FILE__) . '/../../routes/routes.php');
+        // =====================================================================
+        // ROUTES
+        // =====================================================================
+        $this->loadRoutesFrom($this->getPackagePath('routes/routes.php'));
 
-        // Views
-        $this->loadViewsFrom(dirname(__FILE__) . '/../../views', 'datafinder');
-        // $this->loadViewsFrom(dirname(__FILE__) . '/../../views/filters', 'datafinder');
-        // $this->loadViewsFrom(dirname(__FILE__) . '/../../views/datatable', 'datafinder');
+        // =====================================================================
+        // VIEWS
+        // =====================================================================
+        $this->loadViewsFrom($this->getPackagePath('views'), 'datafinder');
 
-        // Configs
-        /*$this->publishes([
-            dirname(__FILE__) . '/../../config/filter_configurations.php' => ConfigGlobal::getPath('sample_filter_configurations'),
-        ], 'sample_configuration');*/
-        // assets
+        // =====================================================================
+        // PUBLISHABLE ASSETS
+        // =====================================================================
+        
+        // Publish JavaScript and CSS assets
         $this->publishes([
-            dirname(__FILE__) . '/../../assets' => public_path('vendor/datafinder/assets/'),
+            $this->getPackagePath('assets') => public_path('vendor/datafinder/assets/'),
+        ], 'datafinder-assets');
+
+        // Alias for backward compatibility
+        $this->publishes([
+            $this->getPackagePath('assets') => public_path('vendor/datafinder/assets/'),
         ], 'assets');
 
-        // $this->commands($this->commands);
+        // Publish config file (optional)
+        $this->publishes([
+            $this->getPackagePath('config/filter_configurations.php') => ConfigGlobal::getPath('sample_filter_configurations'),
+        ], 'datafinder-config');
 
-        // Commands Registration
+        // =====================================================================
+        // CONSOLE COMMANDS
+        // =====================================================================
         if ($this->app->runningInConsole()) {
             $this->commands($this->commands);
         }
+    }
 
+    /**
+     * Get the full path to a package file or directory
+     *
+     * @param string $path Relative path within the package
+     * @return string Full path
+     */
+    protected function getPackagePath(string $path = ''): string
+    {
+        return dirname(__FILE__) . '/../../' . $path;
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['datafinder', DataFinderManager::class];
     }
 }
