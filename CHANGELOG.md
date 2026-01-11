@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.0] - 2026-01-11
+
+#### Added
+- **Factory-Based JS Engine**: Introduced a completely new, modular JavaScript architecture using a factory pattern for better instance management.
+- **Dynamic DOM Support**: Enabled initialization of DataFinder on elements added dynamically to the DOM (e.g., via AJAX or partial reloads).
+- **Multiple Instance Support**: Improved scoping to allow multiple independent DataFinder tables/filters on a single page without interference.
+- **ES Module Support**: `DataFinder.js` is now exported as an ES module with global window registration for non-module environments.
+- **New Managed Components**:
+    - `FilterManager`: Isolated logic for filter collection and event binding.
+    - `ExportManager`: Refactored export logic for better progress tracking and error handling.
+    - `ErrorHandler`: Centralized error reporting within instances.
+    - `ToolbarManager`: Dynamic management of table controls and buttons.
+- **Refactored Backend Architecture**:
+    - Added `DataFinderManager` to centralize package operations.
+    - Updated `MainServiceProvider` with improved asset publishing and route registration.
+- **Comprehensive Documentation**: Added detailed `QuickStart.md` and `Usage.md` guides directly in the package repository.
+- **Legacy Compatibility**: Added `datafinder-legacy.js` to support older v1.x/v2.x-alpha implementations.
+
+#### Changed
+- Refactored `container.blade.php`, `datatable.blade.php`, and filter elements to support the new factory initialization.
+- Updated default styles in `df-style.css` for a more modern, responsive look.
+
+#### Fixed
+- Fixed various initialization race conditions and scoped event listener leaks.
+- Improved Select2 and date picker filter integration logic.
+
+---
+
+### [v2.1.1] - 2025-11-24
+
+#### Fixed
+- Removed `container-fluid` class from the main container to prevent unwanted extra spacing/padding in integrated views.
+- Fixed a bug in the `datafinder:add-new-module` command where the `table_header` file was missing from the publishable assets logic.
+- Minor UI refinements to paddings and margins for better layout consistency.
+
+---
+
 ### [v2.1.0] - 2025-11-19
 
 #### Added
