@@ -43,7 +43,7 @@ class ConfigParser
             return $configEntries;
         }
         foreach ($configEntries as $key => $entry) {
-            if (is_null($conditionKey) || !isset($entry['conditionKey']) || (isset($entry[$conditionKey]) && $entry[$conditionKey] === $conditionValue)) {
+            if (is_null($conditionKey) || !isset($entry[$conditionKey]) || (isset($entry[$conditionKey]) && $entry[$conditionKey] === $conditionValue)) {
                 $result[] = $transform ? $transform($entry) : ($valueKey ? $entry[$valueKey] : $entry);
             }
         }

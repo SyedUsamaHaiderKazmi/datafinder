@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.4] - 2026-03-05
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- Major bug resolved in the ConfigParser, where the conditionKey was getting validated as a string but not as a parameterized value.
+- Added a `display: none!important` to filters layout if no filters are visible to save the space. Before, if no filters are visible, there would be nothing to show, but the divs were there and taking the space in the DOM.
+
+#### Documentation
+- None
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.3] - 2026-03-05
 
 #### Added

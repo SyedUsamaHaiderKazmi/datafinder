@@ -22,7 +22,7 @@
 @endphp
 
 @if(count($filters) > 0)
-    <div class="df-filters-container d-flex flex-column flex-wrap bg-white">
+    <div class="df-filters-container d-flex flex-column flex-wrap bg-white" @if($allFiltersHidden) style="display: none!important;" @endif>
         
         {{-- Filter Elements Row --}}
         <div class="df-filters-row d-flex flex-row flex-wrap mb-auto p-2">
