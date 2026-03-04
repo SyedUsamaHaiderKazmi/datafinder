@@ -388,6 +388,27 @@ class ConfigParser
         );
     }
     /**
+     * Get filter configuration.
+     *
+     * @param string $configFileName
+     * @return array
+     */
+    public static function allFiltersHidden(string $configFileName): bool
+    {
+        $filters = self::getFiltersConfiguation($configFileName);
+
+        foreach ($filters as $filter) {
+            // visibility defaults to true if not set
+            $isVisible = $filter['visibility'] ?? true;
+
+            if ($isVisible === true) {
+                return false; // at least one visible filter exists
+            }
+        }
+
+        return true; // no visible filters found
+    }
+    /**
      * Get table tow button status.
      *
      * @param string $configFileName

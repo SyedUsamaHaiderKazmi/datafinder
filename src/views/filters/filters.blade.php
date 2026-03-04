@@ -14,6 +14,11 @@
 
 @php
     $filters = SUHK\DataFinder\App\Helpers\ConfigParser::getFiltersConfiguation($config_file_name);
+    $allFiltersHidden = SUHK\DataFinder\App\Helpers\ConfigParser::allFiltersHidden($config_file_name);
+    \Log::info([
+        'allFiltersHidden' => $allFiltersHidden,
+        'config_file_name' => $config_file_name,
+    ]);
 @endphp
 
 @if(count($filters) > 0)
@@ -49,21 +54,22 @@
             @endforeach
         </div>
         
-        {{-- Filter Action Buttons --}}
-        <div class="df-filters-actions align-self-center mt-auto mb-3">
-            <button type="button" class="df-filter-btn btn btn-success shadow m-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px; vertical-align: text-bottom;">
-                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
-                </svg>
-                Filter Data
-            </button>
-            <button type="button" class="df-clear-btn btn btn-outline-danger shadow m-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px; vertical-align: text-bottom;">
-                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                </svg>
-                Clear Filters
-            </button>
-        </div>
-        
+        @if(!$allFiltersHidden)
+            {{-- Filter Action Buttons --}}
+            <div class="df-filters-actions align-self-center mt-auto">
+                <button type="button" class="df-filter-btn btn btn-success shadow m-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px; vertical-align: text-bottom;">
+                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                    </svg>
+                    Filter Data
+                </button>
+                <button type="button" class="df-clear-btn btn btn-danger shadow m-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px; vertical-align: text-bottom;">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                    </svg>
+                    Clear Filters
+                </button>
+            </div>
+        @endif
     </div>
 @endif

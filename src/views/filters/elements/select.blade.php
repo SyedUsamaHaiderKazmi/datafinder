@@ -40,11 +40,6 @@
                         data-join-table="{{ $filter['join_table'] ?? '' }}"
                     @endif
                     data-filter-type="{{ $filter['type'] ?? 'select' }}"
-                    {{-- Legacy attributes for backward compatibility --}}
-                    @isset($filter['filter_through_join']) filter_through_join="{{ $filter['filter_through_join'] }}" @endisset
-                    @isset($filter['join_table']) join_table="{{ $filter['join_table'] }}" @endisset
-                    @isset($filter['conditional_operator']) conditional_operator="{{ $filter['conditional_operator'] }}" @endisset
-                    @isset($filter['column_name']) column_name="{{ $filter['column_name'] }}" @endisset
                 >
                     @foreach($data as $key => $value)
                         <option 

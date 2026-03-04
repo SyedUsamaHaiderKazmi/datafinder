@@ -10,7 +10,7 @@
     @since 2.0.0
 --}}
 
-<div class="d-flex flex-column flex-wrap mt-3 mb-3 p-2 bg-white">
+<div class="d-flex flex-column flex-wrap p-2 bg-white">
     
     {{-- 
         Error Container (scoped to this instance)

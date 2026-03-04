@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.3] - 2026-03-05
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- Fixed Filter Layout styles and html
+- Added allFiltersHidden validation for filter buttons.
+- Removed legacy code for filters object.
+- Updated table layout styles and html
+
+#### Documentation
+- Fixed documentation v2 QuickStart.md
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.2] - 2026-03-04
 
 #### Added

@@ -11,7 +11,7 @@
     @since 2.0.0
 --}}
 
-<div class="df-filter-wrapper flex-fill m-auto p-2" 
+<div class="df-filter-wrapper flex-fill p-2" 
      @if(isset($filter['visibility']) && !$filter['visibility']) hidden @endif>
     
     {{-- Filter Label --}}
@@ -52,11 +52,6 @@
                 data-join-table="{{ $filter['join_table'] ?? '' }}"
             @endif
             data-filter-type="{{ $filter['type'] ?? 'text' }}"
-            {{-- Legacy attributes for backward compatibility --}}
-            @isset($filter['filter_through_join']) filter_through_join="{{ $filter['filter_through_join'] }}" @endisset
-            @isset($filter['join_table']) join_table="{{ $filter['join_table'] }}" @endisset
-            @isset($filter['conditional_operator']) conditional_operator="{{ $filter['conditional_operator'] }}" @endisset
-            @isset($filter['column_name']) column_name="{{ $filter['column_name'] }}" @endisset
         >
     @else
         <span class="text-danger">'name' attribute is required!</span>
