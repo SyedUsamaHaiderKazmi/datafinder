@@ -110,7 +110,6 @@ return [
     
     <!-- DataFinder Scripts -->
     @yield('df-scripts')
-    @stack('df-scripts')
 </body>
 </html>
 ```

@@ -63,7 +63,7 @@
         </div>
 
         {{-- Instance-specific JavaScript initialization --}}
-        @push('df-scripts')
+        @push('df-datatable')
             <script type="module">
                 // Import DataFinder
                 import DataFinder from '/vendor/datafinder/assets/js/DataFinder.js';

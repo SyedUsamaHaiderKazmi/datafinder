@@ -121,7 +121,9 @@ class DFQueryBuilder
             foreach ($this->query_options['joins'] as $key => $join) {
                 $this->joinsInit($join);
                 $this->attachJoin($query);
-                $this->setupSelectQuery($query, $join['using']['options']['has_select'], $this->joined_table_name, $join['using']['options']['select']);
+                $has_select = $this->keyHasProperValue($join['using']['options'], 'has_select') ? $join['using']['options']['has_select'] : false;
+                $select_object = $this->keyHasProperValue($join['using']['options'], 'select') ? $join['using']['options']['select'] : false;
+                $this->setupSelectQuery($query, $has_select, $this->joined_table_name, $select_object);
             }
         }
     }

@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.1] - 2026-03-04
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- Fixed a validation error while executing joins execution through config/file.
+- Fixed a javascript initialization for integrating within page.
+- 
+#### Documentation
+- Fixed documentation v2 QuickStart.md
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.0] - 2026-01-11
 
 #### Added
