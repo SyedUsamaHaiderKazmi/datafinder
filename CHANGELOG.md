@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.2] - 2026-03-04
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- Fixed scripts load in the main layout file using `stack` (previously was `yield`)
+
+#### Documentation
+- Fixed documentation v2 QuickStart.md
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.1] - 2026-03-04
 
 #### Added

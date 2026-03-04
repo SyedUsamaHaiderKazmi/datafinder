@@ -109,7 +109,7 @@ return [
     <script src="https://cdn.datatables.net/buttons/3.0.0/js/dataTables.buttons.min.js"></script>
     
     <!-- DataFinder Scripts -->
-    @yield('df-scripts')
+    @stack('df-scripts')
 </body>
 </html>
 ```

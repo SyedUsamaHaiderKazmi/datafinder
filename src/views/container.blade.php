@@ -37,6 +37,10 @@
                 'frontendConfig' => $frontend_config,
             ];
         @endphp
+        {{-- Styles Section --}}
+        @section('df-styles')
+            <link rel="stylesheet" type="text/css" href="{{ url('vendor/datafinder/assets/styles/df-style.css') }}">
+        @endsection
         
         {{-- 
             Main Scoped Container
@@ -56,14 +60,14 @@
             ])
             
             {{-- Include datatable component (scoped to this container) --}}
-            @include('datafinder::datatable.datatable', [
+            @include('datafinder::datatable.table', [
                 'config_file_name' => $config_path,
                 'frontend_config' => $frontend_config
             ])
         </div>
-
+          
         {{-- Instance-specific JavaScript initialization --}}
-        @push('df-datatable')
+        @push('df-datatable-init')
             <script type="module">
                 // Import DataFinder
                 import DataFinder from '/vendor/datafinder/assets/js/DataFinder.js';
@@ -110,7 +114,12 @@
                 });
             </script>
         @endpush
-
+        {{-- Filter scripts stack --}}
+        @push('df-scripts')
+            @stack('df-filters-scripts')
+            @stack('df-datatable-init')
+        @endpush
+          
     @else
         {{-- Configuration file not found error --}}
         <div class="df-error-container">
