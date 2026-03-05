@@ -285,7 +285,7 @@ class ConfigParser
             null,
             'visibility',
             true,
-            fn($header) => ['title' => $header['title'], 'data' => $header['data'], 'orderable' => $header['orderable'] ?? true]
+            fn($header) => ['title' => $header['title'], 'data' => $header['data'], 'orderable' => $header['orderable'] ?? true, 'column_name' => $header['column_name'] ?? null]
         );
     }
 

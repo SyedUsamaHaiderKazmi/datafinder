@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.7] - 2026-03-06
+
+#### Added
+- A new approach to orderable column, if a column value is generating through model appends, then using `column_name` key instead of `data`, we can now order not just raw values from database, but also the appended values with this.
+
+#### Changed
+- None.
+
+#### Fixed
+- None.
+
+#### Documentation
+- None
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.6] - 2026-03-05
 
 #### Added

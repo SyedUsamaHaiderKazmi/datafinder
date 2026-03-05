@@ -107,11 +107,14 @@ class DataFinderService
         
         if($this->request->has('order')){
             if (count($this->table_header_columns) > 0) {
+                
                 if (isset($this->table_header_columns[$this->request->input('order.0.column')])) {
-                    $order =  $this->table_header_columns[$this->request->input('order.0.column')]['data'];
+                    $col = $this->table_header_columns[$this->request->input('order.0.column')];
                 } else {
-                    $order =  $this->table_header_columns[0]['data'];
+                    $col = $this->table_header_columns[0];
                 }
+                $order = !empty($col['column_name']) ? $col['column_name'] : $col['data'];
+
                 $dir = $this->request->input('order.0.dir');
                 $query->orderBy($order, $dir); 
             }
