@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.6] - 2026-03-05
+
+#### Added
+- Added middleware grpup over the package's default routes for authentication security. `web` & `auth`
+
+#### Changed
+- None.
+
+#### Fixed
+- None.
+
+#### Documentation
+- None
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.5] - 2026-03-05
 
 #### Added
