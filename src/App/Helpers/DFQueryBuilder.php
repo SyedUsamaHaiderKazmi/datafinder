@@ -81,15 +81,17 @@ class DFQueryBuilder
 
     private function applyWhereOnQuery($query, $value)
     {
-        if ($this->keyHasProperValue($value, 'value')) {
-            $conditional_operator = $this->keyHasProperValue($value, 'conditional_operator') ? $value['conditional_operator'] : '=';
-            if ($value['type'] == 'whereIn' || $value['type'] == 'whereNotIn') {
-                $query->{$value['type']}($value['column_name'], $value['value']);
+        if (!empty($value)) {
+            if ($this->keyHasProperValue($value, 'value')) {
+                $conditional_operator = $this->keyHasProperValue($value, 'conditional_operator') ? $value['conditional_operator'] : '=';
+                if ($value['type'] == 'whereIn' || $value['type'] == 'whereNotIn') {
+                    $query->{$value['type']}($value['column_name'], $value['value']);
+                } else {
+                    $query->{$value['type']}($value['column_name'], $conditional_operator, $value['value']);
+                }
             } else {
-                $query->{$value['type']}($value['column_name'], $conditional_operator, $value['value']);
+                $query->{$value['type']}($value['column_name']);
             }
-        } else {
-            $query->{$value['type']}($value['column_name']);
         }
     }
 

@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.5] - 2026-03-05
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- Fixed validation over `where` query generation, if there is an empty array, ignore the iteration for generation.
+
+#### Documentation
+- None
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.4] - 2026-03-05
 
 #### Added
