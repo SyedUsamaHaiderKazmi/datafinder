@@ -53,6 +53,9 @@ class ConfigGlobal
     public static function getPath($path)
     {
         $file_path = app_path(self::$basePath . $path . '.php');
+        // On your local Windows machine, this works because Windows accepts both \ and / as path separators. But your production server is Linux, which only recognizes / as a path separator.
+        // DIRECTORY_SEPARATOR is \ on Windows and / on Linux, so this normalizes the path for whatever OS the app runs on.
+        $file_path = str_replace('\\', DIRECTORY_SEPARATOR, $file_path);
         $path_info = pathinfo($file_path);
         self::createDirectoryIfNotExist($path_info['dirname']);
         return $file_path;

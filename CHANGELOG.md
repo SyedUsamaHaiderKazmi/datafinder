@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.9] - 2026-03-06
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- Fixed trailing problem supported by different OS. `\` on Windows and `/` on linux. Added `$file_path = str_replace('\\', DIRECTORY_SEPARATOR, $file_path);`. `DIRECTORY_SEPARATOR` normalizes the path for whatever OS the app runs on.
+- Array ending block was commented that generated a bug for filters to load. Its fixed.
+
+#### Documentation
+- None
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.8] - 2026-03-06
 
 #### Added
