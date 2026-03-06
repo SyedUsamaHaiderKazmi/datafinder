@@ -47,8 +47,7 @@
                      'time' => 'HH:mm', 
                      'month' => 'YYYY-MM', 
                      'datetime-local' => 'YYYY-MM-DDTHH:mm', 
-                     // 'year' => 'YYYY'][$filter['type']
-                    ] 
+                    ][$filter['type']
                 }}"
             @endif
             {{-- Filter metadata as data attributes --}}
