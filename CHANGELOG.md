@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+### [v2.2.12] - 2026-03-06
+
+#### Added
+- None.
+
+#### Changed
+- None.
+
+#### Fixed
+- input layout for filters had an array syntax error at html attribute `data-date-format`.
+
+#### Documentation
+- None
+
+#### Contributor(s)
+
+Following are the contributor(s) to this release:
+- @SyedUsamaHaiderKazmi (Owner)
+
+---
+
 ### [v2.2.11] - 2026-03-06
 
 #### Added
