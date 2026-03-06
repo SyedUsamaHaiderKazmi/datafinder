@@ -32,7 +32,7 @@
             name="{{ $filter['name'] }}"
             class="df-filter df-input form-control"
             {{-- Value handling --}}
-            @if($data && !is_array($data))
+            @if(!is_null($data) && $data !== '' && !is_array($data))
                 value="{{ $data }}"
             @elseif(is_null($data) || empty($data) || $data === false)
                 placeholder="{{ $filter['placeholder'] ?? 'Enter value to filter' }}"
@@ -41,8 +41,14 @@
                 disabled
             @endif
             {{-- Date format for date inputs --}}
-            @if($filter['type'] === 'date') 
-                data-date-format="YYYY-MM-DD"
+            @if(in_array($filter['type'], ['date', 'time', 'month', 'datetime-local', 'year']))
+                data-date-format="{{ 
+                    ['date' => 'YYYY-MM-DD', 
+                     'time' => 'HH:mm', 
+                     'month' => 'YYYY-MM', 
+                     'datetime-local' => 'YYYY-MM-DDTHH:mm', 
+                     // 'year' => 'YYYY'][$filter['type']] 
+                }}"
             @endif
             {{-- Filter metadata as data attributes --}}
             data-column="{{ $filter['column_name'] ?? $filter['name'] }}"
