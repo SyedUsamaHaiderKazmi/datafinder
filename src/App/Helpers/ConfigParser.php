@@ -285,7 +285,9 @@ class ConfigParser
             null,
             'visibility',
             true,
-            fn($header) => ['title' => $header['title'], 'data' => $header['data'], 'orderable' => $header['orderable'] ?? true, 'column_name' => $header['column_name'] ?? null]
+            function($header) { 
+                return ['title' => $header['title'], 'data' => $header['data'], 'orderable' => $header['orderable'] ?? true, 'column_name' => $header['column_name'] ?? null];
+            }
         );
     }
 
@@ -344,7 +346,9 @@ class ConfigParser
             'data',
             'exportable',
             true,
-            fn($header) => ['title' => $header['title'], 'data' => $header['data']]
+            function($header) {
+                return ['title' => $header['title'], 'data' => $header['data']];
+            }
         );
     }
 
@@ -362,12 +366,14 @@ class ConfigParser
             null,
             'searchable',
             true,
-            fn($header) => [
-                'title' => $header['title'],
-                'column_name' => $header['column_name'],
-                'table_name' => $header['table_name'] ?? '',
-                'search_through_join' => $header['search_through_join'] ?? false
-            ]
+            function($header) {
+                return [
+                    'title' => $header['title'],
+                    'column_name' => $header['column_name'],
+                    'table_name' => $header['table_name'] ?? '',
+                    'search_through_join' => $header['search_through_join'] ?? false
+                ];
+            }
         );
     }
 
